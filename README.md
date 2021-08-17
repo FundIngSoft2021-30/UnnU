@@ -9,24 +9,24 @@
 
 👤 **Juan Pablo Sanchez Gaitan**
 
-- Github: [@kefranabg](https://github.com/lordcidiak)
+- Github: [@lordcidiak](https://github.com/lordcidiak)
 
 👤 **Alejandro Sacristan Leal**
 
-- Github: [@kefranabg](https://github.com/AtonCode)
+- Github: [@AtonCode](https://github.com/AtonCode)
 
 👤 **Jose Fernado Zuluaga Ortiz**
 
-- Github: [@kefranabg](https://github.com/josefer-zuluaga)
+- Github: [@josefer-zuluaga](https://github.com/josefer-zuluaga)
 
 👤 **Nicolas Daniel Vargas Ortiz**
 
-- Github: [@kefranabg](https://github.com/Nicroleto)
+- Github: [@Nicroleto](https://github.com/Nicroleto)
 
 👤 **Camilo Jose Narvaez Montenegro**
 
-- Github: [@kefranabg](https://github.com/camnar)
+- Github: [@camnar](https://github.com/camnar)
 
 👤 **Esteban Flechas**
 
-- Github: [@kefranabg](https://github.com/Esteban-Flechas)
+- Github: [@Esteban-Flechas](https://github.com/Esteban-Flechas)
