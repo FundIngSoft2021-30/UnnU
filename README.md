@@ -25,7 +25,7 @@
 
 👤 **Nicolas Daniel Vargas Ortiz**
 
-- Github: [@Nicroleto](https://github.com/Nicroleto)
+- Github: [@NicolasDVargas](https://github.com/NicolasDVargas)
 
 👤 **Camilo Jose Narvaez Montenegro**
 
