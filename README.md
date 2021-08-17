@@ -1,5 +1,9 @@
+
+
+
 <h1 align="center">UnnU - La aplicacion que conecta a los estudiantes</h1>
 <p align="center">
+   <img src="https://ibb.co/W3LcQjS" alt="unnu-logo" width="120px" height="120px"/>
   <br>
   <i>Unnu ayuda a los estudiantes en crear nuevas
     <br> experiencias.</i>
