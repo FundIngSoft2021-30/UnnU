@@ -9,7 +9,7 @@
 
 👤 **Juan Pablo Sanchez Gaitan**
 
-- Github: [@lordcidiak](https://github.com/lordcidiak)
+- Github: [@jpsanchezg](https://github.com/jpsanchezg)
 
 👤 **Alejandro Sacristan Leal**
 
