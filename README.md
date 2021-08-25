@@ -9,6 +9,11 @@
     <br> experiencias.</i>
   <br>
 </p>
+
+## Documentacion
+[Todo lo que tienes que saber][wiki]
+
+
 ## Autores
 
 👤 **Juan Pablo Sanchez Gaitan**
@@ -34,3 +39,5 @@
 👤 **Esteban Flechas**
 
 - Github: [@Esteban-Flechas](https://github.com/Esteban-Flechas)
+
+[wiki]:https://github.com/FundIngSoft2021-30/UnnU/wiki
