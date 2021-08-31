@@ -15,7 +15,7 @@
 
 
 ## Instalar y ejecutar la app
-# usamos react native 0.65 y node js 16.2.0 
+### usamos react native 0.65 y node js 16.2.0 
  para instalar todos los componentes que vas a necesitar para este proyecto 
 ```nodejs
 npm install 
