@@ -12,6 +12,8 @@
   "dependencies": {
     "@react-navigation/native": "^6.0.2",
     "@react-navigation/native-stack": "^6.1.0",
+    "firebase": "^9.0.1",
+    "firebase-admin": "^9.11.1",
     "react": "17.0.2",
     "react-native": "0.65.1",
     "react-native-safe-area-context": "^3.3.1",
@@ -30,5 +32,23 @@
   },
   "jest": {
     "preset": "react-native"
-  }
+  },
+  "description": "app university social",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FundIngSoft2021-30/UnnU.git"
+  },
+  "keywords": [
+    "social",
+    "meet",
+    "matches",
+    "play"
+  ],
+  "author": "Solar Team, Pontificia Universidad Javerian Bogota D.Ca",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/FundIngSoft2021-30/UnnU/issues"
+  },
+  "homepage": "https://github.com/FundIngSoft2021-30/UnnU#readme"
 }
