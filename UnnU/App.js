@@ -5,13 +5,13 @@ import { StyleSheet, View} from 'react-native';
 
 const Stack = createNativeStackNavigator();
 
-import UserList from './screens/Home';
+import Login from './screens/Login';
 import UserRegister from './screens/Register';
 
 function MyStack(){
   return(
     <Stack.Navigator>
-      <Stack.Screen name="Home" component={UserList} />
+      <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="Register" component={UserRegister} />
     </Stack.Navigator> 
   )     

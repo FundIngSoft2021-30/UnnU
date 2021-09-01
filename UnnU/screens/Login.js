@@ -2,7 +2,7 @@ import React from 'react';
 import { View, StyleSheet, Text, Image, ImageBackground } from 'react-native';
 import App from '../App';
 
-const UserList = () => {
+const Login = () => {
     return(
         <ImageBackground
        style={[styles.group, styles.group_layout]}
@@ -175,4 +175,4 @@ const UserList = () => {
    }
  });
 
-export default UserList
+export default Login
