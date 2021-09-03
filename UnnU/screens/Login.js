@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
-import { View, Text, TextInput, ScrollView, Button, StyleSheet } from 'react-native';
-import firebase from '../dataBase/firebase';
+import { View, Text, TextInput, ScrollView, Button, StyleSheet, ImageBackgroundBase } from 'react-native';
 
 const Login = () => {
 
@@ -16,16 +15,12 @@ const Login = () => {
 
   const createNewUser = async() => {
 
-    console.log(state)
-    if (state.name === '' || state.email === '' || state.phone === ''){ alert('Please Provide a Information')}
+    
+    if (state.name === '' || state.email === '' || state.phone === ''){ alert('Please Provide a Information'), console.log(state)}
    
     else{
-      await firebase.db.collection('users').add({
-          name: state.name,
-          email: state.email,
-          phone: state.phone
-      })
-      alert('User Create Susesfully')
+      alert('User Create Susesfully'),
+      console.log(state)
    }
   }
 
@@ -61,8 +56,8 @@ const styles = StyleSheet.create({
 
   containerGrup:{
     flex: 1,
-    padding: 35
-
+    padding: 35,
+    backgroundColor: '#D8E3E7',
   },
 
   inputGruop:{
@@ -70,7 +65,7 @@ const styles = StyleSheet.create({
     padding: 0,
     marginBottom: 15,
     borderBottomWidth: 1,
-    borderBottomColor: '#cccccc'
+    borderBottomColor: '#CCCCCC'
     
   }
 })
