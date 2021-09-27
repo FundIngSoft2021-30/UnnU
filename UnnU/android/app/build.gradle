@@ -138,6 +138,7 @@ android {
             enable enableSeparateBuildPerCPUArchitecture
             universalApk false  // If true, also generate a universal APK
             include "armeabi-v7a", "x86", "arm64-v8a", "x86_64"
+            manifestPlaceholders = [auth0Domain: "YOUR_DOMAIN", auth0Scheme: "${applicationId}"]
         }
     }
     signingConfigs {
