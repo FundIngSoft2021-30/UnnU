@@ -12,11 +12,12 @@ function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
+  const [edad, setEdad] = useState("");
   const [user, loading, error] = useAuthState(auth);
   const history = useHistory();
 
   const register = () => {
-    if (!name) alert("Please enter name");
+    if (!name) alert("");
     registerWithEmailAndPassword(name, email, password);
   };
 

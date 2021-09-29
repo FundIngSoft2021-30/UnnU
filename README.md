@@ -19,6 +19,8 @@
  para instalar todos los componentes que vas a necesitar para este proyecto 
 ```nodejs
 npm install 
+npm install react-router-dom
+npm install react-router-dom
 ```
 si quieres ver la app en
 ```nodejs

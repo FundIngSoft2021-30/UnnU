@@ -1,8 +1,7 @@
 {
-  "homepage": "https://fundingsoft2021-30.github.io/UnnU/",
   "name": "unnuwebapp",
   "version": "0.1.1",
-  "private": false,
+  "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
@@ -41,8 +40,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "gh-pages": "^3.2.3"
   }
 }
