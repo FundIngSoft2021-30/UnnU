@@ -5,7 +5,7 @@ import {
   auth,
   registerWithEmailAndPassword,
   signInWithGoogle,
-} from "./firebase";
+} from "./DB/firebase";
 import "./Register.css";
 
 function Register() {
@@ -18,7 +18,7 @@ function Register() {
 
   const register = () => {
     if (!name) alert("");
-    registerWithEmailAndPassword(name, email, password);
+    registerWithEmailAndPassword(name, edad, email, password);
   };
 
   useEffect(() => {
@@ -34,34 +34,41 @@ function Register() {
           className="register__textBox"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          placeholder="Full Name"
+          placeholder="Nombre completo"
+        />
+        <input
+          type="text"
+          className="register__textBox"
+          value={edad}
+          onChange={(e) => setEdad(e.target.value)}
+          placeholder="Edad"
         />
         <input
           type="text"
           className="register__textBox"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          placeholder="E-mail Address"
+          placeholder="Correo electronico"
         />
         <input
           type="password"
           className="register__textBox"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          placeholder="Password"
+          placeholder="Contraseña"
         />
         <button className="register__btn" onClick={register}>
-          Register
+          Registrarse
         </button>
         <button
           className="register__btn register__google"
           onClick={signInWithGoogle}
         >
-          Register with Google
+          Registrarse con google
         </button>
 
         <div>
-          Already have an account? <Link to="/">Login</Link> now.
+          Ya tienes cuenta? <Link to="/">Iniciar sesión </Link> now.
         </div>
       </div>
     </div>

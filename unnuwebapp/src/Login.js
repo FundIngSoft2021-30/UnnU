@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import { auth, signInWithEmailAndPassword, signInWithGoogle } from "./firebase";
+import { auth, signInWithEmailAndPassword, signInWithGoogle } from "./DB/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import "./Login.css";
 
@@ -26,29 +26,29 @@ function Login() {
           className="login__textBox"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          placeholder="E-mail Address"
+          placeholder="Correo electronico"
         />
         <input
           type="password"
           className="login__textBox"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          placeholder="Password"
+          placeholder="Contraseña"
         />
         <button
           className="login__btn"
           onClick={() => signInWithEmailAndPassword(email, password)}
         >
-          Login
+          Iniciar sesión 
         </button>
         <button className="login__btn login__google" onClick={signInWithGoogle}>
-          Login with Google
+        Iniciar sesión  con Google
         </button>
         <div>
-          <Link to="/reset">Forgot Password</Link>
+          <Link to="/reset">Olvidaste la contraseña?</Link>
         </div>
         <div>
-          Don't have an account? <Link to="/register">Register</Link> now.
+          No tienes cuenta? <Link to="/register">Registrate</Link> now.
         </div>
       </div>
     </div>
