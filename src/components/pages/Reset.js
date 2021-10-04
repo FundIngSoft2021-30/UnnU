@@ -16,24 +16,28 @@ function Reset() {
   }, [user, loading]);
 
   return (
-    <div className="reset">
-      <div className="reset__container">
-        <input
-          type="text"
-          className="reset__textBox"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="Correo electronico"
-        />
-        <button
-          className="reset__btn"
-          onClick={() => sendPasswordResetEmail(email)}
-        >
-          Restablecer contraseña
-        </button>
+    <div className="resetbg">
+      <div className="reset">
+        <div className="reset__container">
+          <h1 className="logo">UNNU</h1>
+          <h1>Olvidaste contraseña</h1>
+          <input
+            type="text"
+            className="reset__textBox"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Correo electronico"
+          />
+          <button
+            className="reset__btn"
+            onClick={() => sendPasswordResetEmail(email)}
+          >
+            Restablecer contraseña
+          </button>
 
-        <div>
-          Don't have an account? <Link to="/sign-up">Crear cuenta</Link> ahora.
+          <div className="Linkbox">
+          No tienes cuenta? <Link className="Linktxt" to="/sign-up">Crear cuenta ahora</Link> .
+          </div>
         </div>
       </div>
     </div>

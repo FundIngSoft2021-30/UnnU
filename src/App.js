@@ -17,12 +17,14 @@ function App() {
 
         <Switch>
           <Privateroute path='/user-home' component={homeuser} />
+          <Privateroute path='/sign-up' component={SignUp} />
+          <Privateroute path='/login' component={Login} />
+          <Privateroute exact path="/Reset" component={Reset} />
           <div>
             <Navbar />
             <Route path='/' exact component={Home} />
-            <Route path='/sign-up' component={SignUp} />
-            <Route path='/login' component={Login} />
-            <Route exact path="/Reset" component={Reset} />
+
+            
           </div>
 
         </Switch>

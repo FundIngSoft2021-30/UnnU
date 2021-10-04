@@ -5,9 +5,7 @@
   font-family: 'PT Sans', sans-serif;
 }
 
-.home,
-.login,
-.sign-up {
+.home {
   display: flex;
   height: 90vh;
   align-items: center;
@@ -18,14 +16,6 @@
 
 .sign-upbg {
   background-image: url('./images/image2-home.jpeg');
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  color: #fff;
-  font-size: 100px;
-}
-.loginbg {
-  background-image: url('./images/image2-home.jpeg');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -33,6 +23,30 @@
   height: 100%;
   position: fixed;
   z-index: -1;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.loginbg {
+  background-image: url('./images/image2-home.jpeg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: left;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+
 
 }
 
+.resetbg {
+  background-image: url('./images/image2-home.jpeg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: left;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+
+
+}
