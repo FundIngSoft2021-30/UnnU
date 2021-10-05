@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Link, useHistory } from "react-router-dom";
+import Select, { onChangeValue } from 'react-select'
 import makeAnimated from 'react-select/animated';
-import Select, { OnChangeValue } from 'react-select'
+import { MultiSelect } from "react-multi-select-component";
+
 import {
   auth,
   registerWithEmailAndPassword
@@ -11,8 +13,8 @@ import {
 
 import '../../App.css';
 import './SignUp.css'
-const animatedComponents = makeAnimated();
-const useroptions = [
+import { findAllByTestId } from "@testing-library/react";
+const options = [
   { value: 'Cocinar', label: 'Cocinar' },
   { value: 'Anime', label: 'Anime' },
   { value: 'Dibujar', label: 'Dibujar' },
@@ -51,28 +53,9 @@ function SignUp() {
   const [user, loading, error] = useAuthState(auth);
   const history = useHistory();
 
-
-  const [selectedOption, setSelectedOption] = useState(null);
-
-  const [inputs, setInputs] = useState({
-    label: ""
-  })
-
-  const changeHandle = e => {
-    setInputs({
-      ...inputs,
-      [e.target.label]: e.target.value
-    })
-  }
-
-  const submitHandle = e => {
-    e.preventDefault()
-    console.log(inputs)
-  }
-
+  const [selected, setSelected] = useState([]);
 
   const SignUp = () => {
-
     if (!name) alert("");
     registerWithEmailAndPassword(name, edad, email, carrera, facultad, gustos, password);
   };
@@ -118,19 +101,12 @@ function SignUp() {
             onChange={(e) => setFacultad(e.target.value)}
             placeholder="Facultad"
           />
-          <Select
-            placeholder="Seleciona 5 pasiones..."
-            className="Selectbox"
-            closeMenuOnSelect={false}
-            components={animatedComponents}
-            isMulti
-            defaultValue={selectedOption}
-
-            options={useroptions}
-
-
+          <MultiSelect
+            options={options}
+            value={gustos}
+            onChange={setGustos}
+            labelledBy="Select"
           />
-          setGustos(setSelectedOption)
           <input
             type="text"
             className="register__textBox"

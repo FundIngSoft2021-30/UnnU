@@ -2,32 +2,41 @@ import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useHistory } from "react-router";
 import "./homeuser.css";
-import { auth, db, logout } from "../DB/firebase";
+import { auth, db, deleteAccount,logout } from "../DB/firebase";
+import * as admin from "firebase-admin";
 
 function Dashboard() {
   const [user, loading, error] = useAuthState(auth);
   const [name, setName] = useState("");
+  const [edad, setEdad] = useState("");
+  const [email, setEmail] = useState("");
+  const [uid, setUid] = useState("");
   const history = useHistory();
 
-  const fetchUserName = async () => {
+  const fetchUserdata = async () => {
     try {
       const query = await db
-        .collection("users")
+        .collection("usuarios")
         .where("uid", "==", user?.uid)
         .get();
       const data = await query.docs[0].data();
       setName(data.name);
+      setEdad(data.edad);
+      setEmail(data.email);
+      setUid(data.uid);
     } catch (err) {
       console.error(err);
-      alert("An error occured while fetching user data");
+      alert("Se ha producido un error al obtener los datos del usuario");
     }
   };
+
+
 
   useEffect(() => {
     if (loading) return;
     if (!user) return history.replace("/");
 
-    fetchUserName();
+    fetchUserdata();
   }, [user, loading]);
 
   return (
@@ -35,7 +44,14 @@ function Dashboard() {
       <div className="dashboard__container">
         Logged in as
         <div>{name}</div>
-        <div>{user?.email}</div>
+        <div>{edad}</div>
+        <div>{email}</div>
+        <button className="dashboard__btn" onClick={() => deleteAccount(uid)}>
+          Editar perfil
+        </button>
+        <button className="dashboard__btn" onClick={() => deleteAccount(uid)}>
+          Borrar cuenta
+        </button>
         <button className="dashboard__btn" onClick={logout}>
           Logout
         </button>

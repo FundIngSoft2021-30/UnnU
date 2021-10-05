@@ -16,6 +16,7 @@ function App() {
 
 
         <Switch>
+          
           <Privateroute path='/user-home' component={homeuser} />
           <Privateroute path='/sign-up' component={SignUp} />
           <Privateroute path='/login' component={Login} />
@@ -24,7 +25,7 @@ function App() {
             <Navbar />
             <Route path='/' exact component={Home} />
 
-            
+
           </div>
 
         </Switch>
