@@ -4,6 +4,7 @@ import { useHistory } from "react-router";
 import "./homeuser.css";
 import { auth, db, deleteAccount,logout } from "../DB/firebase";
 import * as admin from "firebase-admin";
+import {ButtonED} from "../Button";
 
 function Dashboard() {
   const [user, loading, error] = useAuthState(auth);
@@ -46,9 +47,9 @@ function Dashboard() {
         <div>{name}</div>
         <div>{edad}</div>
         <div>{email}</div>
-        <button className="dashboard__btn" onClick={() => deleteAccount(uid)}>
+        <ButtonED className="dashboard__btn" >
           Editar perfil
-        </button>
+        </ButtonED>
         <button className="dashboard__btn" onClick={() => deleteAccount(uid)}>
           Borrar cuenta
         </button>

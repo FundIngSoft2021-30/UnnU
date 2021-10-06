@@ -43,7 +43,7 @@ const registerWithEmailAndPassword = async (name, edad, email, carrera, facultad
   try {
     const res = await auth.createUserWithEmailAndPassword(email, password);
     const user = res.user;
-    await db.collection("usuarios").add({
+    await db.collection("usuarios").doc(user.uid).set({
       uid: user.uid,
       name,
       edad,
@@ -52,6 +52,20 @@ const registerWithEmailAndPassword = async (name, edad, email, carrera, facultad
       facultad,
       gustos:[],
       authProvider: "local"
+    });
+  } catch (err) {
+    console.error(err);
+    alert(err.message);
+  }
+};
+
+const editprofile = async ( carrera, facultad, gustos) => {
+  try {
+    const user = app.auth().currentUser
+    await db.collection("usuarios").doc(user.uid).update({
+      carrera,
+      facultad,
+      gustos:[],
     });
   } catch (err) {
     console.error(err);
@@ -68,7 +82,7 @@ const sendPasswordResetEmail = async (email) => {
     console.error(err);
     alert(err.message);
   }
-
+  
 };
 
 const logout = () => {
@@ -83,6 +97,7 @@ export {
   deleteAccount,
   signInWithEmailAndPassword,
   registerWithEmailAndPassword,
+  editprofile,
   sendPasswordResetEmail,
   logout,
 };

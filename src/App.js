@@ -8,19 +8,18 @@ import SignUp from './components/pages/SignUp';
 import Login from './components/pages/Login';
 import Reset from './components/pages/Reset';
 import homeuser from './components/userpages/homeuser';
+import Editprofile from './components/userpages/editprofile';
 function App() {
   return (
     <>
-
       <Router>
-
-
         <Switch>
           
           <Privateroute path='/user-home' component={homeuser} />
           <Privateroute path='/sign-up' component={SignUp} />
           <Privateroute path='/login' component={Login} />
           <Privateroute exact path="/Reset" component={Reset} />
+          <Privateroute path="/editprofile" component={Editprofile}/>
           <div>
             <Navbar />
             <Route path='/' exact component={Home} />
