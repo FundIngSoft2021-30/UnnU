@@ -1,12 +1,11 @@
 .edit{
-    width: 50%;
+    width: 45%;
     height: 100%;
     background-color: #0683ff57;
     display: flex;
-    flex-direction: column;
     padding: 10px;
     border-radius: 0px 40px 40px 0px;
-    overflowY: 'scroll'
+    overflowY: 'scroll';
 }
 
 .edit__container {
@@ -15,26 +14,31 @@
     display: flex;
     flex-direction: column;
     text-align: center;
-    padding: 20px;
+    padding: 10px;
     border-radius: 30px 15px;
     border: [medium dotted blue];
+    position: absolute;
+    white-space: nowrap;
+    overflow: hidden;
+    
 }
 
 .edit-text {
 
     padding: 10px;
-    font-size: 18px;
-    width: 300px;
-    margin-bottom: 10px;
+    font-size: 27px;
+    width: 360px;
+    border:none;
+    margin-left: 20px;
     border-radius: 5px;
 }
 
 
 .edit-textBox {
 
-    padding: 10px;
-    font-size: 18px;
-    width: 300px;
+    padding: 20px;
+    font-size: 27px;
+    width: 400px;
     border:none;
     margin-bottom: 10px;
     border-radius: 5px;

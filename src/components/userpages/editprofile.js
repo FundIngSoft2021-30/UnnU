@@ -58,8 +58,11 @@ function Editprofile() {
             <div className="edit">
                 <div className="edit__container">
                     <h1>Tu perfil</h1>
+
                     <div className="edit-text">{name} </div>
+                    
                     <div className="edit-text">{edad}</div>
+
                     <div className="edit-text">{email}</div>
 
                     <input

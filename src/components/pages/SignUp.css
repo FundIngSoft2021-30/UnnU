@@ -1,6 +1,6 @@
 .register {
-    width: 50%;
-    height: auto;
+    width: 40%;
+    height: 100%;
     background-color: #0683ff57;
     display: flex;
     flex-direction: column;
@@ -11,12 +11,15 @@
 }
 
 .register__container {
-    margin: 10%;
-    display: center;
+    margin: 4%;
+    display: flex;
     flex-direction: column;
     text-align: center;
-    padding: 20px;
+    padding: 7%;
     border-radius: 30px 15px;
+    position: absolute;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .register__textBox {
