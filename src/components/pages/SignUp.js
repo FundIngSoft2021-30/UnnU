@@ -17,6 +17,7 @@ const animatedComponents = makeAnimated();
 
 
 function SignUp() {
+  const [photoPerfil, setphotoPerfil] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
@@ -31,7 +32,7 @@ function SignUp() {
 
   const SignUp = () => {
     if (!name) alert("");
-    registerWithEmailAndPassword(name, edad, email, carrera, facultad, gustos, password);
+    registerWithEmailAndPassword(photoPerfil, name, edad, email, carrera, facultad, gustos, password);
   };
 
   useEffect(() => {

@@ -41,12 +41,13 @@ const signInWithEmailAndPassword = async (email, password) => {
   }
 };
 
-const registerWithEmailAndPassword = async (name, edad, email, carrera, facultad, gustos, password) => {
+const registerWithEmailAndPassword = async (photoPerfil, name, edad, email, carrera, facultad, gustos, password) => {
   try {
     const res = await auth.createUserWithEmailAndPassword(email, password);
     const user = res.user;
     await db.collection("usuarios").doc(user.uid).set({
       uid: user.uid,
+      photoPerfil:" ",
       name,
       edad,
       email,
@@ -61,10 +62,11 @@ const registerWithEmailAndPassword = async (name, edad, email, carrera, facultad
   }
 };
 
-const editprofile = async ( carrera, facultad, gustos) => {
+const editprofile = async (photoPerfil, carrera, facultad, gustos) => {
   try {
     const user = app.auth().currentUser
     await db.collection("usuarios").doc(user.uid).update({
+      photoPerfil,
       carrera,
       facultad,
       gustos,

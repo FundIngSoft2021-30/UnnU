@@ -5,6 +5,7 @@ import { Gustosoptions, carrerasOptions, facultadOptions } from "../Data/data"
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 import * as admin from "firebase-admin";
+import { storage } from "../DB/firebase";
 import {
     auth,
     editprofile,
@@ -17,6 +18,7 @@ function Editprofile() {
 
 
     const [user, loading, error] = useAuthState(auth);
+    const [photoPerfil, setphotoPerfil] = useState("");
     const [name, setName] = useState("");
     const [edad, setEdad] = useState("");
     const [email, setEmail] = useState("");
@@ -26,10 +28,45 @@ function Editprofile() {
     const [password, setPassword] = useState("");
     const [uid, setUid] = useState("");
     const history = useHistory();
+    const [image, setImage] = useState(null);
+    const [progressBar, setProgress] = useState(0);
+
+    const handleChange = e => {
+        if (e.target.files[0]) {
+          setImage(e.target.files[0]);
+        }
+      };
+    
+      const handleUpload = () => {
+        const uploadTask = storage.ref(`images/${image.name}`).put(image);
+        uploadTask.on(
+          "state_changed",
+          snapshot => {
+            const progress = Math.round(
+              (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+            );
+            setProgress(progressBar);
+          },
+          error => {
+            console.log(error);
+          },
+          () => {
+            storage
+              .ref("images")
+              .child(image.name)
+              .getDownloadURL()
+              .then(photoPerfil => {
+                setphotoPerfil(photoPerfil);
+              });
+          }
+        );
+      };
+
+    
 
     const Editprofile = () => {
         if (!name) alert("");
-        editprofile(carrera, facultad, gustos);
+        editprofile(photoPerfil, carrera, facultad, gustos);
     };
 
     const fetchUserdata = async () => {
@@ -39,6 +76,7 @@ function Editprofile() {
                 .where("uid", "==", user?.uid)
                 .get();
             const data = await query.docs[0].data();
+            setphotoPerfil(data.photoPerfil);
             setName(data.name);
             setEdad(data.edad);
             setEmail(data.email);
@@ -98,6 +136,15 @@ function Editprofile() {
                         value={gustos}
                         onChange={setGustos}
                     />
+                    <div>
+                        <progress value={progressBar} max="100" />
+                        <br />
+                        <br />
+                        <input type="file" onChange={handleChange} />
+                        <button onClick={(e) => setphotoPerfil(photoPerfil),handleUpload}>Upload</button>
+                        <br />
+                        <img src={photoPerfil} alt="firebase-image" />
+                    </div>
 
                     <Link to='/user-home' className='btn-mobile'>
                         <button className="edit__btn" onClick={Editprofile}>
