@@ -67,7 +67,7 @@ const editprofile = async ( carrera, facultad, gustos) => {
     await db.collection("usuarios").doc(user.uid).update({
       carrera,
       facultad,
-      gustos:[],
+      gustos,
     });
   } catch (err) {
     console.error(err);

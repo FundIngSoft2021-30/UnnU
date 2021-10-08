@@ -93,7 +93,6 @@ function Editprofile() {
                         className="Selectbox"
                         closeMenuOnSelect={false}
                         components={animatedComponents}
-                        defaultValue={[gustos[0], gustos[1], gustos[2], gustos[3], gustos[4]]}
                         options={Gustosoptions}
                         isMulti
                         value={gustos}
