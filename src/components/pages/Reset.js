@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
-import { auth, sendPasswordResetEmail } from "../DB/firebase";
+import { auth, sendResetEmail } from "../DB/firebase";
 import "./Reset.css";
 
 function Reset() {
@@ -24,19 +24,20 @@ function Reset() {
           <input
             type="text"
             className="reset__textBox"
-            value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Correo electronico"
           />
-          <button
-            className="reset__btn"
-            onClick={() => sendPasswordResetEmail(email)}
-          >
-            Restablecer contraseña
-          </button>
+          <Link to='/login' className='btn-mobile'>
+            <button
+              className="reset__btn"
+              onClick={() => sendResetEmail(email)}
+            >
 
+              Restablecer contraseña
+            </button>
+          </Link>
           <div className="Linkbox">
-          No tienes cuenta? <Link className="Linktxt" to="/sign-up">Crear cuenta ahora</Link> .
+            No tienes cuenta? <Link className="Linktxt" to="/sign-up">Crear cuenta ahora</Link> .
           </div>
         </div>
       </div>

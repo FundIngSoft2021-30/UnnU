@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Link, useHistory } from "react-router-dom";
-import { MultiSelect } from "react-multi-select-component";
+import { Gustosoptions, carrerasOptions, facultadOptions } from "../Data/data"
+import Select from 'react-select';
+import makeAnimated from 'react-select/animated';
 import * as admin from "firebase-admin";
 import {
     auth,
@@ -9,6 +11,8 @@ import {
     db
 } from "../DB/firebase";
 import './editprofile.css'
+
+const animatedComponents = makeAnimated();
 function Editprofile() {
 
 
@@ -38,6 +42,7 @@ function Editprofile() {
             setName(data.name);
             setEdad(data.edad);
             setEmail(data.email);
+            setGustos(data.gustos);
             setFacultad(data.facultad);
             setCarrera(data.carrera);
             setUid(data.uid);
@@ -60,23 +65,39 @@ function Editprofile() {
                     <h1>Tu perfil</h1>
 
                     <div className="edit-text">{name} </div>
-                    
+
                     <div className="edit-text">{edad}</div>
 
                     <div className="edit-text">{email}</div>
+                    <Select
+                        placeholder="Carrera..."
+                        className="Selectbox"
+                        components={animatedComponents}
+                        options={carrerasOptions}
+                        value={carrera}
+                        onChange={setCarrera}
 
-                    <input
-                        placeholder={facultad}
-                        type="text"
-                        className="edit-textBox"
-                        onChange={(e) => setFacultad(e.target.value)}
-                    />    
+                    />
+                    <Select
+                        placeholder="Facultad..."
+                        className="Selectbox"
+                        components={animatedComponents}
 
-                    <input
-                        placeholder={carrera}
-                        type="text"
-                        className="edit-textBox"
-                        onChange={(e) => setCarrera(e.target.value)}
+                        options={facultadOptions}
+                        value={facultad}
+                        onChange={setFacultad}
+
+                    />
+                    <Select
+                        placeholder="Gustos..."
+                        className="Selectbox"
+                        closeMenuOnSelect={false}
+                        components={animatedComponents}
+                        defaultValue={[gustos[0], gustos[1], gustos[2], gustos[3], gustos[4]]}
+                        options={Gustosoptions}
+                        isMulti
+                        value={gustos}
+                        onChange={setGustos}
                     />
 
                     <Link to='/user-home' className='btn-mobile'>

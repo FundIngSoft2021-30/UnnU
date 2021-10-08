@@ -1,5 +1,5 @@
 import firebase from "firebase";
-
+import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 import "firebase/storage";
 
 const firebaseConfig = {
@@ -19,10 +19,12 @@ const db = app.firestore();
 const storage = firebase.storage();
 
 
-const deleteAccount = async () => {
+const deleteAccount = async (uid) => {
   try {
-    const user = app.auth().currentUser
-    user.delete()
+    const user = app.auth().currentUser;
+    const data = app.firestore();
+    user.delete();
+    data.collection("usuarios").doc( uid).delete();
   } catch (err) {
     console.error(err);
     alert(err.message);
@@ -50,7 +52,7 @@ const registerWithEmailAndPassword = async (name, edad, email, carrera, facultad
       email,
       carrera,
       facultad,
-      gustos:[],
+      gustos,
       authProvider: "local"
     });
   } catch (err) {
@@ -73,11 +75,11 @@ const editprofile = async ( carrera, facultad, gustos) => {
   }
 };
 
-const sendPasswordResetEmail = async (email) => {
+const sendResetEmail = async (email) => {
   try {
-    await firebase.resetPassword(email)
+    const auth = app.auth();
+    auth.sendPasswordResetEmail(email)
     alert("Se ha enviado el enlace para restablecer la contraseña al email!");
-    this.navigation.navigate('Login')
   } catch (err) {
     console.error(err);
     alert(err.message);
@@ -98,6 +100,6 @@ export {
   signInWithEmailAndPassword,
   registerWithEmailAndPassword,
   editprofile,
-  sendPasswordResetEmail,
+  sendResetEmail,
   logout,
 };
