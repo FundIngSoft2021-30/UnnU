@@ -33,36 +33,36 @@ function Editprofile() {
 
     const handleChange = e => {
         if (e.target.files[0]) {
-          setImage(e.target.files[0]);
+            setImage(e.target.files[0]);
         }
-      };
-    
-      const handleUpload = () => {
+    };
+
+    const handleUpload = () => {
         const uploadTask = storage.ref(`images/${image.name}`).put(image);
         uploadTask.on(
-          "state_changed",
-          snapshot => {
-            const progress = Math.round(
-              (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-            );
-            setProgress(progressBar);
-          },
-          error => {
-            console.log(error);
-          },
-          () => {
-            storage
-              .ref("images")
-              .child(image.name)
-              .getDownloadURL()
-              .then(photoPerfil => {
-                setphotoPerfil(photoPerfil);
-              });
-          }
+            "state_changed",
+            snapshot => {
+                const progress = Math.round(
+                    (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+                );
+                setProgress(progressBar);
+            },
+            error => {
+                console.log(error);
+            },
+            () => {
+                storage
+                    .ref("images")
+                    .child(image.name)
+                    .getDownloadURL()
+                    .then(photoPerfil => {
+                        setphotoPerfil(photoPerfil);
+                    });
+            }
         );
-      };
+    };
 
-    
+
 
     const Editprofile = () => {
         if (!name) alert("");
@@ -101,12 +101,23 @@ function Editprofile() {
             <div className="edit">
                 <div className="edit__container">
                     <h1>Tu perfil</h1>
+                    <div class="picture-container">
+                        <div class="picture">
+                            <img src={photoPerfil} class="picture-src" id="wizardPicturePreview" alt="firebase-image" />
+                            <input type="file" id="wizard-picture" onChange={handleChange} accept=".png, .jpg, .jpeg" />
 
-                    <div className="edit-text">{name} </div>
+                        </div>
+                        <h6 className="text">Choose Picture</h6>
 
-                    <div className="edit-text">{edad}</div>
+                    </div>
+                    <button className="edit__btn" onClick={(e) => setphotoPerfil(photoPerfil), handleUpload}>Subir foto</button>
 
-                    <div className="edit-text">{email}</div>
+                    <div className="text">{name} </div>
+
+                    <div className="text">{edad}</div>
+
+                    <div className="text">{email}</div>
+                    <label className="text" ><b>Carrera</b></label>
                     <Select
                         placeholder="Carrera..."
                         className="Selectbox"
@@ -116,6 +127,7 @@ function Editprofile() {
                         onChange={setCarrera}
 
                     />
+                    <label className="text" ><b>Facultad</b></label>
                     <Select
                         placeholder="Facultad..."
                         className="Selectbox"
@@ -136,15 +148,7 @@ function Editprofile() {
                         value={gustos}
                         onChange={setGustos}
                     />
-                    <div>
-                        <progress value={progressBar} max="100" />
-                        <br />
-                        <br />
-                        <input type="file" onChange={handleChange} />
-                        <button onClick={(e) => setphotoPerfil(photoPerfil),handleUpload}>Upload</button>
-                        <br />
-                        <img src={photoPerfil} alt="firebase-image" />
-                    </div>
+
 
                     <Link to='/user-home' className='btn-mobile'>
                         <button className="edit__btn" onClick={Editprofile}>

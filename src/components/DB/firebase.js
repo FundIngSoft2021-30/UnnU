@@ -24,7 +24,7 @@ const deleteAccount = async (uid) => {
     const user = app.auth().currentUser;
     const data = app.firestore();
     user.delete();
-    data.collection("usuarios").doc( uid).delete();
+    data.collection("usuarios").doc(uid).delete();
   } catch (err) {
     console.error(err);
     alert(err.message);
@@ -41,18 +41,20 @@ const signInWithEmailAndPassword = async (email, password) => {
   }
 };
 
-const registerWithEmailAndPassword = async (photoPerfil, name, edad, email, carrera, facultad, gustos, password) => {
+const registerWithEmailAndPassword = async (photoPerfil, name, genero, edad, email, carrera, facultad,matchuid, gustos, password) => {
   try {
     const res = await auth.createUserWithEmailAndPassword(email, password);
     const user = res.user;
     await db.collection("usuarios").doc(user.uid).set({
       uid: user.uid,
-      photoPerfil:" ",
+      photoPerfil,
       name,
+      genero,
       edad,
       email,
       carrera,
       facultad,
+      matchuid,
       gustos,
       authProvider: "local"
     });
@@ -86,7 +88,7 @@ const sendResetEmail = async (email) => {
     console.error(err);
     alert(err.message);
   }
-  
+
 };
 
 const logout = () => {

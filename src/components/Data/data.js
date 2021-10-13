@@ -92,3 +92,12 @@ export const Gustosoptions = [
     { value: 'CienciasEconi4ever', label: 'CienciasEconi4ever' }
   ]
   
+  export const genderOptions = [
+    { value: 'Hombre', label: 'Hombre' },
+    { value: 'Mujer', label: 'Mujer' },
+    { value: 'No Binario', label: 'No Binario' },
+    { value: 'Bisexual', label: 'Bisexual' },
+    { value: 'No es tu problema', label: 'No es tu problema' },
+    { value: 'No especificar', label: 'No especificar' }
+
+  ]
