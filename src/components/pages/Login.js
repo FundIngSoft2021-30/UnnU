@@ -3,8 +3,7 @@ import { Link, useHistory } from "react-router-dom";
 import { auth, signInWithEmailAndPassword } from "../DB/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import '../../App.css';
-import './login.css'
-import { MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardBody, MDBInput, MDBIcon, MDBBtn } from 'mdbreact';
+import './login.css';
 
 function Login() {
     const [email, setEmail] = useState("");

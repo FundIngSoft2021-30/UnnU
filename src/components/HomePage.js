@@ -1,12 +1,12 @@
 import React from 'react';
 import '../App.css';
 import { ButtonRS } from './Button';
-import './HeroSection.css';
+import './HomePage.css';
 
-function HeroSection() {
+function Homepage() {
   return (
     <div className='hero-container'>
-      <img src='/images/image2-home.jpeg'/>
+      <img class="imgback" src='/images/image2-home.jpeg' />
       <h1>Encuentra nuevos amigos</h1>
       <p>Que estas esperando?</p>
       <div className='hero-btns'>
@@ -22,4 +22,4 @@ function HeroSection() {
   );
 }
 
-export default HeroSection;
+export default Homepage;

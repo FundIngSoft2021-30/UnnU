@@ -1,4 +1,4 @@
-img {
+.imgback {
   filter: contrast(50%);
   object-fit: cover;
   width: 100%;

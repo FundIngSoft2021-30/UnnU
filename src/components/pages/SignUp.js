@@ -1,63 +1,39 @@
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Link, useHistory } from "react-router-dom";
-import Select, { onChangeValue } from 'react-select'
+import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
-import { MultiSelect } from "react-multi-select-component";
-
+import { Gustosoptions, carrerasOptions, facultadOptions, genderOptions } from "../Data/data"
 import {
   auth,
-  registerWithEmailAndPassword
+  registerWithEmailAndPassword,
+  storage
 } from "../DB/firebase";
-
 
 import '../../App.css';
 import './SignUp.css'
-import { findAllByTestId } from "@testing-library/react";
-const options = [
-  { value: 'Cocinar', label: 'Cocinar' },
-  { value: 'Anime', label: 'Anime' },
-  { value: 'Dibujar', label: 'Dibujar' },
-  { value: 'Videojuegos', label: 'Videojuegos' },
-  { value: 'Cafe', label: 'Cafe' },
-  { value: 'Bailar', label: 'Bailar' },
-  { value: 'Ciclismo', label: 'Ciclismo' },
-  { value: 'Correr', label: 'Correr' },
-  { value: 'Fotografia', label: 'Fotografia' },
-  { value: 'Netflix', label: 'Netflix' },
-  { value: 'Golf', label: 'Golf' },
-  { value: 'Caminar', label: 'Caminar' },
-  { value: 'Vino', label: 'Vino' },
-  { value: 'Atletismo', label: 'Atletismo' },
-  { value: 'Futbol', label: 'Futbol' },
-  { value: 'Musica', label: 'Musica' },
-  { value: 'Comedia', label: 'Comedia' },
-  { value: 'Ingenieria4ever', label: 'Ingenieria4ever' },
-  { value: 'CiendiasMedicas4ever', label: 'CiendiasMedicas4ever' },
-  { value: 'Comunicacion4ever', label: 'Comunicacion4ever' },
-  { value: 'ArquitecturayDiseño4ever', label: 'ArquitecturayDiseño4ever' },
-  { value: 'Ciencias4ever', label: 'Ciencias4ever' },
-  { value: 'Artes4ever', label: 'Artes4ever' },
-  { value: 'CienciasEconi4ever', label: 'CienciasEconi4ever' }
-]
 
+const animatedComponents = makeAnimated();
 
 function SignUp() {
+  const [photoPerfil, setphotoPerfil] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
+  const [genero, setGenero] = useState("");
   const [edad, setEdad] = useState("");
   const [carrera, setCarrera] = useState("");
   const [facultad, setFacultad] = useState("");
-  const [gustos, setGustos] = useState([]);
+  const [gustos, setGustos] = useState("");
+  const [image, setImage] = useState(null);
+  const [progressBar, setProgress] = useState(0);
   const [user, loading, error] = useAuthState(auth);
   const history = useHistory();
 
-  const [selected, setSelected] = useState([]);
 
   const SignUp = () => {
     if (!name) alert("");
-    registerWithEmailAndPassword(name, edad, email, carrera, facultad, gustos, password);
+    registerWithEmailAndPassword(photoPerfil, name, genero, edad, email, carrera, facultad, gustos, password);
   };
 
   useEffect(() => {
@@ -65,14 +41,49 @@ function SignUp() {
     if (user) history.replace("/user-home");
   }, [user, loading]);
 
+  const handleChange = e => {
+    if (e.target.files[0]) {
+      setImage(e.target.files[0]);
+    }
+  };
 
+  const handleUpload = () => {
+    const uploadTask = storage.ref(`images/${image.name}`).put(image);
+    uploadTask.on(
+      "state_changed",
+      snapshot => {
+        const progress = Math.round(
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        );
+        setProgress(progressBar);
+      },
+      error => {
+        console.log(error);
+      },
+      () => {
+        storage
+          .ref("images")
+          .child(image.name)
+          .getDownloadURL()
+          .then(photoPerfil => {
+            setphotoPerfil(photoPerfil);
+          });
+      }
+    );
+  };
 
   return (
     <div className="sign-upbg">
       <div className="register">
         <div className="register__container">
-          <h1 className="logo">UNNU</h1>
+          <Link className="Linktxt" to='/' >
+            <h1 className="logo">UNNU</h1>
+          </Link>
           <h1>Crear cuenta</h1>
+          <img class="profile" src={photoPerfil} alt="firebase-image" />
+          <input type="file" onChange={handleChange} />
+          <button className="edit__btn" onClick={(e) => setphotoPerfil(photoPerfil), handleUpload}>Subir foto</button>
+          <br />
           <input
             type="text"
             className="register__textBox"
@@ -87,25 +98,44 @@ function SignUp() {
             onChange={(e) => setEdad(e.target.value)}
             placeholder="Edad"
           />
-          <input
-            type="text"
-            className="register__textBox"
+          <Select
+            placeholder="Genero..."
+            className="Selectbox"
+            components={animatedComponents}
+            options={genderOptions}
+            value={genero}
+            onChange={setGenero}
+
+          />
+          <Select
+            placeholder="Carrera..."
+            className="Selectbox"
+            components={animatedComponents}
+            options={carrerasOptions}
             value={carrera}
-            onChange={(e) => setCarrera(e.target.value)}
-            placeholder="Carrera"
+            onChange={setCarrera}
+
           />
-          <input
-            type="text"
-            className="register__textBox"
+          <Select
+            placeholder="Facultad..."
+            className="Selectbox"
+            defaultValue={[facultad[0]]}
+            components={animatedComponents}
+            options={facultadOptions}
             value={facultad}
-            onChange={(e) => setFacultad(e.target.value)}
-            placeholder="Facultad"
+            onChange={setFacultad}
+
           />
-          <MultiSelect
-            options={options}
+          <Select
+            placeholder="Gustos..."
+            className="Selectbox"
+            closeMenuOnSelect={false}
+            defaultValue={[gustos[0], gustos[1], gustos[2], gustos[3], gustos[4]]}
+            components={animatedComponents}
+            options={Gustosoptions}
+            isMulti
             value={gustos}
             onChange={setGustos}
-            labelledBy="Select"
           />
           <input
             type="text"
