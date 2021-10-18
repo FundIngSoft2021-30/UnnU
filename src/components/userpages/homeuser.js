@@ -11,7 +11,7 @@ import { ButtonED } from "../Button";
 
 
 const animatedComponents = makeAnimated();
-function Dashboard() {
+function Homeuser() {
 
 
   const [user, loading, error] = useAuthState(auth);
@@ -91,4 +91,4 @@ function Dashboard() {
   );
 }
 
-export default Dashboard;
+export default Homeuser;

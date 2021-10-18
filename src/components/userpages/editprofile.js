@@ -4,19 +4,16 @@ import { Link, useHistory } from "react-router-dom";
 import { Gustosoptions, carrerasOptions, facultadOptions } from "../Data/data"
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
-import * as admin from "firebase-admin";
-import { storage } from "../DB/firebase";
 import {
     auth,
     editprofile,
-    db
+    db,
+    storage
 } from "../DB/firebase";
 import './editprofile.css'
 
 const animatedComponents = makeAnimated();
 function Editprofile() {
-
-
     const [user, loading, error] = useAuthState(auth);
     const [photoPerfil, setphotoPerfil] = useState("");
     const [name, setName] = useState("");
@@ -25,18 +22,15 @@ function Editprofile() {
     const [carrera, setCarrera] = useState("");
     const [facultad, setFacultad] = useState("");
     const [gustos, setGustos] = useState("");
-    const [password, setPassword] = useState("");
     const [uid, setUid] = useState("");
     const history = useHistory();
     const [image, setImage] = useState(null);
     const [progressBar, setProgress] = useState(0);
-
     const handleChange = e => {
         if (e.target.files[0]) {
             setImage(e.target.files[0]);
         }
     };
-
     const handleUpload = () => {
         const uploadTask = storage.ref(`images/${image.name}`).put(image);
         uploadTask.on(
@@ -61,14 +55,10 @@ function Editprofile() {
             }
         );
     };
-
-
-
     const Editprofile = () => {
         if (!name) alert("");
         editprofile(photoPerfil, carrera, facultad, gustos);
     };
-
     const fetchUserdata = async () => {
         try {
             const query = await db

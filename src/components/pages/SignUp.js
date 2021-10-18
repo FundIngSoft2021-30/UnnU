@@ -6,16 +6,14 @@ import makeAnimated from 'react-select/animated';
 import { Gustosoptions, carrerasOptions, facultadOptions, genderOptions } from "../Data/data"
 import {
   auth,
-  registerWithEmailAndPassword
+  registerWithEmailAndPassword,
+  storage
 } from "../DB/firebase";
-import { storage } from "../DB/firebase";
+
 import '../../App.css';
 import './SignUp.css'
-import { findAllByTestId } from "@testing-library/react";
 
 const animatedComponents = makeAnimated();
-
-
 
 function SignUp() {
   const [photoPerfil, setphotoPerfil] = useState("");
@@ -31,7 +29,6 @@ function SignUp() {
   const [progressBar, setProgress] = useState(0);
   const [user, loading, error] = useAuthState(auth);
   const history = useHistory();
-
 
 
   const SignUp = () => {

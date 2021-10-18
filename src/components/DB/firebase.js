@@ -41,7 +41,7 @@ const signInWithEmailAndPassword = async (email, password) => {
   }
 };
 
-const registerWithEmailAndPassword = async (photoPerfil, name, genero, edad, email, carrera, facultad,matchuid, gustos, password) => {
+const registerWithEmailAndPassword = async (photoPerfil, name, genero, edad, email, carrera, facultad, matchuid, gustos, password) => {
   try {
     const res = await auth.createUserWithEmailAndPassword(email, password);
     const user = res.user;
