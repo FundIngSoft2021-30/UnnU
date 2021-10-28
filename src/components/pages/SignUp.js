@@ -19,6 +19,7 @@ function SignUp() {
   const [photoPerfil, setphotoPerfil] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [matchuid,setMatchuid] = useState("");
   const [name, setName] = useState("");
   const [genero, setGenero] = useState("");
   const [edad, setEdad] = useState("");
@@ -33,7 +34,7 @@ function SignUp() {
 
   const SignUp = () => {
     if (!name) alert("");
-    registerWithEmailAndPassword(photoPerfil, name, genero, edad, email, carrera, facultad, gustos, password);
+    registerWithEmailAndPassword(photoPerfil, name, genero, edad, email, carrera, facultad,matchuid, gustos, password);
   };
 
   useEffect(() => {
