@@ -3,17 +3,17 @@ import React from 'react';
 import './App.css';
 
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Home from './components/Pages/homepage/Home';
-import Privateroute from './components/Pages/homepage/Privateroute';
-import SignUp from './components/Pages/SignUp/SignUp';
-import Login from './components/Pages/login/Login';
-import Reset from './components/Pages/login/Reset';
-import Homeuser from './components/Pages/perfil/homeuser';
-import Editprofile from './components/Pages/perfil/editprofile';
-import Match from './components/Pages/match/Match';
-import Suerte from './components/Pages/match/tengosuerte';
-import Calendar from './components/Pages/calendario/calendario';
-import Chat from './components/Pages/chat/chat';
+import Home from './Pages/homepage/Home';
+import Privateroute from './Pages/homepage/Privateroute';
+import SignUp from './Pages/SignUp/SignUpC';
+import Login from './Pages/login/LoginC';
+import Reset from './Pages/login/ResetC';
+import Homeuser from './Pages/perfil/perfil';
+import Editprofile from './Pages/perfil/editar';
+import Match from './Pages/match/Match';
+import Suerte from './Pages/match/tengosuerte';
+import Calendar from './Pages/calendario/calendario';
+import Chat from './Pages/chat/chat';
 
 
 function App() {

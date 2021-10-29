@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Link, useHistory } from "react-router-dom";
-import { Gustosoptions, carrerasOptions, facultadOptions } from "../Data/data"
+import { Gustosoptions, carrerasOptions, facultadOptions } from "../../Data/data"
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 import {
@@ -9,8 +9,10 @@ import {
     editprofile,
     db,
     storage
-} from "../DB/firebase";
+} from "../../../DB/firebase";
 import './editprofile.css'
+
+import { HiArrowLeft } from "react-icons/hi";
 
 const animatedComponents = makeAnimated();
 function Editprofile() {
@@ -91,7 +93,7 @@ function Editprofile() {
             <div className="edit">
                 <Link to='/user-home' className='btn-mobile'>
                     <button className="arts__btn" data-testid="ArrowBackIcon">
-                        Back
+                    <HiArrowLeft />
                     </button>
                 </Link>
                 <div className="edit__container">

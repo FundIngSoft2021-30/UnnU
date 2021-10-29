@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { auth, db } from "../DB/firebase";
+import { auth, db } from "../../../DB/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useHistory } from "react-router";
 import { HiCalendar, HiChatAlt2, HiStar, HiUsers, HiUser } from "react-icons/hi";
@@ -67,7 +67,7 @@ function NavbarU() {
                 <div className='navbar-containeru'>
 
                     <div className='menu-iconu' onClick={handleClick}>
-                        <i className={click ? 'fas fa-times' : 'fas fa-bars'} />
+
                     </div>
                     <ul className={click ? 'nav-menu activeUS' : 'nav-menuUS'}>
                         <li className='nav-itemUS'>

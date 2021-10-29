@@ -1,12 +1,12 @@
 import React from 'react';
-import Suerte from './tengosuertesc';
-import NavbarU from '../NavBarUser/NavbarU';
+import Matchpage from './components/matchpage';
+import NavbarU from '../NavBarUser/NavBarUC';
 
 function Match() {
     return (
         <>
             <NavbarU />
-            <Suerte />
+            <Matchpage />
         </>
     );
 }

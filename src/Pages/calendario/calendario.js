@@ -1,6 +1,6 @@
 import React from 'react';
-import CalendarSC from './calendariosc';
-import NavbarU from '../NavBarUser/NavbarU';
+import CalendarSC from './components/calendariosc';
+import NavbarU from '../NavBarUser/NavBarUC';
 
 function Calendar() {
     return (
