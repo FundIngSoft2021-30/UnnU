@@ -21,6 +21,7 @@ function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [matchuid, setMatchuid] = useState("");
+  const [likesdados, setLikesdados] = useState("");
   const [name, setName] = useState("");
   const [genero, setGenero] = useState("");
   const [edad, setEdad] = useState("");
@@ -35,12 +36,12 @@ function SignUp() {
 
   const SignUp = () => {
     if (!name) alert("");
-    registerWithEmailAndPassword(photoPerfil, name, genero, edad, email, carrera, facultad, matchuid, gustos, password);
+    registerWithEmailAndPassword(photoPerfil, name, genero, edad, email, carrera, facultad, matchuid, likesdados, gustos, password);
   };
 
   useEffect(() => {
     if (loading) return;
-    if (user) history.replace("/user-home");
+    if (user) history.replace("/match");
   }, [user, loading]);
 
   const handleChange = e => {
@@ -84,7 +85,7 @@ function SignUp() {
           <h1>Crear cuenta</h1>
           <div class="picture-container">
             <div class="picture">
-              <img src={photoPerfil} class="picture-src" id="wizardPicturePreview" /><MdAddAPhoto class="tamicon"/>
+              <img src={photoPerfil} class="picture-src" id="wizardPicturePreview" /><MdAddAPhoto class="tamicon" />
               <input type="file" id="wizard-picture" onChange={handleChange} accept=".png, .jpg, .jpeg" />
 
             </div>
