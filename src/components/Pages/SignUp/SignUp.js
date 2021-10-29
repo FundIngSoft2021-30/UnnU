@@ -4,13 +4,14 @@ import { Link, useHistory } from "react-router-dom";
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 import { Gustosoptions, carrerasOptions, facultadOptions, genderOptions } from "../Data/data"
+import { MdAddAPhoto } from "react-icons/md";
 import {
   auth,
   registerWithEmailAndPassword,
   storage
 } from "../DB/firebase";
 
-import '../../App.css';
+import '../../../App.css';
 import './SignUp.css'
 
 const animatedComponents = makeAnimated();
@@ -19,7 +20,7 @@ function SignUp() {
   const [photoPerfil, setphotoPerfil] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [matchuid,setMatchuid] = useState("");
+  const [matchuid, setMatchuid] = useState("");
   const [name, setName] = useState("");
   const [genero, setGenero] = useState("");
   const [edad, setEdad] = useState("");
@@ -34,7 +35,7 @@ function SignUp() {
 
   const SignUp = () => {
     if (!name) alert("");
-    registerWithEmailAndPassword(photoPerfil, name, genero, edad, email, carrera, facultad,matchuid, gustos, password);
+    registerWithEmailAndPassword(photoPerfil, name, genero, edad, email, carrera, facultad, matchuid, gustos, password);
   };
 
   useEffect(() => {
@@ -81,8 +82,16 @@ function SignUp() {
             <h1 className="logo">UNNU</h1>
           </Link>
           <h1>Crear cuenta</h1>
-          <img class="profile" src={photoPerfil} alt="firebase-image" />
-          <input type="file" onChange={handleChange} />
+          <div class="picture-container">
+            <div class="picture">
+              <img src={photoPerfil} class="picture-src" id="wizardPicturePreview" /><MdAddAPhoto class="tamicon"/>
+              <input type="file" id="wizard-picture" onChange={handleChange} accept=".png, .jpg, .jpeg" />
+
+            </div>
+            <h6 className="text">
+              Elegir la foto de perfil</h6>
+
+          </div>
           <button className="edit__btn" onClick={(e) => setphotoPerfil(photoPerfil), handleUpload}>Subir foto</button>
           <br />
           <input

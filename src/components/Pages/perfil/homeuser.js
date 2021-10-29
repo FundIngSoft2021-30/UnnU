@@ -7,7 +7,7 @@ import { auth, db, deleteAccount, logout } from "../DB/firebase";
 import * as admin from "firebase-admin";
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
-import { ButtonED } from "../Button";
+
 
 
 const animatedComponents = makeAnimated();

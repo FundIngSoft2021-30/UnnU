@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { auth, signInWithEmailAndPassword } from "../DB/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
-import '../../App.css';
+import '../../../App.css';
 import './login.css';
 
 function Login() {
@@ -16,7 +16,7 @@ function Login() {
             // maybe trigger a loading screen
             return;
         }
-        if (user) history.replace("/user-home");
+        if (user) history.replace("/match");
     }, [user, loading]);
 
     return (

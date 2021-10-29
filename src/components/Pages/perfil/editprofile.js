@@ -89,6 +89,11 @@ function Editprofile() {
     return (
         <div className="editbg">
             <div className="edit">
+                <Link to='/user-home' className='btn-mobile'>
+                    <button className="arts__btn" data-testid="ArrowBackIcon">
+                        Back
+                    </button>
+                </Link>
                 <div className="edit__container">
                     <h1>Tu perfil</h1>
                     <div class="picture-container">
@@ -97,7 +102,8 @@ function Editprofile() {
                             <input type="file" id="wizard-picture" onChange={handleChange} accept=".png, .jpg, .jpeg" />
 
                         </div>
-                        <h6 className="text">Choose Picture</h6>
+                        <h6 className="text">
+                            Elegir la foto de perfil</h6>
 
                     </div>
                     <button className="edit__btn" onClick={(e) => setphotoPerfil(photoPerfil), handleUpload}>Subir foto</button>
@@ -141,7 +147,7 @@ function Editprofile() {
 
 
                     <Link to='/user-home' className='btn-mobile'>
-                        <button className="edit__btn" onClick={Editprofile}>
+                        <button className="edit__btn" >
                             Editar perfil
                         </button>
                     </Link>
