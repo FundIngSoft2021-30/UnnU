@@ -3,13 +3,13 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { Link, useHistory } from "react-router-dom";
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
-import { Gustosoptions, carrerasOptions, facultadOptions, genderOptions } from "../Data/data"
+import { Gustosoptions, carrerasOptions, facultadOptions, genderOptions } from "../../Data/data"
 import { MdAddAPhoto } from "react-icons/md";
 import {
   auth,
   registerWithEmailAndPassword,
   storage
-} from "../DB/firebase";
+} from "../../../DB/firebase";
 
 import '../../../App.css';
 import './SignUp.css'
