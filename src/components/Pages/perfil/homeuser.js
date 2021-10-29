@@ -59,6 +59,11 @@ function Homeuser() {
   return (
 
     <div className="dashboard">
+      <Link to='/match' className='btn-mobile'>
+        <button className="arts__btn" data-testid="ArrowBackIcon">
+          Back
+        </button>
+      </Link>
       <div className="dashboard__container">
         Conectado como
         <div><img class="profile" src={photoPerfil} alt="firebase-image" /></div>
