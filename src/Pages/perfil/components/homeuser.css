@@ -1,16 +1,18 @@
 .dashboard {
-  height: 100vh;
-  width: 100vw;
+  width: 45%;
+  height: 125%;
+  background-color: #0683ff57;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  padding: 10px;
+  border-radius: 0px 40px 40px 0px;
+  position: sticky;
 }
 
 .dashboard__container {
+  
   display: flex;
   flex-direction: column;
   text-align: center;
-  background:linear-gradient(350deg, rgb(30, 14, 175) 0%, rgb(8, 234, 241) 90%);
   padding: 30px;
   border-radius: 30px;
 }
@@ -28,6 +30,20 @@
   margin-top: 7px;
 }
 
+.redondo {
+  
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  border-radius: 8px;
+  width: 100;
+  background-color: #eee;
+  font-size: 18px;
+  font-family: Helvetica, sans-serif;
+  padding: 0.5em 1em;
+  margin-bottom: 1em;
+  text-align: center;
+}
 
 .profile {
   width: 100% !important;
@@ -40,7 +56,7 @@
   background-color: red;
   border-radius: 100%;
   position: relative;
-  z-index:  2;
+  z-index: 2;
 
 }
 

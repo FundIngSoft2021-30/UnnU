@@ -36,7 +36,7 @@ function Homeuser() {
       setName(data.name);
       setEdad(data.edad);
       setGenero(data.genero.value);
-      setGustos(data.gustos);
+      setGustos(data.gustos.map(gusto => <div >{gusto.label}</div>));
       setFacultad(data.facultad.value);
       setCarrera(data.carrera.value);
       setphotoPerfil(data.photoPerfil);
@@ -57,40 +57,43 @@ function Homeuser() {
   }, [user, loading]);
 
   return (
-
-    <div className="dashboard">
-      <Link to='/match' className='btn-mobile'>
-        <button className="arts__btn" data-testid="ArrowBackIcon">
-          Back
-        </button>
-      </Link>
-      <div className="dashboard__container">
-        Conectado como
-        <div><img class="profile" src={photoPerfil} alt="firebase-image" /></div>
-
-        <div>{name} {edad}</div>
-        <div>{genero}</div>
-        <div>Carrera {carrera}</div>
-        <div>Facultad {facultad}</div>
-        <Select
-          placeholder="Gustos..."
-          className="Selectbox"
-          value={gustos}
-          defaultValue={[gustos[0], gustos[1], gustos[2], gustos[3], gustos[4]]}
-          isMulti
-
-        />
-        <Link to='/Editprofile' className='btn-mobile'>
-          <button className="dashboard__btnedit" >
-            Editar perfil
+    <div className="editbg">
+      <div className="dashboard">
+        <Link to='/match' className='btn-mobile'>
+          <button className="arts__btn" data-testid="ArrowBackIcon">
+            Back
           </button>
         </Link>
-        <button className="dashboard__btndelete" onClick={() => deleteAccount(uid)}>
-          Borrar cuenta
-        </button>
-        <button className="dashboard__btnlogut" onClick={logout}>
-          Logout
-        </button>
+        <div className="dashboard__container">
+          Conectado como
+          <div><img class="profile" src={photoPerfil} alt="firebase-image" /></div>
+
+          <div>{name} {edad}</div>
+          <div className='redondo'>{genero}</div>
+          <div>Carrera <div className='redondo'>{carrera}</div></div>
+          <div>Facultad <div className='redondo'>{facultad}</div></div>
+          <div>
+            tus gustos son:
+            <div className='redondo'>{gustos}</div>
+
+          </div>
+
+          <Link to='/Editprofile' className='btn-mobile'>
+            <button className="dashboard__btnedit" >
+              Editar perfil
+            </button>
+          </Link>
+          <Link className='btn-mobile'>
+            <button className="dashboard__btndelete" onClick={() => deleteAccount(uid)}>
+              Borrar cuenta
+            </button>
+          </Link>
+          <Link className='btn-mobile'>
+            <button className="dashboard__btnlogut" onClick={logout}>
+              Logout
+            </button>
+          </Link>
+        </div>
       </div>
     </div>
   );
