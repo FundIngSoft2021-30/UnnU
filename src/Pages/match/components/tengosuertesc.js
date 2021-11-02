@@ -14,6 +14,7 @@ function Tengosuerte() {
     const [name, setName] = useState("");
     const [direc, setDirec] = useState("");
     const [uid, setUid] = useState("");
+    const [gustosUser, setGustosUser] = useState("");
     const [photoPerfil, setphotoPerfil] = useState("");
     const history = useHistory();
 
@@ -27,6 +28,7 @@ function Tengosuerte() {
             setName(data.name);
             setphotoPerfil(data.photoPerfil);
             setUid(data.uid);
+            setGustosUser(data.gustos);
         } catch (err) {
             console.error(err);
             alert("Se ha producido un error al obtener los datos del usuario");
@@ -66,7 +68,7 @@ function Tengosuerte() {
 
             <div className="tinderCard__cardContainer">
 
-                {users.filter(user => user.uid !== uid).map(userr => (
+                {users.filter(user => user.uid !== uid && user.gustos === gustosUser).map(userr => (
 
 
                     <TinderCard
@@ -90,7 +92,7 @@ function Tengosuerte() {
                                 <h3 >{userr.carrera.value}</h3>
                                 <h3 >{userr.genero.value}</h3>
                                 <div className='containerMA'>
-                                    {userr.gustos.map(gusto => <div className='redondoMatch'>{gusto.label}</div>)}
+                                    {userr.gustos.map(gusto => <button className='redondoMatch'>{gusto.label}</button>)}
                                 </div>
                             </div>
                         </div>

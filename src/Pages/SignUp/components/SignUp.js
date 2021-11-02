@@ -22,6 +22,7 @@ function SignUp() {
   const [password, setPassword] = useState("");
   const [matchuid, setMatchuid] = useState("");
   const [likesdados, setLikesdados] = useState("");
+  const [mensajes, setMensajes] = useState("");
   const [name, setName] = useState("");
   const [genero, setGenero] = useState("");
   const [edad, setEdad] = useState("");
@@ -36,7 +37,7 @@ function SignUp() {
 
   const SignUp = () => {
     if (!name) alert("");
-    registerWithEmailAndPassword(photoPerfil, name, genero, edad, email, carrera, facultad, matchuid, likesdados, gustos, password);
+    registerWithEmailAndPassword(photoPerfil, name, genero, edad, email, carrera, facultad, mensajes, matchuid, likesdados, gustos, password);
   };
 
   useEffect(() => {
@@ -82,7 +83,14 @@ function SignUp() {
           <Link className="Linktxt" to='/' >
             <h1 className="logo">UNNU</h1>
           </Link>
-          <h1>Crear cuenta</h1>
+          <div className="nav-buttons">
+            <Link className="Linktxt" to="/login">
+              <button id="loginBtn" >Iniciar sesion</button>
+            </Link>
+            <Link className="Linktxt" to="/sign-up">
+              <button id="registerBtn" class="active">Crear cuenta</button>
+            </Link>
+          </div>
           <div class="picture-container">
             <div class="picture">
               <img src={photoPerfil} class="picture-src" id="wizardPicturePreview" /><MdAddAPhoto class="tamicon" />

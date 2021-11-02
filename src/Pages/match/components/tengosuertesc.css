@@ -46,24 +46,29 @@ h3 {
 }
 
 .containerMA {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #ED8713;
-    height: 300px;
-    width: 300px;
-    margin: 60px;
-    margin-top: 50px;
+    width: 100%;
+    height: 100px;
+    padding-top: 40px;
+    opacity: 1;
+    margin-bottom: 3em;
+    outline: 0px;
+
 }
 
 .redondoMatch {
-    background-color: #FFFFFF;
-    width: 270px;
-    margin: 0 auto;
-    margin-top: 15px;
-    text-align: center;
-
+    font-size: 1.5em;
+    
+    margin-right: 1.1em;
+    border: 0px;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 30px;
+    background: rgb(2, 0, 36);
+    background: linear-gradient(90deg, rgba(14, 4, 212, 0.87) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 212, 255, 1) 100%);
 }
+
+
+
 
 form {
     display: flex;
