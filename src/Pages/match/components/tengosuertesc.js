@@ -68,7 +68,7 @@ function Tengosuerte() {
 
             <div className="tinderCard__cardContainer">
 
-                {users.filter(user => user.uid !== uid && user.gustos === gustosUser).map(userr => (
+                {users.filter(user => user.uid !== uid ).map(userr => (
 
 
                     <TinderCard

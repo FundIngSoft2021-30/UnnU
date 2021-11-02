@@ -58,7 +58,7 @@ function NavbarU() {
                 <div className="perfilNB">
                     <div>
                         <Link to='/user-home'>
-                            <img class="profileNB" src={photoPerfil} alt="firebase-image" /><a className="txtNB">{name}</a>
+                            <img class="profileNB" src={photoPerfil} /><a className="txtNB">{name}</a>
                         </Link>
                     </div>
 

@@ -12,21 +12,15 @@ function SwipeButtons() {
     return (
         <div className="swipeButtons">
 
-            <IconButton className="swipeButtons__right">
-                <svg width={0} height={0}>
-                    <linearGradient id="linearColors" x1={1} y1={0} x2={1} y2={1}>
-                        <stop offset={0} stopColor="rgb(30, 14, 175)" />
-                        <stop offset={1} stopColor="rgb(8, 234, 241)" />
-                    </linearGradient>
-                </svg>
+            <button className="swipeButtons__right">
                 <FavoriteIcon fontSize="large" />
-            </IconButton>
-            <IconButton className="swipeButtons__repeat">
+            </button>
+            <button className="swipeButtons__repeat">
                 <ReplayIcon fontSize="large" />
-            </IconButton>
-            <IconButton className="swipeButtons__left">
+            </button>
+            <button className="swipeButtons__left">
                 <CloseIcon fontSize="large" />
-            </IconButton>
+            </button>
 
 
         </div>

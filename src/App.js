@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useEffect, useState } from "react";
 
 import './App.css';
 
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, useHistory } from 'react-router-dom';
+import { auth } from "./DB/firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
 import Home from './Pages/homepage/Home';
 import Privateroute from './Pages/homepage/Privateroute';
 import SignUp from './Pages/SignUp/SignUpC';
@@ -17,10 +19,14 @@ import Chat from './Pages/chat/chat';
 
 
 function App() {
+  const [user, loading, error] = useAuthState(auth);
+  const history = useHistory();
+
   return (
     <>
       <Router>
         <Switch>
+
           <Privateroute path='/tengosuerte' component={Suerte} />
           <Privateroute path='/calendario' component={Calendar} />
           <Privateroute path='/chat' component={Chat} />

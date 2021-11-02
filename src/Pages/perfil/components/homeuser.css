@@ -36,8 +36,8 @@
   white-space: nowrap;
   text-overflow: ellipsis;
   border-radius: 8px;
-  width: 100;
-  background-color: #eee;
+  width: 300px;
+  background-color: rgb(236, 236, 236);
   font-size: 18px;
   font-family: Helvetica, sans-serif;
   padding: 0.5em 1em;
