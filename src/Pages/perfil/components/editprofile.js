@@ -93,7 +93,7 @@ function Editprofile() {
             <div className="edit">
                 <Link to='/user-home' className='btn-mobile'>
                     <button className="arts__btn" data-testid="ArrowBackIcon">
-                    <HiArrowLeft />
+                        <HiArrowLeft />
                     </button>
                 </Link>
                 <div className="edit__container">
@@ -110,11 +110,6 @@ function Editprofile() {
                     </div>
                     <button className="edit__btn" onClick={(e) => setphotoPerfil(photoPerfil), handleUpload}>Subir foto</button>
 
-                    <div className="text">{name} </div>
-
-                    <div className="text">{edad}</div>
-
-                    <div className="text">{email}</div>
                     <label className="text" ><b>Carrera</b></label>
                     <Select
                         placeholder="Carrera..."
@@ -148,8 +143,8 @@ function Editprofile() {
                     />
 
 
-                    <Link to='/user-home' className='btn-mobile'>
-                        <button className="edit__btn" >
+                    <Link to='/user-home' >
+                        <button className="edit__btn" onClick={() => Editprofile()}>
                             Editar perfil
                         </button>
                     </Link>

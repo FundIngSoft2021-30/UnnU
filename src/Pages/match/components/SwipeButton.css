@@ -1,0 +1,181 @@
+@media only screen and (min-width: 896px) {
+    .swipeButtons {
+        position: relative;
+        padding-bottom: 16px;
+        padding-top: 16px;
+        padding-left: 8px;
+        padding-right: 8px;
+        width: 100%;
+        display: center;
+        justify-content: space-evenly;
+        pointer-events: none;
+        margin-right: auto;
+    }
+
+    .swipeButtons .MuiIconButton-root {
+        background-color: white;
+        box-shadow: 0px 10px 53px 0px rgba(0, 0, 0, 0.3) !important;
+    }
+
+    .swipeButtons__repeat {
+        padding: 3vw !important;
+        color: #f5b748 !important;
+    }
+
+    .swipeButtons__left {
+        padding: 3vw !important;
+        color: #ec5e6f !important;
+    }
+
+
+
+    .swipeButtons__right {
+        padding: 3vw !important;
+        color: rgba(14, 4, 212, 0.87) !important;
+    }
+
+    .color {
+        color: linear-gradient(rgb(30, 14, 175), rgb(8, 234, 241)) !important;
+    }
+}
+
+@media screen and (min-height:680px) {
+    .recsToolbar {
+        bottom: 10px
+    }
+}
+
+@media screen and (min-height:780px) {
+    .recsToolbar {
+        bottom: 20px
+    }
+}
+
+@media screen and (min-height:830px) {
+    .recsToolbar {
+        bottom: 40px
+    }
+}
+
+.recsToolbar__tips {
+    line-height: 55px
+}
+
+.recsToolbar__tips__inner {
+    max-width: 0;
+    transition: max-width .25s ease, opacity .1s ease
+}
+
+.recsToolbar--open .recsToolbar__tips__inner,
+.recsToolbar--static .recsToolbar__tips__inner {
+    max-width: 730px;
+    transition-delay: 0ms, .1s
+}
+
+.beacon__circle {
+    animation-name: beacon__circleExpand
+}
+
+@keyframes beacon__circleExpand {
+    0% {
+        transform: scale(0);
+        opacity: 1
+    }
+
+    95% {
+        transform: scale(4.75);
+        opacity: .1
+    }
+
+    to {
+        transform: scale(5);
+        opacity: 0
+    }
+}
+
+@keyframes shiftProfileCardRight {
+    50% {
+        transform: translate3d(12px, 0, 0)
+    }
+}
+
+@keyframes shiftProfileCardLeft {
+    50% {
+        transform: translate3d(-12px, 0, 0)
+    }
+}
+
+.animn-shift-left {
+    animation-name: shiftProfileCardLeft
+}
+
+.animn-shift-right {
+    animation-name: shiftProfileCardRight
+}
+
+@keyframes marquee {
+    0% {
+        transform: translateZ(0)
+    }
+
+    to {
+        transform: translate3d(-200%, 0, 0)
+    }
+}
+
+.animn-marquee {
+    animation-name: marquee
+}
+
+.twinkle-slow {
+    animation: twinkle 1.5s ease-in 1s infinite
+}
+
+.twinkle-fast {
+    animation: twinkle 1.5s ease-in .5s infinite
+}
+
+@keyframes twinkle {
+    50% {
+        transform: scale(.5);
+        opacity: .5
+    }
+}
+
+@media only screen and (max-width:895px) {
+    .recsCard__loop {
+        min-width: calc(80vh - 67.2px)
+    }
+}
+
+@media only screen and (min-width:896px) {
+    .recsCardboard {
+        max-width: 365px;
+        height: 667px;
+        max-height: calc(100vh - 103px);
+    }
+}
+
+.animn-tilt-right {
+    animation-name: tiltRecCardRight
+}
+
+.animn-tilt-left {
+    animation-name: tiltRecCardLeft
+}
+
+@keyframes tiltRecCardRight {
+    50% {
+        transform: rotateY(8deg)
+    }
+}
+
+@keyframes tiltRecCardLeft {
+    50% {
+        transform: rotateY(-8deg)
+    }
+}
+
+.homeScreen__notification {
+    animation: fadeOut 2s ease 5s 1 normal forwards
+}

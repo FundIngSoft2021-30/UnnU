@@ -1,0 +1,112 @@
+@media only screen and (min-width: 896px) {
+
+    .card {
+        max-width: 365px;
+        height: 667px;
+        max-height: calc(100vh - 103px);
+    }
+}
+
+@media only screen and (max-width:895px) {
+    .card {
+        min-width: calc(80vh - 67.2px)
+    }
+}
+
+@keyframes tiltRecCardRight {
+    50% {
+        transform: rotateY(8deg)
+    }
+}
+
+@keyframes tiltRecCardLeft {
+    50% {
+        transform: rotateY(-8deg)
+    }
+}
+
+
+
+h2 {
+    font-family: 'Gotham Rounded', sans-serif;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #fff;
+    text-align: left;
+    margin-top: 10px;
+}
+
+h3 {
+    font-family: 'Gotham Rounded', sans-serif;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #fff;
+    text-align: left;
+    margin-top: 5px;
+}
+
+.containerMA {
+    width: 100%;
+    height: 100px;
+    padding-top: 40px;
+    opacity: 1;
+    margin-bottom: 3em;
+    outline: 0px;
+
+}
+
+.redondoMatch {
+    font-size: 1.5em;
+    
+    margin-right: 1.1em;
+    border: 0px;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 30px;
+    background: rgb(2, 0, 36);
+    background: linear-gradient(90deg, rgba(14, 4, 212, 0.87) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 212, 255, 1) 100%);
+}
+
+
+
+
+form {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding-top: 20px;
+}
+
+form redondoMatch {
+    width: 100px;
+    margin: 0 auto;
+}
+
+
+.tinderCard__cardContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 41vh;
+    margin-right: 0%;
+}
+
+.swipe {
+    position: absolute;
+}
+
+.cardtext {
+    bottom: 40px;
+}
+
+.container {
+
+    position: absolute;
+    top: 320px;
+    right: 0;
+    border-radius: 30px;
+    padding-bottom: 10%;
+    width: 100%;
+    height: 50%;
+    background: rgb(0, 0, 0, 0.6);
+}

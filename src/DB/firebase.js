@@ -43,7 +43,7 @@ const signInWithEmailAndPassword = async (email, password) => {
   }
 };
 
-const registerWithEmailAndPassword = async (photoPerfil, name, genero, edad, email, carrera, facultad, matchuid, likesdados, gustos, password) => {
+const registerWithEmailAndPassword = async (photoPerfil, name, genero, edad, email, carrera, facultad, mensajes, matchuid, likesdados, gustos, password) => {
   try {
     const res = await auth.createUserWithEmailAndPassword(email, password);
     const user = res.user;
@@ -56,6 +56,7 @@ const registerWithEmailAndPassword = async (photoPerfil, name, genero, edad, ema
       email,
       carrera,
       facultad,
+      mensajes,
       matchuid,
       likesdados,
       gustos,
@@ -75,6 +76,30 @@ const editprofile = async (photoPerfil, carrera, facultad, gustos) => {
       carrera,
       facultad,
       gustos,
+    });
+  } catch (err) {
+    console.error(err);
+    alert(err.message);
+  }
+};
+
+const likesXusuario = async (likesdados) => {
+  try {
+    const user = app.auth().currentUser
+    await db.collection("usuarios").doc(user.uid).update({
+      likesdados,
+    });
+  } catch (err) {
+    console.error(err);
+    alert(err.message);
+  }
+};
+
+const matchXusuario = async (matchuid) => {
+  try {
+    const user = app.auth().currentUser
+    await db.collection("usuarios").doc(user.uid).update({
+      matchuid,
     });
   } catch (err) {
     console.error(err);
@@ -108,5 +133,7 @@ export {
   registerWithEmailAndPassword,
   editprofile,
   sendResetEmail,
+  likesXusuario,
+  matchXusuario,
   logout,
 };
