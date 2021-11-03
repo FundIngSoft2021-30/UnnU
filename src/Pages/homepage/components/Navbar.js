@@ -37,11 +37,7 @@ function Navbar() {
               </Link>
             </li>
             <li>
-              <Link
-                to='/login'
-                className='nav-links-mobile'
-                onClick={closeMobileMenu}
-              >
+              <Link to='/login' className='nav-links-mobile' onClick={closeMobileMenu}>
                 Iniciar sesion
               </Link>
             </li>
