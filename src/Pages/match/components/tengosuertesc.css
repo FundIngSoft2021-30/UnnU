@@ -1,5 +1,4 @@
 @media only screen and (min-width: 896px) {
-
     .card {
         max-width: 365px;
         height: 667px;
@@ -32,6 +31,7 @@ h2 {
     font-size: 1.5rem;
     font-weight: bold;
     color: #fff;
+    padding-left: 10px;
     text-align: left;
     margin-top: 10px;
 }
@@ -41,6 +41,7 @@ h3 {
     font-size: 1.2rem;
     font-weight: bold;
     color: #fff;
+    padding-left: 10px;
     text-align: left;
     margin-top: 5px;
 }
@@ -50,21 +51,24 @@ h3 {
     height: 100px;
     padding-top: 40px;
     opacity: 1;
-    margin-bottom: 3em;
+    margin-bottom: 5em;
+    margin-top: 1em;
+    margin-left: 1em;
     outline: 0px;
-
 }
 
 .redondoMatch {
     font-size: 1.5em;
-    
     margin-right: 1.1em;
+    margin-top: 0.5em;
     border: 0px;
     color: #fff;
     cursor: pointer;
+    padding-left: 5px;
+    padding-right: 5px;
     border-radius: 30px;
     background: rgb(2, 0, 36);
-    background: linear-gradient(90deg, rgba(14, 4, 212, 0.87) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 212, 255, 1) 100%);
+    background: rgba(0, 213, 255, 0.603);
 }
 
 
@@ -100,13 +104,13 @@ form redondoMatch {
 }
 
 .container {
-
     position: absolute;
     top: 320px;
     right: 0;
-    border-radius: 30px;
+    border-radius: 25px;
     padding-bottom: 10%;
     width: 100%;
-    height: 50%;
+    height: 350px;
+    max-height: calc(57vh - 103px);
     background: rgb(0, 0, 0, 0.6);
 }

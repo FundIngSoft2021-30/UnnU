@@ -43,7 +43,7 @@ const signInWithEmailAndPassword = async (email, password) => {
   }
 };
 
-const registerWithEmailAndPassword = async (photoPerfil, name, genero, edad, email, carrera, facultad, mensajes, matchuid, likesdados, gustos, password) => {
+const registerWithEmailAndPassword = async (photoPerfil, name, genero, edad, email, carrera, facultad, mensajes, matchuid, likesdados, likesrecibidos, gustos, password) => {
   try {
     const res = await auth.createUserWithEmailAndPassword(email, password);
     const user = res.user;
@@ -59,6 +59,7 @@ const registerWithEmailAndPassword = async (photoPerfil, name, genero, edad, ema
       mensajes,
       matchuid,
       likesdados,
+      likesrecibidos,
       gustos,
       authProvider: "local"
     });
@@ -87,7 +88,7 @@ const likesXusuario = async (likesdados) => {
   try {
     const user = app.auth().currentUser
     await db.collection("usuarios").doc(user.uid).update({
-      likesdados,
+      likesdados
     });
   } catch (err) {
     console.error(err);
@@ -95,11 +96,22 @@ const likesXusuario = async (likesdados) => {
   }
 };
 
-const matchXusuario = async (matchuid) => {
+const matchXusuario = async (uid,matchuid) => {
   try {
-    const user = app.auth().currentUser
-    await db.collection("usuarios").doc(user.uid).update({
+    await db.collection("usuarios").doc(uid).update({
       matchuid,
+    });
+  } catch (err) {
+    console.error(err);
+    alert(err.message);
+  }
+};
+
+const likesrecibidosxusuario = async (uidpersonalike,likesrecibidos) => {
+  try {
+    
+    await db.collection("usuarios").doc(uidpersonalike).update({
+      likesrecibidos
     });
   } catch (err) {
     console.error(err);
@@ -132,8 +144,9 @@ export {
   signInWithEmailAndPassword,
   registerWithEmailAndPassword,
   editprofile,
-  sendResetEmail,
   likesXusuario,
+  sendResetEmail,
+  likesrecibidosxusuario,
   matchXusuario,
   logout,
 };

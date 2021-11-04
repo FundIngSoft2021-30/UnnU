@@ -3,7 +3,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { Link, useHistory } from "react-router-dom";
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
-import { Gustosoptions, carrerasOptions, facultadOptions, genderOptions } from "../../Data/data"
+import { Gustosoptions, carrerasOptions, facultadOptions, genderOptions,likes } from "../../Data/data"
 import { MdAddAPhoto } from "react-icons/md";
 import {
   auth,
@@ -20,8 +20,8 @@ function SignUp() {
   const [photoPerfil, setphotoPerfil] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [matchuid, setMatchuid] = useState("");
-  const [likesdados, setLikesdados] = useState("");
+  const [matchuid, setMatchuid] = useState(likes);
+  const [likesdados, setLikesdados] = useState(likes);
   const [mensajes, setMensajes] = useState("");
   const [name, setName] = useState("");
   const [genero, setGenero] = useState("");
@@ -30,6 +30,7 @@ function SignUp() {
   const [facultad, setFacultad] = useState("");
   const [gustos, setGustos] = useState("");
   const [image, setImage] = useState(null);
+  const [likesrecibidos, setLikesrecibidos] = useState(likes);
   const [progressBar, setProgress] = useState(0);
   const [user, loading, error] = useAuthState(auth);
   const history = useHistory();
@@ -37,7 +38,7 @@ function SignUp() {
 
   const SignUp = () => {
     if (!name) alert("");
-    registerWithEmailAndPassword(photoPerfil, name, genero, edad, email, carrera, facultad, mensajes, matchuid, likesdados, gustos, password);
+    registerWithEmailAndPassword(photoPerfil, name, genero, edad, email, carrera, facultad, mensajes, matchuid, likesdados,likesrecibidos, gustos, password);
   };
 
   useEffect(() => {
@@ -124,7 +125,6 @@ function SignUp() {
             options={genderOptions}
             value={genero}
             onChange={setGenero}
-
           />
           <Select
             placeholder="Carrera..."
@@ -170,7 +170,7 @@ function SignUp() {
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Contraseña"
           />
-          <button className="register__btn" onClick={SignUp}>
+          <button className="register__btn" onClick={SignUp} >
             Registrarse
           </button>
           <div className="Linkbox">

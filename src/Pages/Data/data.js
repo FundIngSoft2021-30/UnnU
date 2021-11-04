@@ -16,6 +16,11 @@ export const facultadOptions = [
   { value: 'Teología', label: 'Teología' }
 ]
 
+export const likes = [
+  'asdasddewr1334'
+]
+
+
 export const carrerasOptions = [
   { value: 'Arquitectura', label: 'Arquitectura' },
   { value: 'Diseño Industrial', label: 'Diseño Industrial' },

@@ -8,7 +8,7 @@ function SuerteC() {
         <>
             <NavbarU />
             <Suerte />
-            <SwipeButtons/>
+            
         </>
     );
 }
