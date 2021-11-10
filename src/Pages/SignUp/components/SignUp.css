@@ -1,4 +1,4 @@
-.register {
+.register,scroll-container {
     width: 40%;
     height: 150%;
     background-color: #0683ff57;
@@ -8,6 +8,15 @@
     border-radius: 0px 40px 40px 0px;
 
 }
+
+scroll-container {
+    display: block;
+    width: 350px;
+    height: 200px;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+  }
+
 
 .activeregister {
     padding: 10px;

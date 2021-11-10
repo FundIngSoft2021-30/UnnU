@@ -17,18 +17,18 @@ export const daysOfWeek = [
 ];
 
 export const MonthsOfYear = [
-    "Enero",
-    "Febrero",
-    "Marzo",
-    "Abril",
-    "Mayo",
-    "Junio",
-    "Julio",
-    "Agosto",
-    "Septiempre",
-    "Octubre",
-    "Noviembre",
-    "Diciembre"
+  "Enero",
+  "Febrero",
+  "Marzo",
+  "Abril",
+  "Mayo",
+  "Junio",
+  "Julio",
+  "Agosto",
+  "Septiempre",
+  "Octubre",
+  "Noviembre",
+  "Diciembre"
 ];
 
 export function getYearDropdownOptions(currentYear) {
@@ -40,7 +40,7 @@ export function getYearDropdownOptions(currentYear) {
 export function getMonthDropdownOptions() {
   return range(1, 13).map((m) => ({
     value: m,
-    label: MonthsOfYear[m-1]
+    label: MonthsOfYear[m - 1]
   }));
 }
 
@@ -53,6 +53,8 @@ export function createDaysForCurrentMonth(year, month) {
     return {
       dateString: dayjs(`${year}-${month}-${index + 1}`).format("YYYY-MM-DD"),
       dayOfMonth: index + 1,
+      Month:month,
+      Year:year,
       isCurrentMonth: true
     };
   });

@@ -1,4 +1,24 @@
 
+import { useState } from "react";
+import RoomSchedulersc from "./components/RoomScheduler";
+import NavbarU from '../NavBarUser/NavBarUC';
+
+function Calendario() {
+  return (
+    <>
+      <NavbarU />
+      <RoomSchedulersc />
+    </>
+  );
+}
+
+export default Calendario;
+
+
+
+
+/*
+
 import "./components/calendariosc.css";
 import { useState } from "react";
 import Calendar, { CalendarDayHeader } from "./components/calendariosc";
@@ -21,3 +41,5 @@ export default function App() {
     </div>
   );
 }
+
+*/
