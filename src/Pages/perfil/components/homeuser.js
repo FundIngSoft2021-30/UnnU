@@ -3,7 +3,12 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { useHistory } from "react-router";
 import { Link } from 'react-router-dom';
 import "./homeuser.css";
-import { auth, db, deleteAccount, logout } from "../../../DB/firebase";
+import {
+  auth,
+  db,
+  deleteAccount,
+  logout
+} from "../../../DB/firebase";
 import * as admin from "firebase-admin";
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
@@ -83,16 +88,15 @@ function Homeuser() {
               Editar perfil
             </button>
           </Link>
-          <Link className='btn-mobile'>
-            <button className="dashboard__btndelete" onClick={() => deleteAccount(uid)}>
+          <Link to='/' className='btn-mobile'>
+            <button className="dashboard__btndelete" onClick={() => deleteAccount(photoPerfil)}>
               Borrar cuenta
             </button>
           </Link>
-          <Link className='btn-mobile'>
-            <button className="dashboard__btnlogut" onClick={logout}>
-              Logout
-            </button>
-          </Link>
+          <button className="dashboard__btnlogut" onClick={logout}>
+            Logout
+          </button>
+
         </div>
       </div>
     </div>

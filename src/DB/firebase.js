@@ -1,6 +1,6 @@
 import firebase from "firebase";
-import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 import "firebase/storage";
+import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAJ6toDLOGsOo1X8s2r9UPEooXkQ9vRvV0",
@@ -19,12 +19,13 @@ const db = app.firestore();
 const storage = firebase.storage();
 
 
-const deleteAccount = async (uid) => {
+const deleteAccount = async (photourl) => {
   try {
-    const user = app.auth().currentUser;
-    const data = app.firestore();
-    user.delete();
-    data.collection("usuarios").doc(uid).delete();
+    const user = app.auth().currentUser.delete();
+    const imageRef = storage.refFromURL(photourl);
+    imageRef.delete()
+    app.firestore().collection("usuarios").doc(user.uid).delete();
+    app.firestore().collection("eventos").doc(user.uid).delete();
   } catch (err) {
     console.error(err);
     alert(err.message);
@@ -43,7 +44,7 @@ const signInWithEmailAndPassword = async (email, password) => {
   }
 };
 
-const registerWithEmailAndPassword = async (photoPerfil, name, genero, edad, email, carrera, facultad, mensajes, matchuid, likesdados, likesrecibidos, gustos, password) => {
+const registerWithEmailAndPassword = async (photoPerfil, name, genero, edad, email, carrera, facultad, mensajes, matchuid, likesdados, numEventos, likesrecibidos, gustos, password) => {
   try {
     const res = await auth.createUserWithEmailAndPassword(email, password);
     const user = res.user;
@@ -61,7 +62,69 @@ const registerWithEmailAndPassword = async (photoPerfil, name, genero, edad, ema
       likesdados,
       likesrecibidos,
       gustos,
+      numEventos,
       authProvider: "local"
+    });
+  } catch (err) {
+    console.error(err);
+    alert(err.message);
+  }
+};
+
+const numeventosnew = async (numEventos) => {
+
+  try {
+    const res = app.auth().currentUser
+    const user = res.user;
+    await db.collection("usuarios").doc(user.uid).update({
+      numEventos
+    });
+  } catch (err) {
+    console.error(err);
+    alert(err.message);
+  }
+};
+
+
+
+const crearEvento = async (Eventsxuser, uid, nombreusuario) => {
+  try {
+    const res = app.auth().currentUser
+    const user = res.user;
+    await db.collection("eventos").doc(uid).set({
+      uid,
+      nombreusuario,
+      Eventsxuser
+    });
+  } catch (err) {
+    console.error(err);
+    alert(err.message);
+  }
+};
+
+const cambiarEvento = async (nombreusuario, currentEvents, uid) => {
+  try {
+    const res = app.auth().currentUser
+    const user = res.user;
+
+    await db.collection("eventos").doc(user.uid).update({
+      uid,
+      nombreusuario,
+      currentEvents
+    });
+  } catch (err) {
+    console.error(err);
+    alert(err.message);
+  }
+};
+
+
+const eliminarEvento = async (uid,Eventsxuser) => {
+  try {
+    const res = app.auth().currentUser
+    const user = res.user;
+    await db.collection("eventos").doc(uid).update({
+      Eventsxuser
     });
   } catch (err) {
     console.error(err);
@@ -96,7 +159,7 @@ const likesXusuario = async (likesdados) => {
   }
 };
 
-const matchXusuario = async (uid,matchuid) => {
+const matchXusuario = async (uid, matchuid) => {
   try {
     await db.collection("usuarios").doc(uid).update({
       matchuid,
@@ -107,9 +170,9 @@ const matchXusuario = async (uid,matchuid) => {
   }
 };
 
-const likesrecibidosxusuario = async (uidpersonalike,likesrecibidos) => {
+const likesrecibidosxusuario = async (uidpersonalike, likesrecibidos) => {
   try {
-    
+
     await db.collection("usuarios").doc(uidpersonalike).update({
       likesrecibidos
     });
@@ -123,7 +186,7 @@ const sendResetEmail = async (email) => {
   try {
     const auth = app.auth();
     auth.sendPasswordResetEmail(email)
-    alert("Se ha enviado el enlace para restablecer la contraseña al email!");
+    alert("Se ha enviado el enlace para restablecer la contraseña al email, el email se demora en llegar asi que no te preocupes!");
   } catch (err) {
     console.error(err);
     alert(err.message);
@@ -144,9 +207,13 @@ export {
   signInWithEmailAndPassword,
   registerWithEmailAndPassword,
   editprofile,
+  crearEvento,
+  cambiarEvento,
+  eliminarEvento,
   likesXusuario,
   sendResetEmail,
   likesrecibidosxusuario,
   matchXusuario,
   logout,
+  numeventosnew
 };
