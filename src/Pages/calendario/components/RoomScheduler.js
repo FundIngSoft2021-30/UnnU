@@ -94,8 +94,6 @@ function RoomScheduler() {
         fetchUserdata();
         Eventsxuser.push(Eventos[0]);
         setEventsxuser(Eventsxuser);
-
-
         CrearEvento();
     }
 
@@ -133,7 +131,7 @@ function RoomScheduler() {
                         right: 'dayGridMonth,timeGridWeek,timeGridDay'
                     }}
                     initialView='dayGridMonth'
-                    editable={true}
+                    //editable={true}
                     selectable={true}
                     selectMirror={true}
                     dayMaxEvents={true}
