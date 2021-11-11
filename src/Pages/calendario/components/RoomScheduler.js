@@ -11,6 +11,7 @@ import './RoomScheduler.css'
 import {
     auth,
     crearEvento,
+    eliminarEvento,
     db
 } from "../../../DB/firebase";
 
@@ -24,8 +25,8 @@ function RoomScheduler() {
     const [user, loading] = useAuthState(auth);
     const [nombreusuario, setNombreusuario] = useState("");
     const [uid, setUid] = useState("");
-    const [numEventos, setNumEventos] = useState();
-    const [Eventsxuser, setEventsxuser] = useState(INITIAL_EVENTS);
+    const [uidEV, setUidEV] = useState("");
+    const [Eventsxuser, setEventsxuser] = useState([{}]);
     const history = useHistory();
 
     const fetchUserdata = async () => {
@@ -37,26 +38,23 @@ function RoomScheduler() {
             const data = await query.docs[0].data();
             setUid(data.uid);
             setNombreusuario(data.name);
-            setNumEventos(data.numEventos);
+
         } catch (err) {
             console.error(err);
             alert("Se ha producido un error al obtener los datos del usuario");
         }
     };
     const fetchEventdata = async () => {
-        try {
-            const query = await db
-                .collection("eventos")
-                .where("uid", "==", user?.uid)
-                .get();
-            const data = await query.docs[0].data();
-            setUid(data.uid);
-            setNombreusuario(data.name);
-            setEventsxuser(data.Eventsxuser);
-        } catch (err) {
-            console.error(err);
-            alert("Se ha producido un error al obtener los datos del evento");
-        }
+        const query = await db
+            .collection("eventos")
+            .where("uid", "==", user?.uid)
+            .get();
+        const data = await query.docs[0].data();
+        setUidEV(data.uid);
+        setNombreusuario(data.nombreusuario);
+        setEventsxuser(data.Eventsxuser);
+        console.log("nombre  " + nombreusuario);
+
     };
 
 
@@ -64,11 +62,10 @@ function RoomScheduler() {
     useEffect(() => {
         if (loading) return;
         if (!user) return history.replace("/");
-
+        fetchEventdata();
         fetchUserdata();
-        if (numEventos !== 0) {
-            fetchEventdata();
-        }
+        console.log("numero " + Eventsxuser.length);
+
     }, [user, loading]);
 
     const handleDateSelect = (selectInfo) => {
@@ -93,11 +90,12 @@ function RoomScheduler() {
 
             })
         }
-        ++numEventos;
-        data.push(Eventos);
-        setEventsxuser(Eventos);
-        console.log(numEventos);
-        console.log(Eventos);
+
+        fetchUserdata();
+        Eventsxuser.push(Eventos[0]);
+        setEventsxuser(Eventsxuser);
+
+
         CrearEvento();
     }
 
@@ -105,9 +103,19 @@ function RoomScheduler() {
 
         crearEvento(Eventsxuser, uid, nombreusuario);
     };
+
     const handleEventClick = (clickInfo) => {
         if (window.confirm(`Estas seguro de eliminar este evento? '${clickInfo.event.title}'`)) {
-            clickInfo.event.remove()
+            clickInfo.event.remove();
+
+            for (let i = 0; i < Eventsxuser.length; i++) {
+                if (Eventsxuser[i].title === clickInfo.event.title) {
+                    Eventsxuser.splice(i, 1);
+                }
+            }
+            setEventsxuser(Eventsxuser);
+            console.log(Eventsxuser);
+            eliminarEvento(uid, Eventsxuser);
         }
     }
 
@@ -130,8 +138,9 @@ function RoomScheduler() {
                     selectMirror={true}
                     dayMaxEvents={true}
                     weekNumbers={true}
+                    initialEvents={true}
+                    events={Eventsxuser}
                     weekends={state.weekendsVisible}
-                    initialEvents={INITIAL_EVENTS} // alternatively, use the `events` setting to fetch from a feed
                     select={handleDateSelect}
                     eventContent={renderEventContent} // custom render function
                     eventClick={handleEventClick}

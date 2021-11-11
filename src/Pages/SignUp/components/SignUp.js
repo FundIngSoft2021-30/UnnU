@@ -3,7 +3,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { Link, useHistory } from "react-router-dom";
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
-import { Gustosoptions, carrerasOptions, facultadOptions, genderOptions,likes } from "../../Data/data"
+import { Gustosoptions, carrerasOptions, facultadOptions, genderOptions, likes } from "../../Data/data"
 import { MdAddAPhoto } from "react-icons/md";
 import {
   auth,
@@ -32,13 +32,14 @@ function SignUp() {
   const [image, setImage] = useState(null);
   const [likesrecibidos, setLikesrecibidos] = useState(likes);
   const [progressBar, setProgress] = useState(0);
+  const [numEventos, setNumEventos] = useState(0);
   const [user, loading, error] = useAuthState(auth);
   const history = useHistory();
 
 
   const SignUp = () => {
     if (!name) alert("");
-    registerWithEmailAndPassword(photoPerfil, name, genero, edad, email, carrera, facultad, mensajes, matchuid, likesdados,likesrecibidos, gustos, password);
+    registerWithEmailAndPassword(photoPerfil, name, genero, edad, email, carrera, facultad, mensajes, matchuid, likesdados, numEventos, likesrecibidos, gustos, password);
   };
 
   useEffect(() => {

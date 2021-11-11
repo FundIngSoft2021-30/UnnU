@@ -19,12 +19,13 @@ const db = app.firestore();
 const storage = firebase.storage();
 
 
-const deleteAccount = async (uid) => {
+const deleteAccount = async (photourl) => {
   try {
-    const user = app.auth().currentUser;
-    const data = app.firestore();
-    user.delete();
-    data.collection("usuarios").doc(uid).delete();
+    const user = app.auth().currentUser.delete();
+    const imageRef = storage.refFromURL(photourl);
+    imageRef.delete()
+    app.firestore().collection("usuarios").doc(user.uid).delete();
+    app.firestore().collection("eventos").doc(user.uid).delete();
   } catch (err) {
     console.error(err);
     alert(err.message);
@@ -43,11 +44,10 @@ const signInWithEmailAndPassword = async (email, password) => {
   }
 };
 
-const registerWithEmailAndPassword = async (photoPerfil, name, genero, edad, email, carrera, facultad, mensajes, matchuid, likesdados,numEventos, likesrecibidos, gustos, password) => {
+const registerWithEmailAndPassword = async (photoPerfil, name, genero, edad, email, carrera, facultad, mensajes, matchuid, likesdados, numEventos, likesrecibidos, gustos, password) => {
   try {
     const res = await auth.createUserWithEmailAndPassword(email, password);
     const user = res.user;
-    user.sendEmailVerification();
     await db.collection("usuarios").doc(user.uid).set({
       uid: user.uid,
       photoPerfil,
@@ -70,6 +70,22 @@ const registerWithEmailAndPassword = async (photoPerfil, name, genero, edad, ema
     alert(err.message);
   }
 };
+
+const numeventosnew = async (numEventos) => {
+
+  try {
+    const res = app.auth().currentUser
+    const user = res.user;
+    await db.collection("usuarios").doc(user.uid).update({
+      numEventos
+    });
+  } catch (err) {
+    console.error(err);
+    alert(err.message);
+  }
+};
+
+
 
 const crearEvento = async (Eventsxuser, uid, nombreusuario) => {
   try {
@@ -103,10 +119,13 @@ const cambiarEvento = async (nombreusuario, currentEvents, uid) => {
 };
 
 
-const eliminarEvento = async (nombre) => {
+const eliminarEvento = async (uid,Eventsxuser) => {
   try {
-    const data = app.firestore();
-    data.collection("eventos").doc(nombre).delete();
+    const res = app.auth().currentUser
+    const user = res.user;
+    await db.collection("eventos").doc(uid).update({
+      Eventsxuser
+    });
   } catch (err) {
     console.error(err);
     alert(err.message);
@@ -196,4 +215,5 @@ export {
   likesrecibidosxusuario,
   matchXusuario,
   logout,
+  numeventosnew
 };
