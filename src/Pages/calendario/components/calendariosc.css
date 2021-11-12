@@ -1,74 +1,50 @@
-.calendar-root {
-  --grid-gap: 2px;
-  --grid-height: 700px;
-  --text-color-light: rgba(0, 0, 0, 0.4);
-  --text-color-primary: rgba(0, 0, 0, 0.7);
-  --grid-background-color: rgb(0, 0, 0);
-  --grid-foreground-color: rgb(255, 255, 255);
-  --space-sm: 4px;
-  --space-md: 8px;
-  --space-lg: 16px;
-  width: 100%;
+
+
+h2 {
+    margin: 0;
+    font-size: 16px;
 }
 
-.day-of-week-header-cell {
-  color: var(--text-color-primary);
-  background-color: var(--grid-foreground-color);
-  padding: var(--space-md) 0;
-  min-width: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+ul {
+    margin: 0;
+    padding: 0 0 0 1.5em;
 }
 
-.days-of-week,
-.days-grid {
-  width: 100%;
-  box-sizing: border-box;
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  grid-column-gap: var(--grid-gap);
-  grid-row-gap: var(--grid-gap);
+li {
+    margin: 1.5em 0;
+    padding: 0;
 }
 
-.days-grid {
-  height: var(--grid-height);
-  position: relative;
-  border: var(--grid-gap) solid var(--grid-background-color);
-  background-color: var(--grid-background-color);
+b {
+    /* used for event dates/times */
+    margin-right: 3px;
 }
 
-.day-grid-item-container {
-  position: relative;
-  background-color: rgba(223, 243, 255, 0.897);
-  display: flex;
-  flex-direction: row;
-  width: 100%
+.demo-app {
+    display: flex;
+    min-height: 100%;
+    font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+    font-size: 14px;
 }
 
-.day-grid-item-container:not(.current-month) .day-grid-item-header {
-  color: var(--text-color-light);
+.demo-app-sidebar {
+    width: 300px;
+    line-height: 1.5;
+    background: #eaf9ff;
+    border-right: 1px solid #d3e2e8;
 }
 
-/* Position the day label within the day cell */
-.day-grid-item-container .day-grid-item-header {
-  color: var(--text-color-primary);
-  padding: var(--space-md);
-  padding-bottom: 0;
-  flex-shrink: 0;
-  font-weight: bold;
+.demo-app-sidebar-section {
+    padding: 2em;
 }
 
-.day-grid-item-container>.day-content-wrapper {
-  flex: 1;
-  min-height: 0;
-  position: fixed;
+.demo-app-main {
+    flex-grow: 1;
+    padding: 3em;
 }
 
-.navigation-header {
-  display: flex;
-}
-
-.navigation-header>* {
-  margin-right: var(--space-md);
+.fc {
+    /* the calendar root */
+    max-width: 1100px;
+    margin: 0 auto;
 }

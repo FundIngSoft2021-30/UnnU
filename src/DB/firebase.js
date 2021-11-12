@@ -159,7 +159,19 @@ const likesXusuario = async (likesdados) => {
 const matchXusuario = async (uid, matchuid) => {
   try {
     await db.collection("usuarios").doc(uid).update({
-      matchuid,
+      matchuid
+    });
+  } catch (err) {
+    console.error(err);
+    alert(err.message);
+  }
+};
+
+const matchPropioUsuario = async (matchuid) => {
+  try {
+    const user = app.auth().currentUser
+    await db.collection("usuarios").doc(user.uid).update({
+      matchuid
     });
   } catch (err) {
     console.error(err);
@@ -212,5 +224,6 @@ export {
   likesrecibidosxusuario,
   matchXusuario,
   logout,
-  deletedbxUser
+  deletedbxUser,
+  matchPropioUsuario
 };

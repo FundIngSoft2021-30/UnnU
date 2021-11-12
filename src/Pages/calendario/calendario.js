@@ -1,13 +1,12 @@
 
-import { useState } from "react";
-import RoomSchedulersc from "./components/RoomScheduler";
+import CalendarioSC from "./components/calendarioSC";
 import NavbarU from '../NavBarUser/NavBarUC';
 
 function Calendario() {
   return (
     <>
       <NavbarU />
-      <RoomSchedulersc />
+      <CalendarioSC />
     </>
   );
 }
