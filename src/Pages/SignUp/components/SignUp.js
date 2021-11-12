@@ -36,7 +36,6 @@ function SignUp() {
   const [user, loading, error] = useAuthState(auth);
   const history = useHistory();
 
-
   const SignUp = () => {
     if (!name) alert("");
     registerWithEmailAndPassword(photoPerfil, name, genero, edad, email, carrera, facultad, mensajes, matchuid, likesdados, numEventos, likesrecibidos, gustos, password);

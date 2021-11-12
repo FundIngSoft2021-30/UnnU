@@ -11,6 +11,7 @@ import './RoomScheduler.css'
 import {
     auth,
     crearEvento,
+    
     eliminarEvento,
     db
 } from "../../../DB/firebase";
@@ -45,15 +46,20 @@ function RoomScheduler() {
         }
     };
     const fetchEventdata = async () => {
+        console.log("fetchEventdata");
+        console.log(loading);
+        console.log("fetchEventdata if");
+
         const query = await db
             .collection("eventos")
             .where("uid", "==", user?.uid)
             .get();
-        const data = await query.docs[0].data();
-        setUidEV(data.uid);
-        setNombreusuario(data.nombreusuario);
-        setEventsxuser(data.Eventsxuser);
-        console.log("nombre  " + nombreusuario);
+        if (query.docs.length > 0) {
+            const data = await query.docs[0].data();
+            setUidEV(data.uid);
+            setEventsxuser(data.Eventsxuser);
+        }
+
 
     };
 

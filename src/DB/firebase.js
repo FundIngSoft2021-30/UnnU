@@ -21,11 +21,12 @@ const storage = firebase.storage();
 
 const deleteAccount = async (photourl) => {
   try {
-    const user = app.auth().currentUser.delete();
+    const user = app.auth().currentUser;
     const imageRef = storage.refFromURL(photourl);
     imageRef.delete()
-    app.firestore().collection("usuarios").doc(user.uid).delete();
-    app.firestore().collection("eventos").doc(user.uid).delete();
+    deletedbxUser();
+    app.auth().currentUser.delete();
+
   } catch (err) {
     console.error(err);
     alert(err.message);
@@ -33,6 +34,16 @@ const deleteAccount = async (photourl) => {
 
 };
 
+const deletedbxUser = async () => {
+  try {
+    const user = app.auth().currentUser;
+    app.firestore().collection("usuarios").doc(user.uid).delete();
+    app.firestore().collection("eventos").doc(user.uid).delete();
+  } catch (err) {
+    console.error(err);
+    alert(err.message);
+  }
+}
 
 
 const signInWithEmailAndPassword = async (email, password) => {
@@ -64,20 +75,6 @@ const registerWithEmailAndPassword = async (photoPerfil, name, genero, edad, ema
       gustos,
       numEventos,
       authProvider: "local"
-    });
-  } catch (err) {
-    console.error(err);
-    alert(err.message);
-  }
-};
-
-const numeventosnew = async (numEventos) => {
-
-  try {
-    const res = app.auth().currentUser
-    const user = res.user;
-    await db.collection("usuarios").doc(user.uid).update({
-      numEventos
     });
   } catch (err) {
     console.error(err);
@@ -119,7 +116,7 @@ const cambiarEvento = async (nombreusuario, currentEvents, uid) => {
 };
 
 
-const eliminarEvento = async (uid,Eventsxuser) => {
+const eliminarEvento = async (uid, Eventsxuser) => {
   try {
     const res = app.auth().currentUser
     const user = res.user;
@@ -215,5 +212,5 @@ export {
   likesrecibidosxusuario,
   matchXusuario,
   logout,
-  numeventosnew
+  deletedbxUser
 };
