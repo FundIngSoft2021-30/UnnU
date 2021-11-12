@@ -3,7 +3,14 @@ import './tengosuertesc.css';
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useHistory } from "react-router";
 import TinderCard from 'react-tinder-card'
-import { auth, db, likesXusuario, likesrecibidosxusuario, matchXusuario } from "../../../DB/firebase";
+import {
+    auth,
+    db,
+    likesXusuario,
+    likesrecibidosxusuario,
+    matchXusuario,
+    matchPropioUsuario
+} from "../../../DB/firebase";
 import useFitText from "use-fit-text";
 
 
@@ -38,8 +45,8 @@ function Tengosuerte() {
             setphotoPerfil(data.photoPerfil);
             setLikesrecibidos(data.likesrecibidos);
             setUid(data.uid);
-            setMatch(data.match);
-            setMatch2(data.match2);
+            setMatch(data.matchuid);
+            setMatch2(data.matchuid);
             setGustosUser(data.gustos);
         } catch (err) {
             console.error(err);
@@ -71,29 +78,34 @@ function Tengosuerte() {
         if (direction === 'left') {
             setLikesdados(index)
             likedados.push(index);
+
             likesXusuario(likedados);
             likesrecibidos.push(usuarioActual);
+
             likesrecibidosxusuario(index, likesrecibidos);
+
+            console.log("uid que le di like " + index);
+            console.log("uid mio " + usuarioActual);
             mirarLikedual(index, usuarioActual)
         }
 
 
     }
     const mirarLikedual = (index, usuarioActual) => {
-        if (likedados.includes(index)) {
-            matchUsuarixlike(index);
-            matchUsuarioactual(usuarioActual);
+        if (likedados.includes(index) && likesrecibidos.includes(index)) {
+            matchUsuarixlike(index, usuarioActual);
+            matchUsuarioactual(index);
         }
     }
-    const matchUsuarixlike = (index) => {
-        setMatch(index)
-        match.push(index);
+    const matchUsuarixlike = (index, usuarioActual) => {
+        setMatch(usuarioActual)
+        match.push(usuarioActual);
         matchXusuario(index, match);
     }
-    const matchUsuarioactual = (usuarioActual) => {
-        setMatch2(usuarioActual)
-        match2.push(usuarioActual);
-        matchXusuario(usuarioActual, match);
+    const matchUsuarioactual = (index, usuarioActual) => {
+        setMatch2(index)
+        match2.push(index);
+        matchPropioUsuario(match2)
 
     }
     const swipe = async (dir) => {
