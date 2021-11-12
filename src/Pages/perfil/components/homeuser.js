@@ -7,6 +7,7 @@ import {
   auth,
   db,
   deleteAccount,
+  deletedbxUser,
   logout
 } from "../../../DB/firebase";
 import * as admin from "firebase-admin";
@@ -52,6 +53,10 @@ function Homeuser() {
     }
   };
 
+  const deleteuserAll = async () => {
+    deleteAccount(photoPerfil)
+    deletedbxUser()
+  }
 
 
   useEffect(() => {
@@ -89,7 +94,7 @@ function Homeuser() {
             </button>
           </Link>
           <Link to='/' className='btn-mobile'>
-            <button className="dashboard__btndelete" onClick={() => deleteAccount(photoPerfil)}>
+            <button className="dashboard__btndelete" onClick={() => deleteuserAll()}>
               Borrar cuenta
             </button>
           </Link>
