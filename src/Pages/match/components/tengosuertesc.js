@@ -25,7 +25,7 @@ function Tengosuerte() {
     const [photoPerfil, setphotoPerfil] = useState("");
     const [match, setMatch] = useState("");
     const [match2, setMatch2] = useState("");
-    const [likedados, setLikesdados] = useState("");
+    const [likesdados, setLikesdados] = useState([]);
     const history = useHistory();
     const [likesrecibidos, setLikesrecibidos] = useState("");
     const [currentIndex, setCurrentIndex] = useState(db.length - 1)
@@ -75,24 +75,24 @@ function Tengosuerte() {
     // set last direction and decrease current index
     const swiped = (direction, index, usuarioActual) => {
         setLastDirection(direction)
+        fetchUserdata();
         if (direction === 'left') {
-            setLikesdados(index)
-            likedados.push(index);
-
-            likesXusuario(likedados);
-            likesrecibidos.push(usuarioActual);
-
+            if (!likesdados.includes(usuarioActual)) {
+                setLikesdados(index)
+                likesdados.push(index);
+            }
+            if (!likesrecibidos.includes(usuarioActual)) {
+                likesXusuario(likesdados);
+                likesrecibidos.push(usuarioActual);
+            }
             likesrecibidosxusuario(index, likesrecibidos);
-
-            console.log("uid que le di like " + index);
-            console.log("uid mio " + usuarioActual);
             mirarLikedual(index, usuarioActual)
         }
 
 
     }
     const mirarLikedual = (index, usuarioActual) => {
-        if (likedados.includes(index) && likesrecibidos.includes(index)) {
+        if (likesdados.includes(index) && likesrecibidos.includes(index)) {
             matchUsuarixlike(index, usuarioActual);
             matchUsuarioactual(index);
         }
@@ -128,7 +128,6 @@ function Tengosuerte() {
         if (loading) return;
         if (!user) return history.replace("/");
         fetchUserdata();
-
         const unsubscribe = db.collection('usuarios').onSnapshot(snapshot => {
             setUsers(snapshot.docs.map(doc => doc.data()))
         })
@@ -150,7 +149,7 @@ function Tengosuerte() {
 
             <div className="tinderCard__cardContainer">
 
-                {users.filter(user => user.uid !== uid).map(userr => (
+                {users.filter(user => (user.uid !== uid) && (!likesdados.includes(user.uid) && (user.gustos.length === gustosUser.length && user.gustos.every((e, i) => e.label === gustosUser[i].label && e.value === gustosUser[i].value)))).map(userr => (
 
 
                     <TinderCard

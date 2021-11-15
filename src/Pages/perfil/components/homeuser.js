@@ -42,7 +42,7 @@ function Homeuser() {
       setName(data.name);
       setEdad(data.edad);
       setGenero(data.genero.value);
-      setGustos(data.gustos.map(gusto => <div >{gusto.label}</div>));
+      setGustos(data.gustos.map(gusto => <div>{gusto.label}</div>));
       setFacultad(data.facultad.value);
       setCarrera(data.carrera.value);
       setphotoPerfil(data.photoPerfil);
