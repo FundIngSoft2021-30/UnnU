@@ -1,4 +1,4 @@
-import './chat.css';
+import './chats.css';
 import ChatsGente from './components/ChatsGente';
 import { auth } from '../../DB/firebase'
 import NavbarU from '../NavBarUser/NavBarUC';

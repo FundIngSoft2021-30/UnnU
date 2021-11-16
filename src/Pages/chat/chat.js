@@ -1,5 +1,5 @@
 import './chat.css';
-import Chatsc from './components/Chatsc';
+import Chatsc from './components/chatsc';
 import { auth } from '../../DB/firebase'
 import NavbarU from '../NavBarUser/NavBarUC';
 import { useAuthState } from 'react-firebase-hooks/auth'

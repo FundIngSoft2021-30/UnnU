@@ -81,6 +81,7 @@
     "react-tinder-card": "^1.4.5",
     "react-toastify": "^5.5.0",
     "react-zmage": "^0.8.5-beta.37",
+    "stream-chat": "^4.4.2",
     "stream-chat-react": "^6.11.0",
     "styled-components": "^5.3.1",
     "sweetalert2-react": "^0.8.3",

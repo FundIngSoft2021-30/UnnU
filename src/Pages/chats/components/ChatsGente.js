@@ -1,10 +1,7 @@
 
-import { db, auth } from '../../../DB/firebase'
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useHistory } from 'react-router';
 import React, { useState, useMemo, useRef, useEffect } from 'react'
-import { useAuthState } from "react-firebase-hooks/auth";
-import { useHistory } from "react-router";
 import {
     auth,
     db,
@@ -41,10 +38,8 @@ function ChatsGente() {
             const data = await query.docs[0].data();
             setName(data.name);
             setphotoPerfil(data.photoPerfil);
-            setLikesrecibidos(data.likesrecibidos);
             setUid(data.uid);
             setMatch(data.matchuid);
-
         } catch (err) {
             console.error(err);
             alert("Se ha producido un error al obtener los datos del usuario");
@@ -78,7 +73,7 @@ function ChatsGente() {
                     <div className='buttons_chat'>
                         <div className='container_matches'>
                             <div >
-                                <div key={id} className={`msg ${uid === auth.currentUser.uid ? 'sent' : 'received'}`}>
+                                <div key={uid} className={`msg ${uid === auth.currentUser.uid ? 'sent' : 'received'}`}>
                                     <imagen src={userr.photoPerfil.value} alt="  " />
                                     <div>
                                         <h3>{userr.name.value}</h3>
@@ -91,17 +86,8 @@ function ChatsGente() {
                 ))}
             </div>
             <div className='buttons_chat'>
-                <button style={{ backgroundColor: red }} onClick={() => Chat}></button>
+                <button classname="buttonred" onClick={() => Chat}></button>
             </div>
-            {lastDirection ? (
-                <h2 key={lastDirection} className='infoText'>
-                    You swiped {lastDirection}
-                </h2>
-            ) : (
-                <h2 className='infoText'>
-                    Swipe a card or press a button to get Restore Card button visible!
-                </h2>
-            )}
         </div>
     )
 
