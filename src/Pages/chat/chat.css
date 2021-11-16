@@ -1,6 +1,8 @@
-img {
+
+.imagen {
   border-radius: 50%;
   height: 45px;
+  width: 45px;
   margin-top: -20px;
   border: 2px solid black;
 }
@@ -16,12 +18,12 @@ img {
 }
 
 
-h6 {
-  color: #000000;
+h6{
+  color:#000000;
 }
 
-h3 {
-  color: #000000;
+h3{
+  color:#000000;
 }
 
 p {
@@ -44,12 +46,12 @@ p {
 }
 
 .sent {
-  background-color: #748dfa;
+  background-color: #7689dd;
   color: white;
   border-top-right-radius: 1000px;
   flex-direction: row-reverse;
   padding: 20px 20px 0 10px;
-  text-align: end;
+  text-align:left;
   float: right;
 }
 
@@ -77,3 +79,4 @@ p {
   display: flex;
   flex-direction: column;
 }
+

@@ -41,13 +41,15 @@ function Chat() {
     }, [])
 
 
+
     return (
+        
         <div className="container_chat">
             <div className="msgs">
                 {mensajes.map(({ id, text, photoPerfil, uid }) => (
                     <div >
                         <div key={id} className={`msg ${uid === auth.currentUser.uid ? 'sent' : 'received'}`}>
-                            <img src={photoPerfil} alt="  " />
+                            <imagen src={photoPerfil} alt="  " />
                             <div>
                                 <h6>{name}</h6>
                                 <h3>{text}</h3>
