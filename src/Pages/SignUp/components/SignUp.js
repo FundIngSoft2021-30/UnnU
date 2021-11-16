@@ -5,6 +5,16 @@ import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 import { Gustosoptions, carrerasOptions, facultadOptions, genderOptions, likes } from "../../Data/data"
 import { MdAddAPhoto } from "react-icons/md";
+import Swal from 'sweetalert2'
+import { Grid, Paper, Avatar, Typography, TextField, Button } from '@material-ui/core'
+import AddCircleOutlineOutlinedIcon from '@material-ui/icons/AddCircleOutlineOutlined';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControl from '@material-ui/core/FormControl';
+import FormLabel from '@material-ui/core/FormLabel';
+import Checkbox from '@material-ui/core/Checkbox'
+
 import {
   auth,
   registerWithEmailAndPassword,
@@ -17,6 +27,11 @@ import './SignUp.css'
 const animatedComponents = makeAnimated();
 
 function SignUp() {
+
+  const paperStyle = { padding: 20, width: 300, margin: "0 auto" }
+  const headerStyle = { margin: 0 }
+  const avatarStyle = { backgroundColor: '#1bbd7e' }
+  const marginTop = { marginTop: 5 }
   const [photoPerfil, setphotoPerfil] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -52,33 +67,55 @@ function SignUp() {
     }
   };
 
+
+  const errorPhoto = () => {
+    Swal.fire({
+      title: 'Recuerda poner una foto antes de darle a subir foto.',
+      text: "Los formatos soportados son JPEG, JPG, PNG",
+      icon: 'warning',
+      showCancelButton: false,
+      confirmButtonColor: '#3085d6',
+      confirmButtonText: 'Ok'
+    })
+  }
+
+
   const handleUpload = () => {
-    const uploadTask = storage.ref(`images/${image.name}`).put(image);
-    uploadTask.on(
-      "state_changed",
-      snapshot => {
-        const progress = Math.round(
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-        );
-        setProgress(progressBar);
-      },
-      error => {
-        console.log(error);
-      },
-      () => {
-        storage
-          .ref("images")
-          .child(image.name)
-          .getDownloadURL()
-          .then(photoPerfil => {
-            setphotoPerfil(photoPerfil);
-          });
-      }
-    );
+    console.log(image);
+    try {
+      const uploadTask = storage.ref(`images/${image.name}`).put(image);
+      uploadTask.on(
+        "state_changed",
+        snapshot => {
+          const progress = Math.round(
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+          );
+          setProgress(progressBar);
+        },
+        error => {
+          console.log(error);
+        },
+        () => {
+          storage
+            .ref("images")
+            .child(image.name)
+            .getDownloadURL()
+            .then(photoPerfil => {
+              setphotoPerfil(photoPerfil);
+            });
+        }
+      );
+    } catch (error) {
+      console.log(error);
+      errorPhoto();
+    }
   };
 
   return (
     <div className="sign-upbg">
+
+
+
       <div className="register">
         <div className="register__container">
           <Link className="Linktxt" to='/' >
@@ -98,11 +135,11 @@ function SignUp() {
               <input type="file" id="wizard-picture" onChange={handleChange} accept=".png, .jpg, .jpeg" />
 
             </div>
-            <h6 className="text">
+            <h6 className="textpic">
               Elegir la foto de perfil</h6>
 
           </div>
-          <button className="edit__btn" onClick={(e) => setphotoPerfil(photoPerfil), handleUpload}>Subir foto</button>
+          <button className="edit__btn" onClick={() => setphotoPerfil(photoPerfil), handleUpload}>Subir foto</button>
           <br />
           <input
             type="text"
@@ -111,6 +148,7 @@ function SignUp() {
             onChange={(e) => setName(e.target.value)}
             placeholder="Nombre completo"
           />
+          
           <input
             type="text"
             className="register__textBox"
@@ -173,9 +211,6 @@ function SignUp() {
           <button className="register__btn" onClick={SignUp} >
             Registrarse
           </button>
-          <div className="Linkbox">
-            Ya tienes cuenta? <Link className="Linktxt" to="/login">Iniciar sesión </Link> ahora.
-          </div>
         </div>
       </div>
     </div>

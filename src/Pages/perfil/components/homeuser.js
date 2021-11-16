@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Component } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useHistory } from "react-router";
 import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2'
 import "./homeuser.css";
 import {
   auth,
@@ -58,6 +59,39 @@ function Homeuser() {
     deletedbxUser()
   }
 
+  const swalWithBootstrapButtons = Swal.mixin({
+    customClass: {
+      confirmButton: 'btn btn-success',
+      cancelButton: 'btn btn-danger'
+    },
+    buttonsStyling: false
+  })
+
+
+  const deletButton = () => {
+    Swal.fire({
+      title: 'Quieres eliminar tu cuenta?',
+      text: "Recuerda que no se puede revertir la eliminacion!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result) {
+        deleteuserAll();
+        Swal.fire(
+          'Borrada!',
+          'Tu cuenta ha sido borrada.',
+          'success'
+        )
+      }
+    })
+  }
+
+
+
+
 
   useEffect(() => {
     if (loading) return;
@@ -93,11 +127,11 @@ function Homeuser() {
               Editar perfil
             </button>
           </Link>
-          <Link to='/' className='btn-mobile'>
-            <button className="dashboard__btndelete" onClick={() => deleteuserAll()}>
-              Borrar cuenta
-            </button>
-          </Link>
+
+          <button className="dashboard__btndelete" onClick={deletButton}>
+            Borrar cuenta
+          </button>
+
           <button className="dashboard__btnlogut" onClick={logout}>
             Logout
           </button>

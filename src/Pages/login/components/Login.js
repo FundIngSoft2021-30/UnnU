@@ -25,7 +25,15 @@ function Login() {
 
                 <div className="login__container">
                     <h1 className="logo">UNNU</h1>
-                    <h1>Login</h1>
+                    <fieldset>
+                        <div className="nav-buttons">
+                            <Link className="Linktxt" to="/login">
+                                <a class id="loginBtn" class="active" >Iniciar sesion</a>
+                            </Link>
+                            <Link className="Linktxt" to="/sign-up">
+                                <a id="registerBtn" >Crear cuenta</a>
+                            </Link>aa                   </div>
+                    </fieldset>
                     <input
                         type="text"
                         className="login__textBox"
@@ -48,9 +56,6 @@ function Login() {
                     </button>
                     <div className="Linkbox">
                         <Link className="Linktxt" to="/reset">Olvidaste la contraseña?</Link>
-                    </div>
-                    <div className="Linkbox">
-                        No tienes cuenta? <Link className="Linktxt" to="/sign-up">Registrate ahora</Link>.
                     </div>
                 </div>
             </div>

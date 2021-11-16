@@ -21,6 +21,7 @@ export const likes = [
 ]
 
 
+
 export const carrerasOptions = [
   { value: 'Arquitectura', label: 'Arquitectura' },
   { value: 'Diseño Industrial', label: 'Diseño Industrial' },

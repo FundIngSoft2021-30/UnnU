@@ -1,4 +1,5 @@
-.register,scroll-container {
+.register,
+scroll-container {
     width: 40%;
     height: 150%;
     background-color: #0683ff57;
@@ -15,7 +16,7 @@ scroll-container {
     height: 200px;
     overflow-y: scroll;
     scroll-behavior: smooth;
-  }
+}
 
 
 .activeregister {
@@ -60,7 +61,7 @@ button.active {
 
 .register__container {
     position: absolute;
-    top: -80px;
+    top: -150px;
     display: flex;
     flex-direction: column;
     text-align: center;
@@ -113,6 +114,14 @@ button.active {
     text-decoration: none;
 }
 
+.textpic {
+    font-size: 18px;
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
 .Linktxt {
 
     color: rgb(12, 174, 185);
@@ -129,6 +138,7 @@ button.active {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     font-size: 100px;
+
 }
 
 .logo:hover {
@@ -154,6 +164,7 @@ button.active {
 /*Profile Pic Start*/
 .picture-container {
     position: relative;
+    top: -30px; left: -10px;
     cursor: pointer;
     text-align: center;
 }
@@ -161,8 +172,8 @@ button.active {
 .picture {
     width: 106px;
     height: 106px;
-    background-color: #3b2eee;
-    border: 4px solid #0305a5;
+    background-color: #3b2eeee8;
+    border: 4px solid #0051ff;
     color: #FFFFFF;
     border-radius: 50%;
     margin: 0px auto;
@@ -172,7 +183,7 @@ button.active {
 }
 
 .picture:hover {
-    border-color: #2ca8ff;
+    border-color: #0e99fc;
 }
 
 .content.ct-wizard-green .picture:hover {
