@@ -5,13 +5,13 @@ import NavbarU from '../NavBarUser/NavBarUC';
 import { useAuthState } from 'react-firebase-hooks/auth'
 
 function Chat() {
-    const [user] = useAuthState(auth)
-    return (
-      <>
-        <NavbarU/>
-        <Chatsc /> 
-      </>
-    );
-  }
+  const [user] = useAuthState(auth)
+  return (
+    <>
+      <NavbarU />
+      <Chatsc />
+    </>
+  );
+}
 
 export default Chat;
