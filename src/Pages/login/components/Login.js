@@ -25,15 +25,14 @@ function Login() {
 
                 <div className="login__container">
                     <h1 className="logo">UNNU</h1>
-                    <fieldset>
-                        <div className="nav-buttons">
-                            <Link className="Linktxt" to="/login">
-                                <a class id="loginBtn" class="active" >Iniciar sesion</a>
-                            </Link>
-                            <Link className="Linktxt" to="/sign-up">
-                                <a id="registerBtn" >Crear cuenta</a>
-                            </Link>aa                   </div>
-                    </fieldset>
+                    <div className="nav-buttons">
+                        <Link className="Linktxt" to="/login">
+                            <button id="loginBtn" class="active" >Iniciar sesion</button>
+                        </Link>
+                        <Link className="Linktxt" to="/sign-up">
+                            <button id="registerBtn" >Crear cuenta</button>
+                        </Link>
+                    </div>
                     <input
                         type="text"
                         className="login__textBox"

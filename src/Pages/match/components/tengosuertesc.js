@@ -3,6 +3,7 @@ import './tengosuertesc.css';
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useHistory } from "react-router";
 import TinderCard from 'react-tinder-card'
+import Cards, { Card } from 'react-swipe-card'
 import {
     auth,
     db,
@@ -109,10 +110,11 @@ function Tengosuerte() {
 
     }
     const swipe = async (dir) => {
+        console.log(dir)
         console.log(canSwipe)
         if (!canSwipe) {
-            await childRefs[currentIndex].current.swipe(dir) // Swipe the card!
-            console.log("hola")
+            //console.log(swipe(dir==='left'))
+            //await swipe(dir) // Swipe the card!
         }
     }
 
@@ -151,7 +153,7 @@ function Tengosuerte() {
 
             <div className="tinderCard__cardContainer">
 
-                {users.filter(user => (user.uid !== uid) && (!likesdados.includes(user.uid) && (user.gustos.length === gustosUser.length && user.gustos.every((e, i) => e.label === gustosUser[i].label && e.value === gustosUser[i].value)))).map(userr => (
+                {users.filter(user => (user.uid !== uid) && (!likesdados.includes(user.uid) && (!match.includes(user.uid)) && (!match2.includes(user.uid)) && (user.gustos.length === gustosUser.length && user.gustos.every((e, i) => e.label === gustosUser[i].label && e.value === gustosUser[i].value)))).map(userr => (
 
 
                     <TinderCard
@@ -165,32 +167,19 @@ function Tengosuerte() {
 
                             <div className='container'>
                                 <div className='grande'>
-                                    <h2 style="textogande" >{userr.name} {userr.edad}</h2>
+                                    <h2 className="textogande" >{userr.name} {userr.edad}</h2>
                                 </div>
-                                <h3 classname='textomediano' >{userr.carrera.value}</h3>
-                                <h3 >{userr.genero.value}</h3>
+                                <h3 className="textomediano">{userr.carrera.value}</h3>
+                                <h3 className="textomediano">{userr.genero.value}</h3>
                                 <div className='containerMA'>
                                     {userr.gustos.map(gusto => <button className='redondoMatch'>{gusto.label}</button>)}
                                 </div>
                             </div>
                         </div>
+
                     </TinderCard>
                 ))}
             </div>
-            <div className='buttons'>
-                <button style={{ backgroundColor: !canSwipe && '#c3c4d3' }} onClick={() => swipe('left')}>Swipe left!</button>
-                <button style={{ backgroundColor: !canGoBack && '#c3c4d3' }} onClick={() => goBack()}>Undo swipe!</button>
-                <button style={{ backgroundColor: !canSwipe && '#c3c4d3' }} onClick={() => swipe('right')}>Swipe right!</button>
-            </div>
-            {lastDirection ? (
-                <h2 key={lastDirection} className='infoText'>
-                    You swiped {lastDirection}
-                </h2>
-            ) : (
-                <h2 className='infoText'>
-                    Swipe a card or press a button to get Restore Card button visible!
-                </h2>
-            )}
         </div>
     )
 }

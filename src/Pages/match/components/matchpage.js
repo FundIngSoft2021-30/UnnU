@@ -112,10 +112,10 @@ function MatchPage() {
 
     }
     const swipe = async (dir) => {
-        console.log(canSwipe)
+        //  console.log(canSwipe(dir))
         if (!canSwipe) {
-            await swipe(dir) // Swipe the card!
-            console.log("hola")
+            //await swipe(dir) // Swipe the card!
+            //console.log("hola")
         }
     }
 
@@ -156,7 +156,7 @@ function MatchPage() {
 
             <div className="tinderCard__cardContainer">
 
-                {users.filter(user => (user.uid !== uid) && (!likesdados.includes(user.uid))).map(userr => (
+                {users.filter(user => (user.uid !== uid) && (!likesdados.includes(user.uid)) && (!match.includes(user.uid))).map(userr => (
 
 
                     <TinderCard
@@ -170,32 +170,20 @@ function MatchPage() {
 
                             <div className='container'>
                                 <div className='grande'>
-                                    <h2 >{userr.name} {userr.edad}</h2>
+                                    <h2 className="textogande" >{userr.name} {userr.edad}</h2>
                                 </div>
-                                <h3 >{userr.carrera.value}</h3>
-                                <h3 >{userr.genero.value}</h3>
+                                <h3 className="textomediano">{userr.carrera.value}</h3>
+                                <h3 className="textomediano">{userr.genero.value}</h3>
                                 <div className='containerMA'>
                                     {userr.gustos.map(gusto => <button className='redondoMatch'>{gusto.label}</button>)}
                                 </div>
                             </div>
                         </div>
+
                     </TinderCard>
                 ))}
             </div>
-            <div className='buttons'>
-                <button style={{ backgroundColor: !canSwipe && '#c3c4d3' }} onClick={() => swipe('left')}>Swipe left!</button>
-                <button style={{ backgroundColor: !canGoBack && '#c3c4d3' }} onClick={() => goBack()}>Undo swipe!</button>
-                <button style={{ backgroundColor: !canSwipe && '#c3c4d3' }} onClick={() => swipe('right')}>Swipe right!</button>
-            </div>
-            {lastDirection ? (
-                <h2 key={lastDirection} className='infoText'>
-                    You swiped {lastDirection}
-                </h2>
-            ) : (
-                <h2 className='infoText'>
-                    Swipe a card or press a button to get Restore Card button visible!
-                </h2>
-            )}
+
         </div>
     )
 }

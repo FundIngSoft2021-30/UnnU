@@ -6,14 +6,9 @@ import makeAnimated from 'react-select/animated';
 import { Gustosoptions, carrerasOptions, facultadOptions, genderOptions, likes } from "../../Data/data"
 import { MdAddAPhoto } from "react-icons/md";
 import Swal from 'sweetalert2'
-import { Grid, Paper, Avatar, Typography, TextField, Button } from '@material-ui/core'
-import AddCircleOutlineOutlinedIcon from '@material-ui/icons/AddCircleOutlineOutlined';
-import Radio from '@material-ui/core/Radio';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormControl from '@material-ui/core/FormControl';
-import FormLabel from '@material-ui/core/FormLabel';
-import Checkbox from '@material-ui/core/Checkbox'
+import useMediaQuery from "@material-ui/core/useMediaQuery";
+import { red, blue, green } from "@material-ui/core/colors";
+import { AutoRotatingCarousel, Slide } from "material-auto-rotating-carousel";
 
 import {
   auth,
@@ -51,6 +46,12 @@ function SignUp() {
   const [user, loading, error] = useAuthState(auth);
   const history = useHistory();
 
+  const [handleOpen, setHandleOpen] = useState({ open: false });
+  const handleClick = () => {
+    setHandleOpen({ open: true });
+  };
+  const matches = useMediaQuery("(max-width:600px)");
+
   const SignUp = () => {
     if (!name) alert("");
     registerWithEmailAndPassword(photoPerfil, name, genero, edad, email, carrera, facultad, mensajes, matchuid, likesdados, numEventos, likesrecibidos, gustos, password);
@@ -58,7 +59,7 @@ function SignUp() {
 
   useEffect(() => {
     if (loading) return;
-    if (user) history.replace("/match");
+    if (user) history.replace("/primeros-pasos");
   }, [user, loading]);
 
   const handleChange = e => {
@@ -111,6 +112,52 @@ function SignUp() {
     }
   };
 
+
+  const AutoRotatingCarouselModal = ({ handleOpen, setHandleOpen, isMobile }) => {
+    return (
+      <div>
+        {/* <Button onClick={() => setHandleOpen({ open: true })}>Open carousel</Button> */}
+        <AutoRotatingCarousel
+          label="Get started"
+          open={handleOpen.open}
+          onClose={() => setHandleOpen({ open: false })}
+          onStart={() => setHandleOpen({ open: false })}
+          autoplay={false}
+          mobile={isMobile}
+          style={{ position: "absolute" }}
+        >
+          <Slide
+            media={
+              <img src="http://www.icons101.com/icon_png/size_256/id_79394/youtube.png" />
+            }
+            mediaBackgroundStyle={{ backgroundColor: red[400] }}
+            style={{ backgroundColor: red[600] }}
+            title="This is a very cool feature"
+            subtitle="Just using this will blow your mind."
+          />
+          <Slide
+            media={
+              <img src="http://www.icons101.com/icon_png/size_256/id_80975/GoogleInbox.png" />
+            }
+            mediaBackgroundStyle={{ backgroundColor: blue[400] }}
+            style={{ backgroundColor: blue[600] }}
+            title="Ever wanted to be popular?"
+            subtitle="Well just mix two colors and your are good to go!"
+          />
+          <Slide
+            media={
+              <img src="http://www.icons101.com/icon_png/size_256/id_76704/Google_Settings.png" />
+            }
+            mediaBackgroundStyle={{ backgroundColor: green[400] }}
+            style={{ backgroundColor: green[600] }}
+            title="May the force be with you"
+            subtitle="The Force is a metaphysical and ubiquitous power in the Star Wars fictional universe."
+          />
+        </AutoRotatingCarousel>
+      </div>
+    );
+  };
+
   return (
     <div className="sign-upbg">
 
@@ -148,7 +195,7 @@ function SignUp() {
             onChange={(e) => setName(e.target.value)}
             placeholder="Nombre completo"
           />
-          
+
           <input
             type="text"
             className="register__textBox"
@@ -211,6 +258,12 @@ function SignUp() {
           <button className="register__btn" onClick={SignUp} >
             Registrarse
           </button>
+          <AutoRotatingCarouselModal
+            isMobile={matches}
+            handleOpen={handleOpen}
+            setHandleOpen={setHandleOpen}
+          />
+
         </div>
       </div>
     </div>
