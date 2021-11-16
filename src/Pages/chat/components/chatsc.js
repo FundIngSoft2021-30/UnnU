@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 import React, { useRef, useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
@@ -5,9 +6,16 @@ import { ChatEngine } from 'react-chat-engine';
 import { useAuth } from '../components/AuthContext';
 import { auth } from '../../../DB/firebase'
 import axios from 'axios';
+=======
+import React, { useState, useEffect, useRef } from 'react'
+import { db, auth } from '../../../DB/firebase'
+import SendMessage from './SendMessage'
+>>>>>>> d98925cc13600b68ac111ccb5c1b03b2b36a5c0c
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { useHistory } from 'react-router';
 
 
+<<<<<<< HEAD
 function Chatsc() {
     const history = useHistory();
     const [user] = useAuthState(auth);
@@ -15,21 +23,43 @@ function Chatsc() {
 
     console.log(user);
 
+=======
+>>>>>>> d98925cc13600b68ac111ccb5c1b03b2b36a5c0c
 
-    const getFile = async (url) => {
-        const response = await fetch(url);
-        const data = await response.blob();
+function Chat() {
 
+<<<<<<< HEAD
         return new File([data], "UserPhoto.jpg", { type: 'image/jpeg' });
     }
 
     useEffect(() => {
         if (!user) {
             history.push('/')
+=======
+    const [user, loading, error] = useAuthState(auth);
+    const [name, setName] = useState("");
+    const [uid, setUid] = useState("");
+    const [photoPerfil, setphotoPerfil] = useState("");
+    const history = useHistory();
+>>>>>>> d98925cc13600b68ac111ccb5c1b03b2b36a5c0c
 
-            return;
+    const fetchUserdata = async () => {
+        try {
+            const query = await db
+                .collection("usuarios")
+                .where("uid", "==", user?.uid)
+                .get();
+            const data = await query.docs[0].data();
+            setName(data.name);
+            setphotoPerfil(data.photoPerfil);
+            setUid(data.uid);
+        } catch (err) {
+            console.error(err);
+            alert("Se ha producido un error al obtener los datos del usuario");
         }
+    };
 
+<<<<<<< HEAD
         axios.get('https://api.chatengine.io/users/me', {
             headers: {
                 "project-id": process.env.REACT_APP_CHAT_ENGINE_ID,
@@ -70,10 +100,38 @@ function Chatsc() {
                 userName={user.email}
                 userSecret={user.uid}
             />
+=======
+    const scroll = useRef()
+    const [mensajes, setMessages] = useState([])
+
+    useEffect(() => {
+        fetchUserdata();
+        db.collection('mensajes').orderBy('createdAt').limit(50).onSnapshot(snapshot => {
+            setMessages(snapshot.docs.map(doc => doc.data()))
+        })
+    }, [])
+
+
+    return (
+        <div className="container_chat">
+            <div className="msgs">
+                {mensajes.map(({ id, text, photoPerfil, uid }) => (
+                    <div >
+                        <div key={id} className={`msg ${uid === auth.currentUser.uid ? 'sent' : 'received'}`}>
+                            <img src={photoPerfil} alt="  " />
+                            <div>
+                                <h6>{name}</h6>
+                                <h3>{text}</h3>
+                            </div>
+                        </div>
+                    </div>
+                ))}
+            </div>
+            <SendMessage scroll={scroll} />
+            <div ref={scroll}></div>
+>>>>>>> d98925cc13600b68ac111ccb5c1b03b2b36a5c0c
         </div>
-    );
+    )
 }
 
-export default Chatsc;
-
-
+export default Chat
