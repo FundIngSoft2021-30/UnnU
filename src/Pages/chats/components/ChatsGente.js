@@ -12,6 +12,7 @@ import {
 } from "../../../DB/firebase";
 import useFitText from "use-fit-text";
 import { Chat } from 'stream-chat-react';
+import './ChatsGente.css';
 
 
 function ChatsGente() {
