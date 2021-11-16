@@ -86,7 +86,7 @@ function NavbarU() {
                             </Link>
                         </li>
                         <li className='nav-itemUS'>
-                            <Link to='/chat' className='nav-linksUS' onClick={closeMobileMenu}>
+                            <Link to='/chats' className='nav-linksUS' onClick={closeMobileMenu}>
                                 <div className='nav-buttonUS'><HiChatAlt2 /></div>
                             </Link>
                         </li>
