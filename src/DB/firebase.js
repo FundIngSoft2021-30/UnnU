@@ -30,7 +30,7 @@ const deleteAccount = async (photourl) => {
     imageRef.delete()
     deletedbxUser();
     app.auth().currentUser.delete();
-
+    auth.signOut();
   } catch (err) {
     console.error(err);
     alert(err.message);
@@ -209,7 +209,6 @@ const sendResetEmail = async (email) => {
 
 const logout = () => {
   auth.signOut();
-
 };
 
 export {

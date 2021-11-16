@@ -26,7 +26,7 @@
 
 
 
-h2 {
+.textogande {
     font-family: 'Gotham Rounded', sans-serif;
     font-size: 1.5rem;
     font-weight: bold;
@@ -36,7 +36,7 @@ h2 {
     margin-top: 10px;
 }
 
-h3 {
+.textomediano {
     font-family: 'Gotham Rounded', sans-serif;
     font-size: 1.2rem;
     font-weight: bold;

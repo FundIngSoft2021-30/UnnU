@@ -108,11 +108,14 @@ function MatchPage() {
         setMatch2(index)
         match2.push(index);
         matchPropioUsuario(match2)
+        alert("Felicidades has encontrado un match")
 
     }
     const swipe = async (dir) => {
-        if (canSwipe && currentIndex < db.length) {
-            await childRefs[currentIndex].current.swipe(dir) // Swipe the card!
+        console.log(canSwipe)
+        if (!canSwipe) {
+            await swipe(dir) // Swipe the card!
+            console.log("hola")
         }
     }
 

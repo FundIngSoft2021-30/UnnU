@@ -109,8 +109,10 @@ function Tengosuerte() {
 
     }
     const swipe = async (dir) => {
-        if (canSwipe && currentIndex < db.length) {
+        console.log(canSwipe)
+        if (!canSwipe) {
             await childRefs[currentIndex].current.swipe(dir) // Swipe the card!
+            console.log("hola")
         }
     }
 
@@ -163,9 +165,9 @@ function Tengosuerte() {
 
                             <div className='container'>
                                 <div className='grande'>
-                                    <h2 >{userr.name} {userr.edad}</h2>
+                                    <h2 style="textogande" >{userr.name} {userr.edad}</h2>
                                 </div>
-                                <h3 >{userr.carrera.value}</h3>
+                                <h3 classname='textomediano' >{userr.carrera.value}</h3>
                                 <h3 >{userr.genero.value}</h3>
                                 <div className='containerMA'>
                                     {userr.gustos.map(gusto => <button className='redondoMatch'>{gusto.label}</button>)}
