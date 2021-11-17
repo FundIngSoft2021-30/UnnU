@@ -7,7 +7,7 @@ import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
 import { createEventId } from './event-utils'
 import esLocale from '@fullcalendar/core/locales/es';
-import './calendarioSC.css'
+import './calendariosc.css'
 import {
     auth,
     crearEvento,

@@ -6,7 +6,7 @@ import { useHistory } from 'react-router';
 
 
 
-function Chat() {
+function Chatsc() {
 
     const [user, loading, error] = useAuthState(auth);
     const [name, setName] = useState("");
@@ -64,4 +64,4 @@ function Chat() {
     )
 }
 
-export default Chat
+export default Chatsc
