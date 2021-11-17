@@ -21,6 +21,10 @@
     border: 2px solid black;
 }
 
+.grande{
+    text-decoration: none;
+}
+
 .container_chats {
     height: 93%;
     width: 100%;
