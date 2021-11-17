@@ -87,13 +87,10 @@ const registerWithEmailAndPassword = async (photoPerfil, name, genero, edad, ema
   }
 };
 
-const uiddescartadosxusuario = async (uiddescartados) => {
+const uiddescartadosxusuario = async (uid, uiddescartados) => {
 
   try {
-    const res = app.auth().currentUser
-    const user = res.user;
-
-    await db.collection("usuarios").doc(user.uid).update({
+    await db.collection("usuarios").doc(uid).update({
       uiddescartados
     });
   } catch (err) {

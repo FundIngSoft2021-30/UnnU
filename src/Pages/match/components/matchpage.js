@@ -13,7 +13,7 @@ import {
     uiddescartadosxusuario
 } from "../../../DB/firebase";
 import useFitText from "use-fit-text";
-
+import Swal from 'sweetalert2'
 
 function MatchPage() {
     const { fontSize, ref } = useFitText();
@@ -77,7 +77,7 @@ function MatchPage() {
     const canSwipe = currentIndex >= 0
 
     // set last direction and decrease current index
-    const swiped = (direction, index, usuarioActual) => {
+    const swiped = (direction, index, usuarioActual, nombrepersona) => {
         setLastDirection(direction)
         fetchUserdata();
         if (direction === 'left') {
@@ -91,22 +91,22 @@ function MatchPage() {
                 likesrecibidos.push(usuarioActual);
             }
             likesrecibidosxusuario(index, likesrecibidos);
-            mirarLikedual(index, usuarioActual)
+            mirarLikedual(index, usuarioActual, nombrepersona)
         }
         if (direction === 'right') {
             if (!uiddescartados.includes(index)) {
                 setUiddescartados(index)
                 uiddescartados.push(index);
-                uiddescartadosxusuario(uiddescartados);
+                uiddescartadosxusuario(usuarioActual, uiddescartados);
             }
         }
     }
 
 
-    const mirarLikedual = (index, usuarioActual) => {
+    const mirarLikedual = (index, usuarioActual, nombrepersona) => {
         if (likesdados.includes(index) && likesrecibidos.includes(index)) {
             matchUsuarixlike(index, usuarioActual);
-            matchUsuarioactual(index);
+            matchUsuarioactual(index, nombrepersona);
         }
     }
     const matchUsuarixlike = (index, usuarioActual) => {
@@ -114,11 +114,18 @@ function MatchPage() {
         match.push(usuarioActual);
         matchXusuario(index, match);
     }
-    const matchUsuarioactual = (index, usuarioActual) => {
+    const matchUsuarioactual = (index, nombrepersona) => {
         setMatch2(index)
         match2.push(index);
         matchPropioUsuario(match2)
-        alert("Felicidades has encontrado un match")
+        Swal.fire({
+            title: 'Felicitaciones obtuviste un match con',
+            text: nombrepersona,
+            icon: 'success',
+            showCancelButton: false,
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'Ok'
+        })
 
     }
     const swipe = async (dir) => {
@@ -173,7 +180,7 @@ function MatchPage() {
                         className="swipe"
                         key={userr.name}
                         preventSwipe={['up', 'down']}
-                        onSwipe={(dir) => swiped(dir, userr.uid, uid)}
+                        onSwipe={(dir) => swiped(dir, userr.uid, uid, userr.name)}
                     >
 
                         <div style={{ backgroundImage: `url(${userr.photoPerfil})` }} className="card">

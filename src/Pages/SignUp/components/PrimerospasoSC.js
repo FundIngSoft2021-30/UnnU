@@ -5,6 +5,7 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { red, blue, green } from "@material-ui/core/colors";
 import { AutoRotatingCarousel, Slide } from "material-auto-rotating-carousel";
 import { Link, useHistory } from "react-router-dom";
+import Buutton from '@mui/material/Button';
 import {
     auth,
     registerWithEmailAndPassword,
@@ -18,16 +19,19 @@ function PrimerosPasoSC() {
     const history = useHistory();
     const [user, loading, error] = useAuthState(auth);
     const [handleOpen, setHandleOpen] = useState({ open: false });
+    const [skip, setSkip] = useState(false);
 
 
     const handleClick = () => {
-        console.log(user)
+        console.log(skip);
+        setSkip(true);
     };
 
 
     useEffect(() => {
         if (loading) return;
-        if (user) history.replace("/match");
+        console.log(skip);
+        if (skip) history.replace("/match");
     }, [user, loading]);
 
 
@@ -39,8 +43,9 @@ function PrimerosPasoSC() {
                 <div>
                     {/* <Button onClick={() => setHandleOpen({ open: true })}>Open carousel</Button> */}
                     <AutoRotatingCarousel
+
                         label="Comenzar"
-                        ButtonProps={handleClick}
+                        ButtonProps={<Buutton href="/match">Comenzar</Buutton>}
                         open={true}
                         onClose={() => setHandleOpen({ open: false })}
                         onStart={() => setHandleOpen({ open: false })}
