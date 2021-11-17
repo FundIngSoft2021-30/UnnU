@@ -52,20 +52,20 @@ function ChatsGente() {
 
     }, [user, loading])
 
-   
+
 
     return (
         <div>
             <div className="container_chats">
 
-                {users.filter(user => (user.uid !== uid)&& (match.includes(user.uid))).map(userr => (
-                  
-                        <div className="margen" >
-                            <div className='grande'>
-                                <img class="profileNB" src={userr.photoPerfil} alt="  " /><h2 className="textogande" >{userr.name} {userr.edad}</h2>
-                            </div>
+                {users.filter(user => (user.uid !== uid) && (match.includes(user.uid))).map(userr => (
+
+                    <div className="margen" >
+                        <div className='grande'>
+                            <img class="profileNB" src={userr.photoPerfil} alt="  " /><h2 className="textogande" >{userr.name} {userr.edad}</h2>
                         </div>
-                 
+                    </div>
+
                 ))}
             </div>
         </div>

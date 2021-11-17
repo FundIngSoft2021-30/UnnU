@@ -7,11 +7,10 @@ import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
 import { createEventId } from './event-utils'
 import esLocale from '@fullcalendar/core/locales/es';
-import './calendariosc.css'
+import './calendarioSC.css'
 import {
     auth,
     crearEvento,
-
     eliminarEvento,
     db
 } from "../../../DB/firebase";

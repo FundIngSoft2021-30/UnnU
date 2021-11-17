@@ -10,7 +10,8 @@ import {
     likesXusuario,
     likesrecibidosxusuario,
     matchXusuario,
-    matchPropioUsuario
+    matchPropioUsuario,
+    uiddescartadosxusuario
 } from "../../../DB/firebase";
 import useFitText from "use-fit-text";
 
@@ -27,6 +28,8 @@ function Tengosuerte() {
     const [match, setMatch] = useState("");
     const [match2, setMatch2] = useState("");
     const [likesdados, setLikesdados] = useState([]);
+    const [uiddescartados, setUiddescartados] = useState([]);
+
     const history = useHistory();
     const [likesrecibidos, setLikesrecibidos] = useState("");
     const [currentIndex, setCurrentIndex] = useState(db.length - 1)
@@ -45,6 +48,7 @@ function Tengosuerte() {
             setLikesdados(data.likesdados);
             setphotoPerfil(data.photoPerfil);
             setLikesrecibidos(data.likesrecibidos);
+            setUiddescartados(data.uiddescartados);
             setUid(data.uid);
             setMatch(data.matchuid);
             setMatch2(data.matchuid);
@@ -89,9 +93,16 @@ function Tengosuerte() {
             likesrecibidosxusuario(index, likesrecibidos);
             mirarLikedual(index, usuarioActual)
         }
-
-
+        if (direction === 'right') {
+            if (!uiddescartados.includes(index)) {
+                setUiddescartados(index)
+                uiddescartados.push(index);
+                uiddescartadosxusuario(uiddescartados);
+            }
+        }
     }
+
+
     const mirarLikedual = (index, usuarioActual) => {
         if (likesdados.includes(index) && likesrecibidos.includes(index)) {
             matchUsuarixlike(index, usuarioActual);
@@ -128,7 +139,6 @@ function Tengosuerte() {
 
 
     useEffect(() => {
-
         if (loading) return;
         if (!user) return history.replace("/");
         fetchUserdata();
@@ -153,7 +163,7 @@ function Tengosuerte() {
 
             <div className="tinderCard__cardContainer">
 
-                {users.filter(user => (user.uid !== uid) && (!likesdados.includes(user.uid) && (!match.includes(user.uid)) && (!match2.includes(user.uid)) && (user.gustos.length === gustosUser.length && user.gustos.every((e, i) => e.label === gustosUser[i].label && e.value === gustosUser[i].value)))).map(userr => (
+                {users.filter(user => (user.uid !== uid) && (!likesdados.includes(user.uid) && (!match.includes(user.uid)) && (!match2.includes(user.uid)) && (!uiddescartados.includes(user.uid)) && (user.gustos.length === gustosUser.length && user.gustos.every((e, i) => e.label === gustosUser[i].label && e.value === gustosUser[i].value)))).map(userr => (
 
 
                     <TinderCard

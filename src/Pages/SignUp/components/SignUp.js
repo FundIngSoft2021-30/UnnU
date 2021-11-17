@@ -41,6 +41,7 @@ function SignUp() {
   const [gustos, setGustos] = useState("");
   const [image, setImage] = useState(null);
   const [likesrecibidos, setLikesrecibidos] = useState(likes);
+  const [uiddescartados, setUiddescartados] = useState(likes);
   const [progressBar, setProgress] = useState(0);
   const [numEventos, setNumEventos] = useState(0);
   const [user, loading, error] = useAuthState(auth);
@@ -53,8 +54,11 @@ function SignUp() {
   const matches = useMediaQuery("(max-width:600px)");
 
   const SignUp = () => {
-    if (!name) alert("");
-    registerWithEmailAndPassword(photoPerfil, name, genero, edad, email, carrera, facultad, mensajes, matchuid, likesdados, numEventos, likesrecibidos, gustos, password);
+    if (!email || !password || !name || !genero || !edad || !carrera || !facultad || !gustos || !photoPerfil) {
+      recuerderellenartodo();
+    } else {
+      registerWithEmailAndPassword(photoPerfil, name, genero, edad, email, carrera, facultad, mensajes, matchuid, likesdados, numEventos, likesrecibidos, uiddescartados, gustos, password);
+    }
   };
 
   useEffect(() => {
@@ -80,6 +84,50 @@ function SignUp() {
     })
   }
 
+
+  const recuerderellenartodo = () => {
+    Swal.fire({
+      title: 'Recuerde llenar todos los campos para que se pueda registrar',
+      text: "Vuelva a llenar todos los campos",
+      icon: 'warning',
+      showCancelButton: false,
+      confirmButtonColor: '#3085d6',
+      confirmButtonText: 'Ok'
+    })
+  }
+
+  const condiciones = () => {
+    Swal.fire({
+      title: 'Desea aceptar los terminos y condiciones?',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si acepto!',
+      cancelButtonText: 'No acepto'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: 'Se ha registrado satisfactoriamente!',
+          text: 'Se va redirigir a el tutorial ',
+          icon: 'success',
+          confirmButtonText: 'Ok'
+        }
+        ).then((result) => {
+          if (result.isConfirmed) {
+            SignUp();
+          }
+        })
+
+      } else {
+        Swal.fire(
+          'No se puede registrar!',
+          'Primero acepte los terminos y condiciones.',
+          'warning'
+        )
+      }
+    })
+  }
 
   const handleUpload = () => {
     console.log(image);
@@ -112,57 +160,8 @@ function SignUp() {
     }
   };
 
-
-  const AutoRotatingCarouselModal = ({ handleOpen, setHandleOpen, isMobile }) => {
-    return (
-      <div>
-        {/* <Button onClick={() => setHandleOpen({ open: true })}>Open carousel</Button> */}
-        <AutoRotatingCarousel
-          label="Get started"
-          open={handleOpen.open}
-          onClose={() => setHandleOpen({ open: false })}
-          onStart={() => setHandleOpen({ open: false })}
-          autoplay={false}
-          mobile={isMobile}
-          style={{ position: "absolute" }}
-        >
-          <Slide
-            media={
-              <img src="http://www.icons101.com/icon_png/size_256/id_79394/youtube.png" />
-            }
-            mediaBackgroundStyle={{ backgroundColor: red[400] }}
-            style={{ backgroundColor: red[600] }}
-            title="This is a very cool feature"
-            subtitle="Just using this will blow your mind."
-          />
-          <Slide
-            media={
-              <img src="http://www.icons101.com/icon_png/size_256/id_80975/GoogleInbox.png" />
-            }
-            mediaBackgroundStyle={{ backgroundColor: blue[400] }}
-            style={{ backgroundColor: blue[600] }}
-            title="Ever wanted to be popular?"
-            subtitle="Well just mix two colors and your are good to go!"
-          />
-          <Slide
-            media={
-              <img src="http://www.icons101.com/icon_png/size_256/id_76704/Google_Settings.png" />
-            }
-            mediaBackgroundStyle={{ backgroundColor: green[400] }}
-            style={{ backgroundColor: green[600] }}
-            title="May the force be with you"
-            subtitle="The Force is a metaphysical and ubiquitous power in the Star Wars fictional universe."
-          />
-        </AutoRotatingCarousel>
-      </div>
-    );
-  };
-
   return (
     <div className="sign-upbg">
-
-
-
       <div className="register">
         <div className="register__container">
           <Link className="Linktxt" to='/' >
@@ -194,9 +193,11 @@ function SignUp() {
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder="Nombre completo"
+            required
           />
 
           <input
+            required
             type="text"
             className="register__textBox"
             value={edad}
@@ -204,6 +205,7 @@ function SignUp() {
             placeholder="Edad"
           />
           <Select
+
             placeholder="Genero..."
             className="Selectbox"
             components={animatedComponents}
@@ -242,6 +244,7 @@ function SignUp() {
             onChange={setGustos}
           />
           <input
+            required
             type="text"
             className="register__textBox"
             value={email}
@@ -249,21 +252,16 @@ function SignUp() {
             placeholder="Correo electronico"
           />
           <input
+            required
             type="password"
             className="register__textBox"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Contraseña"
           />
-          <button className="register__btn" onClick={SignUp} >
+          <button className="register__btn" onClick={condiciones} >
             Registrarse
           </button>
-          <AutoRotatingCarouselModal
-            isMobile={matches}
-            handleOpen={handleOpen}
-            setHandleOpen={setHandleOpen}
-          />
-
         </div>
       </div>
     </div>

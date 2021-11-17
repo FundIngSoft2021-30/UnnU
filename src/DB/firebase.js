@@ -59,7 +59,7 @@ const signInWithEmailAndPassword = async (email, password) => {
   }
 };
 
-const registerWithEmailAndPassword = async (photoPerfil, name, genero, edad, email, carrera, facultad, mensajes, matchuid, likesdados, numEventos, likesrecibidos, gustos, password) => {
+const registerWithEmailAndPassword = async (photoPerfil, name, genero, edad, email, carrera, facultad, mensajes, matchuid, likesdados, numEventos, likesrecibidos, uiddescartados, gustos, password) => {
   try {
     const res = await auth.createUserWithEmailAndPassword(email, password);
     const user = res.user;
@@ -76,6 +76,7 @@ const registerWithEmailAndPassword = async (photoPerfil, name, genero, edad, ema
       matchuid,
       likesdados,
       likesrecibidos,
+      uiddescartados,
       gustos,
       numEventos,
       authProvider: "local"
@@ -86,6 +87,20 @@ const registerWithEmailAndPassword = async (photoPerfil, name, genero, edad, ema
   }
 };
 
+const uiddescartadosxusuario = async (uiddescartados) => {
+
+  try {
+    const res = app.auth().currentUser
+    const user = res.user;
+
+    await db.collection("usuarios").doc(user.uid).update({
+      uiddescartados
+    });
+  } catch (err) {
+    console.error(err);
+    alert(err.message);
+  }
+}
 
 
 const crearEvento = async (Eventsxuser, uid, nombreusuario) => {
@@ -102,23 +117,6 @@ const crearEvento = async (Eventsxuser, uid, nombreusuario) => {
     alert(err.message);
   }
 };
-
-const cambiarEvento = async (nombreusuario, currentEvents, uid) => {
-  try {
-    const res = app.auth().currentUser
-    const user = res.user;
-
-    await db.collection("eventos").doc(user.uid).update({
-      uid,
-      nombreusuario,
-      currentEvents
-    });
-  } catch (err) {
-    console.error(err);
-    alert(err.message);
-  }
-};
-
 
 const eliminarEvento = async (uid, Eventsxuser) => {
   try {
@@ -204,7 +202,6 @@ const sendResetEmail = async (email) => {
     console.error(err);
     alert(err.message);
   }
-
 };
 
 const logout = () => {
@@ -220,7 +217,6 @@ export {
   registerWithEmailAndPassword,
   editprofile,
   crearEvento,
-  cambiarEvento,
   eliminarEvento,
   likesXusuario,
   sendResetEmail,
@@ -228,5 +224,6 @@ export {
   matchXusuario,
   logout,
   deletedbxUser,
-  matchPropioUsuario
+  matchPropioUsuario,
+  uiddescartadosxusuario
 };

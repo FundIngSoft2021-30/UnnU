@@ -4,6 +4,7 @@ import { useHistory } from "react-router";
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2'
 import "./homeuser.css";
+import { BiUser } from "react-icons/bi";
 import {
   auth,
   db,
@@ -13,6 +14,7 @@ import {
 } from "../../../DB/firebase";
 import * as admin from "firebase-admin";
 import Select from 'react-select';
+import { HiArrowLeft } from "react-icons/hi";
 import makeAnimated from 'react-select/animated';
 
 
@@ -43,7 +45,7 @@ function Homeuser() {
       setName(data.name);
       setEdad(data.edad);
       setGenero(data.genero.value);
-      setGustos(data.gustos.map(gusto => <div>{gusto.label}</div>));
+      setGustos(data.gustos.map(gusto => <div className='redondogustos'>{gusto.label}</div>));
       setFacultad(data.facultad.value);
       setCarrera(data.carrera.value);
       setphotoPerfil(data.photoPerfil);
@@ -76,14 +78,20 @@ function Homeuser() {
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!'
+      confirmButtonText: 'Si, Eliminar la cuenta!'
     }).then((result) => {
-      if (result) {
+      if (result.isConfirmed) {
         deleteuserAll();
         Swal.fire(
           'Borrada!',
           'Tu cuenta ha sido borrada.',
           'success'
+        )
+      } else {
+        Swal.fire(
+          'Cancelado',
+          'Tu cuenta no ha sido borrada.',
+          'error'
         )
       }
     })
@@ -105,7 +113,7 @@ function Homeuser() {
       <div className="dashboard">
         <Link to='/match' className='btn-mobile'>
           <button className="arts__btn" data-testid="ArrowBackIcon">
-            Back
+            <HiArrowLeft />
           </button>
         </Link>
         <div className="dashboard__container">
@@ -113,12 +121,12 @@ function Homeuser() {
           <div><img class="profile" src={photoPerfil} alt="firebase-image" /></div>
 
           <div>{name} {edad}</div>
-          <div className='redondo'>{genero}</div>
+          <div className='redondo'><BiUser></BiUser> {genero}</div>
           <div>Carrera <div className='redondo'>{carrera}</div></div>
           <div>Facultad <div className='redondo'>{facultad}</div></div>
           <div>
             tus gustos son:
-            <div className='redondo'>{gustos}</div>
+            <div className='containergustos'>{gustos}</div>
 
           </div>
 

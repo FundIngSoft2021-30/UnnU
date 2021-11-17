@@ -43,7 +43,7 @@ function Chatsc() {
 
 
     return (
-        
+
         <div className="container_chat">
             <div className="msgs">
                 {mensajes.map(({ id, text, photoPerfil, uid }) => (

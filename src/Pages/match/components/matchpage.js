@@ -9,7 +9,8 @@ import {
     likesXusuario,
     likesrecibidosxusuario,
     matchXusuario,
-    matchPropioUsuario
+    matchPropioUsuario,
+    uiddescartadosxusuario
 } from "../../../DB/firebase";
 import useFitText from "use-fit-text";
 
@@ -26,6 +27,7 @@ function MatchPage() {
     const [match, setMatch] = useState("");
     const [match2, setMatch2] = useState("");
     const [likesdados, setLikesdados] = useState([]);
+    const [uiddescartados, setUiddescartados] = useState([]);
     const history = useHistory();
     const [likesrecibidos, setLikesrecibidos] = useState("");
     const [currentIndex, setCurrentIndex] = useState(db.length - 1)
@@ -44,6 +46,7 @@ function MatchPage() {
             setLikesdados(data.likesdados);
             setphotoPerfil(data.photoPerfil);
             setLikesrecibidos(data.likesrecibidos);
+            setUiddescartados(data.uiddescartados);
             setUid(data.uid);
             setMatch(data.matchuid);
             setMatch2(data.matchuid);
@@ -90,9 +93,16 @@ function MatchPage() {
             likesrecibidosxusuario(index, likesrecibidos);
             mirarLikedual(index, usuarioActual)
         }
-
-
+        if (direction === 'right') {
+            if (!uiddescartados.includes(index)) {
+                setUiddescartados(index)
+                uiddescartados.push(index);
+                uiddescartadosxusuario(uiddescartados);
+            }
+        }
     }
+
+
     const mirarLikedual = (index, usuarioActual) => {
         if (likesdados.includes(index) && likesrecibidos.includes(index)) {
             matchUsuarixlike(index, usuarioActual);
@@ -156,7 +166,7 @@ function MatchPage() {
 
             <div className="tinderCard__cardContainer">
 
-                {users.filter(user => (user.uid !== uid) && (!likesdados.includes(user.uid)) && (!match.includes(user.uid))).map(userr => (
+                {users.filter(user => (user.uid !== uid) && (!likesdados.includes(user.uid)) && (!uiddescartados.includes(user.uid)) && (!match.includes(user.uid))).map(userr => (
 
 
                     <TinderCard

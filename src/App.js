@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 import './App.css';
 
@@ -40,7 +40,6 @@ function App() {
           <Privateroute path='/login' component={Login} />
           <Privateroute path="/Reset" component={Reset} />
           <Privateroute path="/editprofile" component={Editprofile} />
-
           <div>
             <Route path='/' exact component={Home} />
           </div>

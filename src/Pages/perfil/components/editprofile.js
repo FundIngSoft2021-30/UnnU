@@ -96,20 +96,22 @@ function Editprofile() {
                         <HiArrowLeft />
                     </button>
                 </Link>
-                <div className="edit__container">
-                    <h1>Tu perfil</h1>
+                <div className="register__container">
+                    <div className="nav-buttons">
+                        <h1 className="textoarriba">Tu perfil</h1>
+                    </div>
                     <div class="picture-container">
                         <div class="picture">
                             <img src={photoPerfil} class="picture-src" id="wizardPicturePreview" alt="firebase-image" />
                             <input type="file" id="wizard-picture" onChange={handleChange} accept=".png, .jpg, .jpeg" />
 
                         </div>
-                        <h6 className="text">
+                        <h6 className="textpic">
                             Elegir la foto de perfil</h6>
 
                     </div>
-                    <button className="edit__btn" onClick={(e) => setphotoPerfil(photoPerfil), handleUpload}>Subir foto</button>
-
+                    <button className="edit__btn" onClick={() => setphotoPerfil(photoPerfil), handleUpload}>Subir foto</button>
+                    <br />
                     <label className="text" ><b>Carrera</b></label>
                     <Select
                         placeholder="Carrera..."
@@ -124,34 +126,37 @@ function Editprofile() {
                     <Select
                         placeholder="Facultad..."
                         className="Selectbox"
+                        defaultValue={[facultad[0]]}
                         components={animatedComponents}
-
                         options={facultadOptions}
                         value={facultad}
                         onChange={setFacultad}
 
                     />
+                    <label className="text" ><b>Gustos</b></label>
                     <Select
                         placeholder="Gustos..."
                         className="Selectbox"
                         closeMenuOnSelect={false}
+                        defaultValue={[gustos[0], gustos[1], gustos[2], gustos[3], gustos[4]]}
                         components={animatedComponents}
                         options={Gustosoptions}
                         isMulti
                         value={gustos}
                         onChange={setGustos}
                     />
-
-
-                    <Link to='/user-home' >
-                        <button className="edit__btn" onClick={() => Editprofile()}>
+                    <Link to='/user-home' className='edit__btn'>
+                        <a onClick={() => Editprofile()}>
                             Editar perfil
-                        </button>
+                        </a>
                     </Link>
+
                 </div>
+
             </div>
         </div>
     );
 }
 
 export default Editprofile;
+
