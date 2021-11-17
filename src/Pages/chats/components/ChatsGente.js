@@ -52,13 +52,13 @@ function ChatsGente() {
 
     }, [user, loading])
 
-
+   
 
     return (
         <div>
             <div className="container_chats">
 
-                {users.filter(user => (user.uid !== uid)).map(userr => (
+                {users.filter(user => (user.uid !== uid)&& (match.includes(user.uid))).map(userr => (
                   
                         <div className="margen" >
                             <div className='grande'>
