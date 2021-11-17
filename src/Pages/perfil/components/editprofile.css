@@ -1,18 +1,29 @@
 .edit {
-    width: 45%;
+    width: 40%;
     height: 100%;
     background-color: #0683ff57;
     display: flex;
-    padding: 10px;
+    flex-direction: column;
+    padding: 6px;
     border-radius: 0px 40px 40px 0px;
-    position: sticky;
+}
+
+.textoarriba {
+    margin-top: 10px;
+    margin-right: -10px;
+}
+
+.ajustepantalla {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding: 30px;
+    border-radius: 30px;
 }
 
 .edit__container {
-
-    margin: 10%;
     width: 50%;
-    height: 90%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     text-align: center;
@@ -64,6 +75,7 @@
     background-color: rgb(250, 250, 250);
     border-radius: 5px;
     opacity: 70;
+    text-decoration: none;
 }
 
 .edit__btn:hover {
@@ -73,8 +85,11 @@
     transition: 250ms;
 }
 
+.sinsub {
+    text-decoration: none;
+}
 
-.arts__btn{
+.arts__btn {
     padding: 10px;
     font-size: 18px;
     margin-bottom: 10px;
@@ -86,25 +101,37 @@
     opacity: 70;
 }
 
-.arts__btn:hover{
+.arts__btn:hover {
     transition: all 1s ease-out;
     background: linear-gradient(350deg, rgb(30, 14, 175) 0%, rgb(8, 234, 241) 90%);
     color: #fcfcfc;
     transition: 250ms;
 }
+
 .Selectbox {
+    margin-right: 50px;
+    display: center;
     font-size: 18px;
-    margin-bottom: 5px;
-    width: 300px;
+    width: 302px;
     border: none;
     margin-top: 10px;
     margin-bottom: 10px;
     border-radius: 5px;
 }
 
+.textpic {
+    font-size: 18px;
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
 /*Profile Pic Start*/
 .picture-container {
     position: relative;
+    top: -30px;
+    left: -20px;
     cursor: pointer;
     text-align: center;
 }
@@ -112,8 +139,8 @@
 .picture {
     width: 106px;
     height: 106px;
-    background-color: #3b2eee;
-    border: 4px solid #0305a5;
+    background-color: #3b2eeee8;
+    border: 4px solid #0051ff;
     color: #FFFFFF;
     border-radius: 50%;
     margin: 0px auto;
@@ -123,7 +150,7 @@
 }
 
 .picture:hover {
-    border-color: #2ca8ff;
+    border-color: #0e99fc;
 }
 
 .content.ct-wizard-green .picture:hover {

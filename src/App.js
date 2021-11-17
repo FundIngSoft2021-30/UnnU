@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 import './App.css';
 
@@ -15,7 +15,9 @@ import Editprofile from './Pages/perfil/editar';
 import Match from './Pages/match/Match';
 import Suerte from './Pages/match/tengosuerte';
 import Calendar from './Pages/calendario/calendario';
+import Chats from './Pages/chats/chats';
 import Chat from './Pages/chat/chat';
+import PrimerosPasos from './Pages/SignUp/PrimerosPasos';
 
 
 function App() {
@@ -28,7 +30,9 @@ function App() {
         <Switch>
 
           <Privateroute path='/tengosuerte' component={Suerte} />
+          <Privateroute path='/primeros-pasos' component={PrimerosPasos} />
           <Privateroute path='/calendario' component={Calendar} />
+          <Privateroute path='/chats' component={Chats} />
           <Privateroute path='/chat' component={Chat} />
           <Privateroute path='/match' component={Match} />
           <Privateroute path='/user-home' component={Homeuser} />
@@ -36,7 +40,6 @@ function App() {
           <Privateroute path='/login' component={Login} />
           <Privateroute path="/Reset" component={Reset} />
           <Privateroute path="/editprofile" component={Editprofile} />
-
           <div>
             <Route path='/' exact component={Home} />
           </div>

@@ -3,13 +3,15 @@ import './tengosuertesc.css';
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useHistory } from "react-router";
 import TinderCard from 'react-tinder-card'
+import Cards, { Card } from 'react-swipe-card'
 import {
     auth,
     db,
     likesXusuario,
     likesrecibidosxusuario,
     matchXusuario,
-    matchPropioUsuario
+    matchPropioUsuario,
+    uiddescartadosxusuario
 } from "../../../DB/firebase";
 import useFitText from "use-fit-text";
 
@@ -25,7 +27,9 @@ function Tengosuerte() {
     const [photoPerfil, setphotoPerfil] = useState("");
     const [match, setMatch] = useState("");
     const [match2, setMatch2] = useState("");
-    const [likedados, setLikesdados] = useState("");
+    const [likesdados, setLikesdados] = useState([]);
+    const [uiddescartados, setUiddescartados] = useState([]);
+
     const history = useHistory();
     const [likesrecibidos, setLikesrecibidos] = useState("");
     const [currentIndex, setCurrentIndex] = useState(db.length - 1)
@@ -44,6 +48,7 @@ function Tengosuerte() {
             setLikesdados(data.likesdados);
             setphotoPerfil(data.photoPerfil);
             setLikesrecibidos(data.likesrecibidos);
+            setUiddescartados(data.uiddescartados);
             setUid(data.uid);
             setMatch(data.matchuid);
             setMatch2(data.matchuid);
@@ -75,24 +80,31 @@ function Tengosuerte() {
     // set last direction and decrease current index
     const swiped = (direction, index, usuarioActual) => {
         setLastDirection(direction)
+        fetchUserdata();
         if (direction === 'left') {
-            setLikesdados(index)
-            likedados.push(index);
-
-            likesXusuario(likedados);
-            likesrecibidos.push(usuarioActual);
-
+            if (!likesdados.includes(usuarioActual)) {
+                setLikesdados(index)
+                likesdados.push(index);
+            }
+            if (!likesrecibidos.includes(usuarioActual)) {
+                likesXusuario(likesdados);
+                likesrecibidos.push(usuarioActual);
+            }
             likesrecibidosxusuario(index, likesrecibidos);
-
-            console.log("uid que le di like " + index);
-            console.log("uid mio " + usuarioActual);
             mirarLikedual(index, usuarioActual)
         }
-
-
+        if (direction === 'right') {
+            if (!uiddescartados.includes(index)) {
+                setUiddescartados(index)
+                uiddescartados.push(index);
+                uiddescartadosxusuario(uiddescartados);
+            }
+        }
     }
+
+
     const mirarLikedual = (index, usuarioActual) => {
-        if (likedados.includes(index) && likesrecibidos.includes(index)) {
+        if (likesdados.includes(index) && likesrecibidos.includes(index)) {
             matchUsuarixlike(index, usuarioActual);
             matchUsuarioactual(index);
         }
@@ -109,8 +121,11 @@ function Tengosuerte() {
 
     }
     const swipe = async (dir) => {
-        if (canSwipe && currentIndex < db.length) {
-            await childRefs[currentIndex].current.swipe(dir) // Swipe the card!
+        console.log(dir)
+        console.log(canSwipe)
+        if (!canSwipe) {
+            //console.log(swipe(dir==='left'))
+            //await swipe(dir) // Swipe the card!
         }
     }
 
@@ -124,11 +139,9 @@ function Tengosuerte() {
 
 
     useEffect(() => {
-
         if (loading) return;
         if (!user) return history.replace("/");
         fetchUserdata();
-
         const unsubscribe = db.collection('usuarios').onSnapshot(snapshot => {
             setUsers(snapshot.docs.map(doc => doc.data()))
         })
@@ -150,7 +163,7 @@ function Tengosuerte() {
 
             <div className="tinderCard__cardContainer">
 
-                {users.filter(user => user.uid !== uid).map(userr => (
+                {users.filter(user => (user.uid !== uid) && (!likesdados.includes(user.uid) && (!match.includes(user.uid)) && (!match2.includes(user.uid)) && (!uiddescartados.includes(user.uid)) && (user.gustos.length === gustosUser.length && user.gustos.every((e, i) => e.label === gustosUser[i].label && e.value === gustosUser[i].value)))).map(userr => (
 
 
                     <TinderCard
@@ -164,32 +177,19 @@ function Tengosuerte() {
 
                             <div className='container'>
                                 <div className='grande'>
-                                    <h2 >{userr.name} {userr.edad}</h2>
+                                    <h2 className="textogande" >{userr.name} {userr.edad}</h2>
                                 </div>
-                                <h3 >{userr.carrera.value}</h3>
-                                <h3 >{userr.genero.value}</h3>
+                                <h3 className="textomediano">{userr.carrera.value}</h3>
+                                <h3 className="textomediano">{userr.genero.value}</h3>
                                 <div className='containerMA'>
                                     {userr.gustos.map(gusto => <button className='redondoMatch'>{gusto.label}</button>)}
                                 </div>
                             </div>
                         </div>
+
                     </TinderCard>
                 ))}
             </div>
-            <div className='buttons'>
-                <button style={{ backgroundColor: !canSwipe && '#c3c4d3' }} onClick={() => swipe('left')}>Swipe left!</button>
-                <button style={{ backgroundColor: !canGoBack && '#c3c4d3' }} onClick={() => goBack()}>Undo swipe!</button>
-                <button style={{ backgroundColor: !canSwipe && '#c3c4d3' }} onClick={() => swipe('right')}>Swipe right!</button>
-            </div>
-            {lastDirection ? (
-                <h2 key={lastDirection} className='infoText'>
-                    You swiped {lastDirection}
-                </h2>
-            ) : (
-                <h2 className='infoText'>
-                    Swipe a card or press a button to get Restore Card button visible!
-                </h2>
-            )}
         </div>
     )
 }

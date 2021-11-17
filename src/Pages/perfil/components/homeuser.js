@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Component } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useHistory } from "react-router";
 import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2'
 import "./homeuser.css";
+import { BiUser } from "react-icons/bi";
 import {
   auth,
   db,
@@ -12,6 +14,7 @@ import {
 } from "../../../DB/firebase";
 import * as admin from "firebase-admin";
 import Select from 'react-select';
+import { HiArrowLeft } from "react-icons/hi";
 import makeAnimated from 'react-select/animated';
 
 
@@ -42,7 +45,7 @@ function Homeuser() {
       setName(data.name);
       setEdad(data.edad);
       setGenero(data.genero.value);
-      setGustos(data.gustos.map(gusto => <div >{gusto.label}</div>));
+      setGustos(data.gustos.map(gusto => <div className='redondogustos'>{gusto.label}</div>));
       setFacultad(data.facultad.value);
       setCarrera(data.carrera.value);
       setphotoPerfil(data.photoPerfil);
@@ -58,6 +61,45 @@ function Homeuser() {
     deletedbxUser()
   }
 
+  const swalWithBootstrapButtons = Swal.mixin({
+    customClass: {
+      confirmButton: 'btn btn-success',
+      cancelButton: 'btn btn-danger'
+    },
+    buttonsStyling: false
+  })
+
+
+  const deletButton = () => {
+    Swal.fire({
+      title: 'Quieres eliminar tu cuenta?',
+      text: "Recuerda que no se puede revertir la eliminacion!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, Eliminar la cuenta!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        deleteuserAll();
+        Swal.fire(
+          'Borrada!',
+          'Tu cuenta ha sido borrada.',
+          'success'
+        )
+      } else {
+        Swal.fire(
+          'Cancelado',
+          'Tu cuenta no ha sido borrada.',
+          'error'
+        )
+      }
+    })
+  }
+
+
+
+
 
   useEffect(() => {
     if (loading) return;
@@ -71,7 +113,7 @@ function Homeuser() {
       <div className="dashboard">
         <Link to='/match' className='btn-mobile'>
           <button className="arts__btn" data-testid="ArrowBackIcon">
-            Back
+            <HiArrowLeft />
           </button>
         </Link>
         <div className="dashboard__container">
@@ -79,12 +121,12 @@ function Homeuser() {
           <div><img class="profile" src={photoPerfil} alt="firebase-image" /></div>
 
           <div>{name} {edad}</div>
-          <div className='redondo'>{genero}</div>
+          <div className='redondo'><BiUser></BiUser> {genero}</div>
           <div>Carrera <div className='redondo'>{carrera}</div></div>
           <div>Facultad <div className='redondo'>{facultad}</div></div>
           <div>
             tus gustos son:
-            <div className='redondo'>{gustos}</div>
+            <div className='containergustos'>{gustos}</div>
 
           </div>
 
@@ -93,11 +135,11 @@ function Homeuser() {
               Editar perfil
             </button>
           </Link>
-          <Link to='/' className='btn-mobile'>
-            <button className="dashboard__btndelete" onClick={() => deleteuserAll()}>
-              Borrar cuenta
-            </button>
-          </Link>
+
+          <button className="dashboard__btndelete" onClick={deletButton}>
+            Borrar cuenta
+          </button>
+
           <button className="dashboard__btnlogut" onClick={logout}>
             Logout
           </button>

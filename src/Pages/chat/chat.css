@@ -1,0 +1,80 @@
+.imagen {
+  border-radius: 50%;
+  height: 45px;
+  width: 45px;
+  margin-top: -20px;
+  border: 2px solid black;
+}
+
+.container_chat {
+  height: 100%;
+  width: 50%;
+  overflow: scroll;
+  position: absolute;
+  white-space: nowrap;
+  background-color: rgb(240, 240, 240);
+
+}
+
+
+h6 {
+  color: #000000;
+}
+
+h3 {
+  color: #000000;
+}
+
+p {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-weight: 500;
+  font-size: 25px;
+  margin-top: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+  overflow-wrap: break-word;
+}
+
+.msg {
+  display: flex;
+  padding: 20px 10px 0 20px;
+  margin: 20px;
+  border-radius: 3000px;
+  box-shadow: 0 0 10px rgb(164, 164, 164);
+  align-items: center;
+}
+
+.sent {
+  background-color: #7689dd;
+  color: white;
+  border-top-right-radius: 1000px;
+  flex-direction: row-reverse;
+  padding: 20px 20px 0 10px;
+  text-align: left;
+  float: right;
+}
+
+.received {
+  border: 1px solid lightgray;
+  background-color: #ae97d4;
+  border-top-left-radius: 1000px;
+  float: left;
+}
+
+.sendMsg {
+  margin: 2%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  padding: 10%;
+  border-radius: 30px 15px;
+  position: static;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.msgs {
+  margin: 110px 0;
+  display: flex;
+  flex-direction: column;
+}

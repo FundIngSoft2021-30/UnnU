@@ -8,9 +8,12 @@
     background-size: cover;
     background-position: center;
     box-shadow: 0px 18px 53px 0px rgba(0, 0, 0, 0.3);
+
 }
 
-.card > h3 {
+
+
+.card>h3 {
     position: absolute;
     bottom: 10px;
     color: white;
@@ -24,4 +27,38 @@
 
 .swipe {
     position: absolute;
+}
+
+.textogande {
+    font-family: 'Gotham Rounded', sans-serif;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #fff;
+    padding-left: 10px;
+    text-align: left;
+    margin-top: 10px;
+}
+
+.textomediano {
+    font-family: 'Gotham Rounded', sans-serif;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #fff;
+    padding-left: 10px;
+    text-align: left;
+    margin-top: 10px;
+}
+
+.redondoMatch {
+    font-size: 1.5em;
+    margin-right: 1.1em;
+    margin-top: 0.5rem;
+    border: 0px;
+    color: #fff;
+    cursor: pointer;
+    padding-left: 5px;
+    padding-right: 5px;
+    border-radius: 30px;
+    background: rgb(2, 0, 36);
+    background: rgba(0, 213, 255, 0.603);
 }

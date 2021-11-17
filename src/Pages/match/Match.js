@@ -8,7 +8,6 @@ function Match() {
         <>
             <NavbarU />
             <Matchpage />
-            <SwipeButtons />
         </>
     );
 }
