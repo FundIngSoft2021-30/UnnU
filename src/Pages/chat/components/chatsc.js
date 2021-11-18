@@ -7,16 +7,16 @@ import { useParams } from "react-router-dom";
 
 
 function Chatsc() {
-    const {uidurl}   = useParams();
+    const { uidurl } = useParams();
     const [user, loading, error] = useAuthState(auth);
     const [name, setName] = useState("");
     const [uid, setUid] = useState("");
     const [photoPerfil, setphotoPerfil] = useState("");
     const history = useHistory();
-    const [dueno, setDueno] =useState("");
+    const [dueno, setDueno] = useState("");
     const scroll = useRef()
     const [mensajes, setMessages] = useState([])
-    const [uidMensajes,setUidMensajes] = useState("")
+    const [uidMensajes, setUidMensajes] = useState("")
 
     const fetchUserdata = async () => {
         try {
@@ -30,48 +30,29 @@ function Chatsc() {
             setUid(data.uid);
         } catch (err) {
             console.error(err);
-            alert("Se ha producido un error al obtener los datos del usuario");
+            alert("Se ha producido un error al obtener los datos del usuario h");
         }
     };
-
-    /*
-    const fetchConver = async() => {
-        try{
-            const query = await db
-            .collection("conversaciones")
-            .where(("uid1", "==", user?.uid)||("uid2", "==", user?.uid)&&("uid1", "==", msg.uid)||("uid2", "==", user?.uid))
-            .get();
-        }catch(err){
-            console.error(err);
-            alert("No se encontro conversacion")
-        }
-    }*/
-
-
 
     useEffect(() => {
         fetchUserdata();
         db.collection('mensajes').orderBy('createdAt').limit(50).onSnapshot(snapshot => {
             setMessages(snapshot.docs.map(doc => doc.data()))
-            
+
         })
 
     }, [])
 
-
-
-
     return (
-
         <div className="container_chat">
             <div className="msgs">
-                {mensajes.filter(mensajeuid => ((mensajeuid.uid === uidurl) && (mensajeuid.para === auth.currentUser.uid)) || ((mensajeuid.uid === auth.currentUser.uid) && (mensajeuid.para ===  uidurl)) ).map(({ id, text, photoPerfil, uid,para }) => (
+                {mensajes.filter(mensajeuid => ((mensajeuid.uid === uidurl) && (mensajeuid.para === auth.currentUser.uid)) || ((mensajeuid.uid === auth.currentUser.uid) && (mensajeuid.para === uidurl))).map(({ id, text, photoPerfil, uid, para, name }) => (
                     <div >
                         <div key={id} className={`msg ${uid === auth.currentUser.uid ? 'sent' : 'received'}`} >
 
                             <img class="perfil" src={photoPerfil} alt="  " />
                             <div>
-                                <h6>{dueno}</h6>
+                                <h5>{name}</h5>
                                 <h3>{text}</h3>
                             </div>
                         </div>

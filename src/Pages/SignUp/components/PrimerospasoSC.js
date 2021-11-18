@@ -41,43 +41,96 @@ function PrimerosPasoSC() {
         <>
             <div className="sign-upbg">
                 <div>
-                    {/* <Button onClick={() => setHandleOpen({ open: true })}>Open carousel</Button> */}
                     <AutoRotatingCarousel
-
+                        className="carousel"
                         label="Comenzar"
                         ButtonProps={<Buutton href="/match">Comenzar</Buutton>}
                         open={true}
                         onClose={() => setHandleOpen({ open: false })}
                         onStart={() => setHandleOpen({ open: false })}
                         autoplay={false}
+
                         style={{ position: "absolute" }}
                     >
                         <Slide
                             media={
-                                <img src="http://www.icons101.com/icon_png/size_256/id_79394/youtube.png" />
+                                <img src='/images/pantalla.jpg' />
                             }
                             mediaBackgroundStyle={{ backgroundColor: red[400] }}
                             style={{ backgroundColor: red[600] }}
-                            title="This is a very cool feature"
-                            subtitle="Just using this will blow your mind."
+                            title="Esta es la pantalla calendario"
                         />
                         <Slide
                             media={
-                                <img src="http://www.icons101.com/icon_png/size_256/id_80975/GoogleInbox.png" />
+                                <img src='/images/pantalla_3.jpg' />
+                            }
+                            mediaBackgroundStyle={{ backgroundColor: red[400] }}
+                            style={{ backgroundColor: red[600] }}
+                            title="Esta es la pantalla calendario"
+                        />
+                        <Slide
+                            media={
+                                <img src='/images/pantalla_2.jpg' />
                             }
                             mediaBackgroundStyle={{ backgroundColor: blue[400] }}
                             style={{ backgroundColor: blue[600] }}
-                            title="Ever wanted to be popular?"
-                            subtitle="Well just mix two colors and your are good to go!"
+                            title="Esta es la pantalla de Tengo suerte"
                         />
                         <Slide
                             media={
-                                <img src="http://www.icons101.com/icon_png/size_256/id_76704/Google_Settings.png" />
+                                <img src='/images/pantalla_6.jpg' />
+                            }
+                            mediaBackgroundStyle={{ backgroundColor: blue[400] }}
+                            style={{ backgroundColor: blue[600] }}
+                            title="Esta es la pantalla de Tengo suerte"
+                        />
+                        <Slide
+                            media={
+                                <img src='/images/pantalla_1.jpg' />
                             }
                             mediaBackgroundStyle={{ backgroundColor: green[400] }}
                             style={{ backgroundColor: green[600] }}
-                            title="May the force be with you"
-                            subtitle="The Force is a metaphysical and ubiquitous power in the Star Wars fictional universe."
+                            title="Esta es la pantalla de match"
+                        />
+                        <Slide
+                            media={
+                                <img src='/images/pantalla_6.jpg' />
+                            }
+                            mediaBackgroundStyle={{ backgroundColor: green[400] }}
+                            style={{ backgroundColor: green[600] }}
+                            title="Esta es la pantalla de match"
+                        />
+                        <Slide
+                            media={
+                                <img src='/images/pantalla_4.jpg' />
+                            }
+                            mediaBackgroundStyle={{ backgroundColor: green[400] }}
+                            style={{ backgroundColor: blue[700] }}
+                            title="Esta es la pantalla de chat"
+                        />
+                        <Slide
+                            media={
+                                <img src='/images/pantalla_7.jpg' />
+                            }
+                            mediaBackgroundStyle={{ backgroundColor: green[400] }}
+                            style={{ backgroundColor: blue[400] }}
+                            title="Esta es la pantalla de chat"
+                        />
+                        <Slide
+                            media={
+                                <img src='/images/pantalla_5.jpg' />
+                            }
+                            mediaBackgroundStyle={{ backgroundColor: red[400] }}
+                            style={{ backgroundColor: red[600] }}
+                            title="Esta es la pantalla perfil"
+                        />
+                        <Slide
+                            media={
+                                <img src='/images/pantalla_8.jpg' />
+                            }
+                            mediaBackgroundStyle={{ backgroundColor: red[400] }}
+                            style={{ backgroundColor: red[600] }}
+                            title="Esta es la pantalla perfil"
                         />
                     </AutoRotatingCarousel>
                 </div>

@@ -12,7 +12,6 @@ function SendMessage({ scroll }) {
     const [msg, setMsg] = useState('')
     
     const {uidurl}   = useParams();
-    console.log(uidurl)
     const [user, loading, error] = useAuthState(auth);
     const [name, setName] = useState("");
     const [uid, setUid] = useState("");
@@ -50,6 +49,7 @@ function SendMessage({ scroll }) {
             photoPerfil,
             uid,
             para: uidurl,
+            name,
             createdAt: firebase.firestore.FieldValue.serverTimestamp()
         })
         setMsg('')

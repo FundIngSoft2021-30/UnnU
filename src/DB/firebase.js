@@ -28,7 +28,6 @@ const deleteAccount = async (photourl) => {
     const user = app.auth().currentUser;
     const imageRef = storage.refFromURL(photourl);
     imageRef.delete()
-    deletedbxUser();
     app.auth().currentUser.delete();
     auth.signOut();
   } catch (err) {
