@@ -28,7 +28,6 @@ const deleteAccount = async (photourl) => {
     const user = app.auth().currentUser;
     const imageRef = storage.refFromURL(photourl);
     imageRef.delete()
-    deletedbxUser();
     app.auth().currentUser.delete();
     auth.signOut();
   } catch (err) {
@@ -87,13 +86,10 @@ const registerWithEmailAndPassword = async (photoPerfil, name, genero, edad, ema
   }
 };
 
-const uiddescartadosxusuario = async (uiddescartados) => {
+const uiddescartadosxusuario = async (uid, uiddescartados) => {
 
   try {
-    const res = app.auth().currentUser
-    const user = res.user;
-
-    await db.collection("usuarios").doc(user.uid).update({
+    await db.collection("usuarios").doc(uid).update({
       uiddescartados
     });
   } catch (err) {
@@ -204,6 +200,17 @@ const sendResetEmail = async (email) => {
   }
 };
 
+const crearConver = async (uid1, uid2) => {
+  try{
+  await db.collection('conversaciones').add({
+    uid1,
+    uid2,
+  })}catch(err){
+    console.error(err);
+    alert(err.message);
+  }
+}
+
 const logout = () => {
   auth.signOut();
 };
@@ -212,6 +219,7 @@ export {
   auth,
   storage,
   db,
+  crearConver,
   deleteAccount,
   signInWithEmailAndPassword,
   registerWithEmailAndPassword,

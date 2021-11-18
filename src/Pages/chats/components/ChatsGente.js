@@ -10,7 +10,7 @@ import {
 } from "../../../DB/firebase";
 import useFitText from "use-fit-text";
 import { Chat } from 'stream-chat-react';
-
+import { Link } from 'react-router-dom';
 
 function ChatsGente() {
 
@@ -59,13 +59,14 @@ function ChatsGente() {
             <div className="container_chats">
 
                 {users.filter(user => (user.uid !== uid) && (match.includes(user.uid))).map(userr => (
-
-                    <div className="margen" >
-                        <div className='grande'>
-                            <img class="profileNB" src={userr.photoPerfil} alt="  " /><h2 className="textogande" >{userr.name} {userr.edad}</h2>
+                    <Link to={`/chat/${userr.uid}`} key={userr.uid}>
+                        <div className="margen" >
+                        <img class="perfil" src={userr.photoPerfil} alt="  " />
+                            <div className='grande'>
+                                <h2 className="texto" >{userr.name} {userr.edad}</h2>
+                            </div>
                         </div>
-                    </div>
-
+                    </Link>
                 ))}
             </div>
         </div>

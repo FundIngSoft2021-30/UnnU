@@ -57,8 +57,9 @@ function Homeuser() {
   };
 
   const deleteuserAll = async () => {
-    deleteAccount(photoPerfil)
     deletedbxUser()
+    deleteAccount(photoPerfil)
+    
   }
 
   const swalWithBootstrapButtons = Swal.mixin({

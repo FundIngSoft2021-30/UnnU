@@ -107,17 +107,21 @@ function SignUp() {
       cancelButtonText: 'No acepto'
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire({
-          title: 'Se ha registrado satisfactoriamente!',
-          text: 'Se va redirigir a el tutorial ',
-          icon: 'success',
-          confirmButtonText: 'Ok'
-        }
-        ).then((result) => {
-          if (result.isConfirmed) {
-            SignUp();
+        if (!email || !password || !name || !genero || !edad || !carrera || !facultad || !gustos || !photoPerfil) {
+          recuerderellenartodo();
+        } else {
+          Swal.fire({
+            title: 'Se ha registrado satisfactoriamente!',
+            text: 'Se va redirigir a el tutorial ',
+            icon: 'success',
+            confirmButtonText: 'Ok'
           }
-        })
+          ).then((result) => {
+            if (result.isConfirmed) {
+              SignUp();
+            }
+          })
+        }
 
       } else {
         Swal.fire(
