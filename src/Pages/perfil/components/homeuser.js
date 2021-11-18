@@ -9,7 +9,9 @@ import {
   auth,
   db,
   deleteAccount,
-  deletedbxUser,
+  deleteAccountDBUsuarios,
+  deleteAccountDBEventos,
+  deletePhotoUser,
   logout
 } from "../../../DB/firebase";
 import * as admin from "firebase-admin";
@@ -57,9 +59,8 @@ function Homeuser() {
   };
 
   const deleteuserAll = async () => {
-    deletedbxUser()
-    deleteAccount(photoPerfil)
-    
+    deleteAccountDBUsuarios(uid);
+    deletePhotoUser(photoPerfil);
   }
 
   const swalWithBootstrapButtons = Swal.mixin({
@@ -112,7 +113,7 @@ function Homeuser() {
   return (
     <div className="editbg">
       <div className="dashboard">
-        <Link to='/match' className='btn-mobile'>
+        <Link className='btn-mobile' to={`/match/${user.uid}`} key={user.uid}>
           <button className="arts__btn" data-testid="ArrowBackIcon">
             <HiArrowLeft />
           </button>
@@ -147,7 +148,7 @@ function Homeuser() {
 
         </div>
       </div>
-    </div>
+    </div >
   );
 }
 

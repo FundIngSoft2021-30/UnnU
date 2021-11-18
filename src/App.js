@@ -29,17 +29,17 @@ function App() {
       <Router>
         <Switch>
 
-          <Privateroute path='/tengosuerte' component={Suerte} />
-          <Privateroute path='/primeros-pasos' component={PrimerosPasos} />
-          <Privateroute path='/calendario' component={Calendar} />
+          <Privateroute path='/tengosuerte/:uidurl' component={Suerte} />
+          <Privateroute path='/primeros-pasos/:uidurl' component={PrimerosPasos} />
+          <Privateroute path='/calendario/:uidurl' component={Calendar} />
           <Privateroute path='/chats' component={Chats} />
           <Privateroute path='/chat/:uidurl' component={Chat} />
-          <Privateroute path='/match' component={Match} />
-          <Privateroute path='/user-home' component={Homeuser} />
+          <Privateroute path='/match/:uidurl' component={Match} />
+          <Privateroute path='/user-home/:uidurl' component={Homeuser} />
           <Privateroute path='/sign-up' component={SignUp} />
           <Privateroute path='/login' component={Login} />
           <Privateroute path="/Reset" component={Reset} />
-          <Privateroute path="/editprofile" component={Editprofile} />
+          <Privateroute path="/editprofile/:uidurl" component={Editprofile} />
           <div>
             <Route path='/' exact component={Home} />
           </div>

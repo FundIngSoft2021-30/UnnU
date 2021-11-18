@@ -23,13 +23,11 @@ const db = app.firestore();
 const storage = firebase.storage();
 
 
-const deleteAccount = async (photourl) => {
+const deleteAccount = async () => {
   try {
     const user = app.auth().currentUser;
-    const imageRef = storage.refFromURL(photourl);
-    imageRef.delete()
-    app.auth().currentUser.delete();
-    auth.signOut();
+    user.delete();
+    //auth.signOut();
   } catch (err) {
     console.error(err);
     alert(err.message);
@@ -37,11 +35,65 @@ const deleteAccount = async (photourl) => {
 
 };
 
-const deletedbxUser = async () => {
+const deleteAccountDBUsuarios = async (uid) => {
   try {
     const user = app.auth().currentUser;
-    app.firestore().collection("usuarios").doc(user.uid).delete();
-    app.firestore().collection("eventos").doc(user.uid).delete();
+    const data = app.firestore().collection("usuarios").doc(uid);
+    await data.delete().then(function () {
+      console.log("Document usuarios successfully deleted!");
+      deleteAccountDBEventos(uid);
+    }
+    ).catch(function (error) {
+      console.error("Error removing document: ", error);
+    }
+    );
+
+  } catch (err) {
+    console.error(err);
+    alert(err.message);
+  }
+};
+
+const deleteAccountDBEventos = async (uid) => {
+  try {
+    const user = app.auth().currentUser;
+    const data = app.firestore().collection("eventos").doc(uid);
+    console.log(data.delete());
+    await data.delete().then(function () {
+      console.log("Document eventos successfully deleted!");
+      deleteAccount();
+    }
+    ).catch(function (error) {
+      console.error("Error removing document: ", error);
+    }
+    );
+  } catch (err) {
+
+    console.error(err);
+    alert(err.message);
+  }
+};
+
+const deletePhotoUser = async (photourl) => {
+  try {
+    const imageRef = storage.refFromURL(photourl);
+    imageRef.delete()
+  } catch (err) {
+    console.error(err);
+    alert(err.message);
+  }
+
+};
+
+
+const deletedbxUser = async (uid) => {
+  try {
+    const user = app.auth().currentUser;
+    const data = app.firestore();
+    console.log(uid);
+    data.collection("usuarios").doc(uid).delete();
+    data.collection("eventos").doc(uid).delete();
+
   } catch (err) {
     console.error(err);
     alert(err.message);
@@ -58,7 +110,7 @@ const signInWithEmailAndPassword = async (email, password) => {
   }
 };
 
-const registerWithEmailAndPassword = async (photoPerfil, name, genero, edad, email, carrera, facultad, mensajes, matchuid, likesdados, numEventos, likesrecibidos, uiddescartados, gustos, password) => {
+const registerWithEmailAndPassword = async (photoPerfil, name, genero, edad, email, carrera, facultad, matchuid, likesdados, likesrecibidos, uiddescartados, gustos, password) => {
   try {
     const res = await auth.createUserWithEmailAndPassword(email, password);
     const user = res.user;
@@ -71,14 +123,11 @@ const registerWithEmailAndPassword = async (photoPerfil, name, genero, edad, ema
       email,
       carrera,
       facultad,
-      mensajes,
       matchuid,
       likesdados,
       likesrecibidos,
       uiddescartados,
-      gustos,
-      numEventos,
-      authProvider: "local"
+      gustos
     });
   } catch (err) {
     console.error(err);
@@ -201,11 +250,12 @@ const sendResetEmail = async (email) => {
 };
 
 const crearConver = async (uid1, uid2) => {
-  try{
-  await db.collection('conversaciones').add({
-    uid1,
-    uid2,
-  })}catch(err){
+  try {
+    await db.collection('conversaciones').add({
+      uid1,
+      uid2,
+    })
+  } catch (err) {
     console.error(err);
     alert(err.message);
   }
@@ -233,5 +283,8 @@ export {
   logout,
   deletedbxUser,
   matchPropioUsuario,
-  uiddescartadosxusuario
+  uiddescartadosxusuario,
+  deleteAccountDBUsuarios,
+  deleteAccountDBEventos,
+  deletePhotoUser
 };
