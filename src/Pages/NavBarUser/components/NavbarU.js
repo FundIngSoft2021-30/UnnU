@@ -57,7 +57,7 @@ function NavbarU() {
 
                 <div className="perfilNB">
                     <div>
-                        <Link to='/user-home'>
+                        <Link to={`/user-home/${user.uid}`} key={user.uid}>
                             <img class="profileNB" src={photoPerfil} /><a className="txtNB">{name}</a>
                         </Link>
                     </div>
@@ -71,17 +71,17 @@ function NavbarU() {
                     </div>
                     <ul className={click ? 'nav-menu activeUS' : 'nav-menuUS'}>
                         <li className='nav-itemUS'>
-                            <Link to='/calendario' className='nav-linksUS' onClick={closeMobileMenu}>
+                            <Link to={`/calendario/${user.uid}`} key={user.uid} className='nav-linksUS' onClick={closeMobileMenu}>
                                 <div className='nav-buttonUS'><HiCalendar /></div>
                             </Link>
                         </li>
                         <li className='nav-itemUS'>
-                            <Link to='/tengosuerte' className='nav-linksUS' onClick={closeMobileMenu}>
+                            <Link to={`/tengosuerte/${user.uid}`} key={user.uid} className='nav-linksUS' onClick={closeMobileMenu}>
                                 <div className='nav-buttonUS'><HiStar /></div>
                             </Link>
                         </li>
                         <li className='nav-itemUS'>
-                            <Link to='/match' className='nav-linksUS' onClick={closeMobileMenu}>
+                            <Link to={`/match/${user.uid}`} key={user.uid} className='nav-linksUS' onClick={closeMobileMenu}>
                                 <div className='nav-buttonUS'><HiUsers /></div>
                             </Link>
                         </li>
@@ -91,7 +91,7 @@ function NavbarU() {
                             </Link>
                         </li>
                         <li className='nav-itemUS'>
-                            <Link to='/user-home' className='nav-linksUS' onClick={closeMobileMenu}>
+                            <Link to={`/user-home/${user.uid}`} key={user.uid} className='nav-linksUS' onClick={closeMobileMenu}>
                                 <div className='nav-buttonUS'><HiUser /></div>
                             </Link>
                         </li>

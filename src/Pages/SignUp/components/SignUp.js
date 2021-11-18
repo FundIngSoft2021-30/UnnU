@@ -13,9 +13,10 @@ import { AutoRotatingCarousel, Slide } from "material-auto-rotating-carousel";
 import {
   auth,
   registerWithEmailAndPassword,
-  storage
+  storage,
+  crearEvento
 } from "../../../DB/firebase";
-
+import { INITIAL_EVENTS } from "../../calendario/components/event-utils"
 import '../../../App.css';
 import './SignUp.css'
 
@@ -32,7 +33,6 @@ function SignUp() {
   const [password, setPassword] = useState("");
   const [matchuid, setMatchuid] = useState(likes);
   const [likesdados, setLikesdados] = useState(likes);
-  const [mensajes, setMensajes] = useState("");
   const [name, setName] = useState("");
   const [genero, setGenero] = useState("");
   const [edad, setEdad] = useState("");
@@ -43,8 +43,8 @@ function SignUp() {
   const [likesrecibidos, setLikesrecibidos] = useState(likes);
   const [uiddescartados, setUiddescartados] = useState(likes);
   const [progressBar, setProgress] = useState(0);
-  const [numEventos, setNumEventos] = useState(0);
   const [user, loading, error] = useAuthState(auth);
+  const [Eventsxuser, setEventsxuser] = useState(INITIAL_EVENTS);
   const history = useHistory();
 
   const [handleOpen, setHandleOpen] = useState({ open: false });
@@ -57,13 +57,17 @@ function SignUp() {
     if (!email || !password || !name || !genero || !edad || !carrera || !facultad || !gustos || !photoPerfil) {
       recuerderellenartodo();
     } else {
-      registerWithEmailAndPassword(photoPerfil, name, genero, edad, email, carrera, facultad, mensajes, matchuid, likesdados, numEventos, likesrecibidos, uiddescartados, gustos, password);
+      registerWithEmailAndPassword(photoPerfil, name, genero, edad, email, carrera, facultad, matchuid, likesdados, likesrecibidos, uiddescartados, gustos, password);
+
     }
   };
 
   useEffect(() => {
     if (loading) return;
-    if (user) history.replace("/primeros-pasos");
+    if (user) {
+      crearEvento(Eventsxuser, user.uid, name);
+      history.replace("/match");
+    }
   }, [user, loading]);
 
   const handleChange = e => {

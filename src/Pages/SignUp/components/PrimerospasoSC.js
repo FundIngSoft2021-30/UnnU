@@ -44,9 +44,9 @@ function PrimerosPasoSC() {
                     <AutoRotatingCarousel
                         className="carousel"
                         label="Comenzar"
-                        ButtonProps={<Buutton href="/match">Comenzar</Buutton>}
+                        ButtonProps={<Buutton href="/match">comenzar</Buutton>}
                         open={true}
-                        onClose={() => setHandleOpen({ open: false })}
+                        onClose={() => setHandleOpen({ open: true })}
                         onStart={() => setHandleOpen({ open: false })}
                         autoplay={false}
 
