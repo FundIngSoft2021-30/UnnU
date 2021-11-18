@@ -10,6 +10,7 @@ import {
     likesrecibidosxusuario,
     matchXusuario,
     matchPropioUsuario,
+    crearConver,
     uiddescartadosxusuario
 } from "../../../DB/firebase";
 import useFitText from "use-fit-text";
@@ -32,6 +33,8 @@ function MatchPage() {
     const [likesrecibidos, setLikesrecibidos] = useState("");
     const [currentIndex, setCurrentIndex] = useState(db.length - 1)
     const [lastDirection, setLastDirection] = useState()
+    const [uid1,setUid1]=useState("");//uid usuario actual
+    const [uid2,setUid2]=useState("")//uid usuario con quien hizo match
     // used for outOfFrame closure
     const currentIndexRef = useRef(currentIndex)
 
@@ -51,7 +54,7 @@ function MatchPage() {
             setMatch(data.matchuid);
             setMatch2(data.matchuid);
             setGustosUser(data.gustos);
-
+            setUid1(data.uid);
         } catch (err) {
             console.error(err);
             alert("Se ha producido un error al obtener los datos del usuario");
@@ -107,6 +110,8 @@ function MatchPage() {
         if (likesdados.includes(index) && likesrecibidos.includes(index)) {
             matchUsuarixlike(index, usuarioActual);
             matchUsuarioactual(index, nombrepersona);
+            setUid2(index);
+            crearConver(uid1,uid2);
         }
     }
     const matchUsuarixlike = (index, usuarioActual) => {

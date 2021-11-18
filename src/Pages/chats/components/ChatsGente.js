@@ -59,10 +59,11 @@ function ChatsGente() {
             <div className="container_chats">
 
                 {users.filter(user => (user.uid !== uid) && (match.includes(user.uid))).map(userr => (
-                    <Link to={`/chat/${userr.uid}`}>
+                    <Link to={`/chat/${userr.uid}`} key={userr.uid}>
                         <div className="margen" >
+                        <img class="perfil" src={userr.photoPerfil} alt="  " />
                             <div className='grande'>
-                                <img class="profileNB" src={userr.photoPerfil} alt="  " /><h2 className="textogande" >{userr.name} {userr.edad}</h2>
+                                <h2 className="texto" >{userr.name} {userr.edad}</h2>
                             </div>
                         </div>
                     </Link>

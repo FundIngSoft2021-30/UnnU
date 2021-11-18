@@ -3,16 +3,20 @@ import { db, auth } from '../../../DB/firebase'
 import SendMessage from './SendMessage'
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useHistory } from 'react-router';
-
+import { useParams } from "react-router-dom";
 
 
 function Chatsc() {
-
+    const {uidurl}   = useParams();
     const [user, loading, error] = useAuthState(auth);
     const [name, setName] = useState("");
     const [uid, setUid] = useState("");
     const [photoPerfil, setphotoPerfil] = useState("");
     const history = useHistory();
+    const [dueno, setDueno] =useState("");
+    const scroll = useRef()
+    const [mensajes, setMessages] = useState([])
+    const [uidMensajes,setUidMensajes] = useState("")
 
     const fetchUserdata = async () => {
         try {
@@ -30,15 +34,30 @@ function Chatsc() {
         }
     };
 
-    const scroll = useRef()
-    const [mensajes, setMessages] = useState([])
+    /*
+    const fetchConver = async() => {
+        try{
+            const query = await db
+            .collection("conversaciones")
+            .where(("uid1", "==", user?.uid)||("uid2", "==", user?.uid)&&("uid1", "==", msg.uid)||("uid2", "==", user?.uid))
+            .get();
+        }catch(err){
+            console.error(err);
+            alert("No se encontro conversacion")
+        }
+    }*/
+
+
 
     useEffect(() => {
         fetchUserdata();
         db.collection('mensajes').orderBy('createdAt').limit(50).onSnapshot(snapshot => {
             setMessages(snapshot.docs.map(doc => doc.data()))
+            
         })
+
     }, [])
+
 
 
 
@@ -46,12 +65,13 @@ function Chatsc() {
 
         <div className="container_chat">
             <div className="msgs">
-                {mensajes.map(({ id, text, photoPerfil, uid }) => (
+                {mensajes.filter(mensajeuid => ((mensajeuid.uid === uidurl) && (mensajeuid.para === auth.currentUser.uid)) || ((mensajeuid.uid === auth.currentUser.uid) && (mensajeuid.para ===  uidurl)) ).map(({ id, text, photoPerfil, uid,para }) => (
                     <div >
-                        <div key={id} className={`msg ${uid === auth.currentUser.uid ? 'sent' : 'received'}`}>
-                            <imagen src={photoPerfil} alt="  " />
+                        <div key={id} className={`msg ${uid === auth.currentUser.uid ? 'sent' : 'received'}`} >
+
+                            <img class="perfil" src={photoPerfil} alt="  " />
                             <div>
-                                <h6>{name}</h6>
+                                <h6>{dueno}</h6>
                                 <h3>{text}</h3>
                             </div>
                         </div>

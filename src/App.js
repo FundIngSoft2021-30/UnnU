@@ -33,7 +33,7 @@ function App() {
           <Privateroute path='/primeros-pasos' component={PrimerosPasos} />
           <Privateroute path='/calendario' component={Calendar} />
           <Privateroute path='/chats' component={Chats} />
-          <Privateroute path='/chat' component={Chat} />
+          <Privateroute path='/chat/:uidurl' component={Chat} />
           <Privateroute path='/match' component={Match} />
           <Privateroute path='/user-home' component={Homeuser} />
           <Privateroute path='/sign-up' component={SignUp} />

@@ -1,19 +1,27 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { db, auth } from '../../../DB/firebase'
 import firebase from 'firebase'
 import { Input, Button } from '@material-ui/core'
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useHistory } from 'react-router';
+import { useParams } from "react-router-dom";
+
+
 
 function SendMessage({ scroll }) {
     const [msg, setMsg] = useState('')
-
-
+    
+    const {uidurl}   = useParams();
+    console.log(uidurl)
     const [user, loading, error] = useAuthState(auth);
     const [name, setName] = useState("");
     const [uid, setUid] = useState("");
     const [photoPerfil, setphotoPerfil] = useState("");
     const history = useHistory();
+    const cid = "";
+   // const [params, setParams] = useState(null);
+    //const location = useLocation();
+
 
     const fetchUserdata = async () => {
         try {
@@ -32,6 +40,7 @@ function SendMessage({ scroll }) {
     };
 
 
+
     async function sendMessage(e) {
         fetchUserdata();
         e.preventDefault();
@@ -40,6 +49,7 @@ function SendMessage({ scroll }) {
             text: msg,
             photoPerfil,
             uid,
+            para: uidurl,
             createdAt: firebase.firestore.FieldValue.serverTimestamp()
         })
         setMsg('')

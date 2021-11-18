@@ -201,6 +201,17 @@ const sendResetEmail = async (email) => {
   }
 };
 
+const crearConver = async (uid1, uid2) => {
+  try{
+  await db.collection('conversaciones').add({
+    uid1,
+    uid2,
+  })}catch(err){
+    console.error(err);
+    alert(err.message);
+  }
+}
+
 const logout = () => {
   auth.signOut();
 };
@@ -209,6 +220,7 @@ export {
   auth,
   storage,
   db,
+  crearConver,
   deleteAccount,
   signInWithEmailAndPassword,
   registerWithEmailAndPassword,

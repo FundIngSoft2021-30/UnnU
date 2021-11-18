@@ -7,8 +7,8 @@
 }
 
 .container_chat {
-  height: 100%;
-  width: 50%;
+  height: 93%;
+  width: 100%;
   overflow: scroll;
   position: absolute;
   white-space: nowrap;
