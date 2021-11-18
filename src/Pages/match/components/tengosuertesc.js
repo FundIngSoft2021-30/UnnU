@@ -11,9 +11,11 @@ import {
     likesrecibidosxusuario,
     matchXusuario,
     matchPropioUsuario,
-    uiddescartadosxusuario
+    uiddescartadosxusuario,
+    crearConver
 } from "../../../DB/firebase";
 import useFitText from "use-fit-text";
+import Swal from 'sweetalert2'
 
 
 function Tengosuerte() {
@@ -29,7 +31,8 @@ function Tengosuerte() {
     const [match2, setMatch2] = useState("");
     const [likesdados, setLikesdados] = useState([]);
     const [uiddescartados, setUiddescartados] = useState([]);
-
+    const [uid1, setUid1] = useState("");//uid usuario actual
+    const [uid2, setUid2] = useState("")//uid usuario con quien hizo match
     const history = useHistory();
     const [likesrecibidos, setLikesrecibidos] = useState("");
     const [currentIndex, setCurrentIndex] = useState(db.length - 1)
@@ -78,35 +81,38 @@ function Tengosuerte() {
     const canSwipe = currentIndex >= 0
 
     // set last direction and decrease current index
-    const swiped = (direction, index, usuarioActual) => {
+    const swiped = (direction, index, usuarioActual, nombrepersona) => {
         setLastDirection(direction)
         fetchUserdata();
         if (direction === 'left') {
-            if (!likesdados.includes(usuarioActual)) {
+
+            if (!likesdados.includes(index)) {
                 setLikesdados(index)
                 likesdados.push(index);
             }
-            if (!likesrecibidos.includes(usuarioActual)) {
+            if (!likesrecibidos.includes(index)) {
                 likesXusuario(likesdados);
                 likesrecibidos.push(usuarioActual);
             }
             likesrecibidosxusuario(index, likesrecibidos);
-            mirarLikedual(index, usuarioActual)
+            mirarLikedual(index, usuarioActual, nombrepersona)
         }
         if (direction === 'right') {
             if (!uiddescartados.includes(index)) {
                 setUiddescartados(index)
                 uiddescartados.push(index);
-                uiddescartadosxusuario(uiddescartados);
+                uiddescartadosxusuario(usuarioActual, uiddescartados);
             }
         }
     }
 
 
-    const mirarLikedual = (index, usuarioActual) => {
+    const mirarLikedual = (index, usuarioActual, nombrepersona) => {
         if (likesdados.includes(index) && likesrecibidos.includes(index)) {
             matchUsuarixlike(index, usuarioActual);
-            matchUsuarioactual(index);
+            matchUsuarioactual(index, nombrepersona);
+            setUid2(index);
+            crearConver(uid1, uid2);
         }
     }
     const matchUsuarixlike = (index, usuarioActual) => {
@@ -114,12 +120,22 @@ function Tengosuerte() {
         match.push(usuarioActual);
         matchXusuario(index, match);
     }
-    const matchUsuarioactual = (index, usuarioActual) => {
+    const matchUsuarioactual = (index, nombrepersona) => {
         setMatch2(index)
         match2.push(index);
         matchPropioUsuario(match2)
+        Swal.fire({
+            title: 'Felicitaciones obtuviste un match con',
+            text: nombrepersona,
+            icon: 'success',
+            showCancelButton: false,
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'Ok'
+        })
 
     }
+
+
     const swipe = async (dir) => {
         console.log(dir)
         console.log(canSwipe)

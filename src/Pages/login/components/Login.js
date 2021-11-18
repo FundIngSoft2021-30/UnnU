@@ -16,7 +16,7 @@ function Login() {
             // maybe trigger a loading screen
             return;
         }
-        if (user) history.replace('/match/${user.uid}');
+        if (user) history.replace("/match");
     }, [user, loading]);
 
     return (

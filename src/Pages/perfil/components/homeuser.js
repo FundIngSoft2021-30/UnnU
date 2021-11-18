@@ -113,7 +113,7 @@ function Homeuser() {
   return (
     <div className="editbg">
       <div className="dashboard">
-        <Link className='btn-mobile' to={`/match/${user.uid}`} key={user.uid}>
+        <Link to='/match' className='btn-mobile'>
           <button className="arts__btn" data-testid="ArrowBackIcon">
             <HiArrowLeft />
           </button>
@@ -148,7 +148,7 @@ function Homeuser() {
 
         </div>
       </div>
-    </div >
+    </div>
   );
 }
 
