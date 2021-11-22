@@ -9,7 +9,6 @@
     "@devexpress/dx-react-scheduler-material-ui": "^2.7.6",
     "@emotion/react": "^11.4.1",
     "@emotion/styled": "^11.3.0",
-    "@firebase/performance": "^0.5.4",
     "@fullcalendar/core": "^5.10.1",
     "@fullcalendar/daygrid": "^5.10.1",
     "@fullcalendar/interaction": "^5.10.1",

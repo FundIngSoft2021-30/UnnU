@@ -1,6 +1,5 @@
 import firebase from "firebase";
 import "firebase/storage";
-import "firebase/performance";
 import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 
 const firebaseConfig = {
@@ -16,8 +15,9 @@ const firebaseConfig = {
 
 
 
+
+
 const app = firebase.initializeApp(firebaseConfig);
-const perf = firebase.getPerformance(app);
 const auth = app.auth();
 const db = app.firestore();
 const storage = firebase.storage();
@@ -27,6 +27,7 @@ const deleteAccount = async () => {
   try {
     const user = app.auth().currentUser;
     user.delete();
+    //auth.signOut();
   } catch (err) {
     console.error(err);
     alert(err.message);
@@ -265,7 +266,6 @@ const logout = () => {
 };
 
 export {
-  perf,
   auth,
   storage,
   db,
