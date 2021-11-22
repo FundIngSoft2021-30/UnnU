@@ -8,8 +8,6 @@ import {
     matchPropioUsuario,
     matchuid
 } from "../../../DB/firebase";
-import useFitText from "use-fit-text";
-import { Chat } from 'stream-chat-react';
 import { Link } from 'react-router-dom';
 
 function ChatsGente() {

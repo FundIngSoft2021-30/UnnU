@@ -8,7 +8,6 @@ import { MdAddAPhoto } from "react-icons/md";
 import Swal from 'sweetalert2'
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { red, blue, green } from "@material-ui/core/colors";
-import { AutoRotatingCarousel, Slide } from "material-auto-rotating-carousel";
 
 import {
   auth,
